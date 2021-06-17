@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "estimatepro-79a38": {
+      "hosting": {
+        "estimatePro": [
+          "estimatepro-79a38"
+        ]
+      }
+    }
+  }
+}
