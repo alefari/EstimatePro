@@ -1,0 +1,63 @@
+<div class="container">
+
+    <div class="row mt-lg-5">    
+        <div class="col">
+            <h1>Presupuestos:</h1>
+        </div> 
+    </div>
+    
+    <div class="row mt-3">
+    <!--HEAD DE TABLA DE INVENTARIO-->
+        <table class="table shadow table-hover">
+            <thead class="table-dark">
+                <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col">Categoría</th>
+                <th scope="col">Estatus</th>
+                <th scope="col">Precio</th>
+                <th scope="col">Fecha</th>
+                <th></th>
+                </tr>
+            </thead>
+    <!--FILTROS DE TABLA INVENTARIO-->
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col"><input class="w-75 form-control form-control-sm" ngModel type="text" placeholder="Filtro por nombre"></th>
+                    <th scope="col">
+                        <select class="form-control form-control-sm" ngModel name="filtroCategoria">
+                            <option value="">Categoría (Todas)</option>
+                            <option value="">Gubernamental</option>
+                            <option value="">Privado</option>
+                            <option value="">Mixto</option>
+                        </select>
+                    </th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+    <!--CUERPO DE TABLA DE INVENTARIO-->
+            <tbody>
+                <ng-container>
+                    <tr class="table-light" scope>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>
+                            <div class="btn-group">
+                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalInfoProducto">
+                                    Rename
+                                </button>
+                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminarProducto">
+                                    Eliminar
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </div>
+</div>

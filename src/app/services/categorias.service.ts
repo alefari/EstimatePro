@@ -1,0 +1,49 @@
+import { Injectable } from '@angular/core';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { Categoria } from '../models/categoria.models'
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class CategoriasService {
+
+  //VARIABLE QUE VA A CONTENER NUESTRA LISTA DE CATEGORIAS
+
+  categoriasColeccion: AngularFirestoreCollection<Categoria>;
+  categorias: Observable<Categoria[]>;
+
+  constructor(private readonly afs: AngularFirestore) {
+
+    this.categoriasColeccion = afs.collection<Categoria>('categorias');
+    this.categorias = this.categoriasColeccion.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Categoria;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    )
+
+  }
+
+  //FUNCION OBTENER CATEGORIAS DE LA BASE DE DATOS
+  obtenerCategorias() {
+    return this.categorias;
+  }
+
+  //FUNCION AGREGAR CATEGORIA EN LA BASE DE DATOS
+  agregarCategoria(nuevaCategoria: Categoria) {
+    this.categoriasColeccion.doc(nuevaCategoria.id).set(nuevaCategoria);
+  }
+
+  //FUNCION MODIFICAR CATEGORIA DE LA BASE DE DATOS
+  editarCategoria(categoriaEditada: Categoria) {
+    return this.categoriasColeccion.doc(categoriaEditada.id).update(categoriaEditada);
+  }
+
+  //FUNCION ELIMINAR CATEGORIA DE LA BASE DE DATOS
+  eliminarCategoria(idCategoriaEliminar: string){
+    return this.categoriasColeccion.doc(idCategoriaEliminar).delete();
+  }
+}
