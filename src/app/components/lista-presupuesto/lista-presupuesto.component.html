@@ -55,6 +55,9 @@
                         <td>{{ presupuesto.fecha | date:'short'}}</td>
                         <td>
                             <div class="btn-group">
+                                <button class="btn btn-success text-white btn-sm" data-bs-toggle="modal">
+                                    Editar
+                                </button>
                                 <button class="btn btn-info text-white btn-sm" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#modalInfoPresupuesto" (click)="recibirInformacion(presupuesto)">
                                     Detalles
                                 </button>

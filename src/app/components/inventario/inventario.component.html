@@ -5,12 +5,21 @@
         </div> 
     </div>
     <!--BOTONES DE CONTROL-->
-    <div class="col">
-        <div class="btn-group float-left">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalIngreso">
-                Ingresar Item
-            </button>
-        </div>
+    <div class="row">
+        <div class="col">
+            <div class="btn-group float-end">
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngresar">
+                    Ingresar Item
+                </button>
+            </div>
+        </div>    
+        <div class="col">
+            <div class="btn-group float-end">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalModificar">
+                    Modificar Item
+                </button>
+            </div>
+        </div> 
     </div>
     
     <div class="row mt-3">
@@ -68,7 +77,7 @@
                         <td>{{ item.equipmentRate }}</td>
                         <td>
                             <div class="btn-group">
-                                <button class="btn btn-info btn-sm" data-toggle="modal">
+                                <button class="btn btn-info btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalInfoItem"  (click)="recibirInformacion(item)">
                                     Detalles
                                 </button>
                                 <button class="btn btn-danger btn-sm" data-toggle="modal">
@@ -82,86 +91,85 @@
         </table>
     </div>
 </div>
+<!-- FIN TABLA DE INVENTARIO -->
 
-<!--MODAL AGREGAR ITEM-->
-<div id="modalIngreso" class="modal fade" data-bs-backdrop="static" ata-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+<!-- MODAL DE INFO -->
+<div class="modal fade" id="modalInfoItem" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Ingreso</h5>
+            <div class="modal-header bg-info">
+                <h5 class="modal-title text-white" id="exampleModalLabel"><strong>{{ infoItem.nombre }}</strong></h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModal()" aria-label="Close"></button>
             </div>
-            <form #f='ngForm'>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <h3>Nuevo Item</h3>
-                        <div class="row">
-                            <div class="col-4 mb-3">
-                                <label class="form-label">Nombre</label>
-                                <input #nombre="ngModel" required type="text" name="nombre" [(ngModel)]="nuevoItem.nombre" class="form-control">
-                            </div>
-                            <div class="col-4 mb-3">
-                                <label for="exampleFormControlSelect1" class="mb-2">Categoría</label>
-                                <select #categoria="ngModel" required class="form-select" name="categoria" [(ngModel)]="nuevoItem.categoria">
-                                    <option *ngFor="let categoria of listaCategorias" value="{{categoria.nombre}}" > {{ categoria.nombre }}</option>
-                                </select>
-                            </div>
-                            <div class="col-4 mb-3">
-                                <label for="exampleFormControlSelect1" class="mb-2">Subcategoría</label>
-                                <select #subcategoria="ngModel" required class="form-select" name="subcategoria" [(ngModel)]="nuevoItem.subcategoria">
-                                    <option *ngFor="let subcategoria of listaSubcategorias" value="{{subcategoria.nombre}}" > {{ subcategoria.nombre }}</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col-3 mb-3">
-                                <label for="exampleFormControlSelect1" class="mb-2">Unidad</label>
-                                <select #unidad="ngModel" required class="form-select" name="unidad" [(ngModel)]="nuevoItem.unidad">
-                                    <option *ngFor="let unidad of listaUnidades" value="{{unidad.nombre}}" > {{ unidad.nombre }}</option>
-                                </select>
-                            </div>
-                            <div class="col-3 mb-3">
-                                <label for="exampleInputPassword1" class="mb-2">Labor Rate</label>
-                                <div class="input-group">
-                                    <input min=1 onkeypress="return event.charCode > 45" required type="number" [(ngModel)]="nuevoItem.laborRate" name="laborRate" class="form-control">
-                                </div>
-                            </div>
-                            <div class="col-3 mb-3">
-                                <label for="exampleInputPassword1" class="mb-2">Material Rate</label>
-                                <div class="input-group">
-                                    <input min=1 onkeypress="return event.charCode >= 48" required type="number" [(ngModel)]="nuevoItem.materialRate" name="materialRate" class="form-control">
-                                </div>
-                                </div>
-                            <div class="col-3 mb-3">
-                                <label for="exampleInputPassword1" class="mb-2">Equipment Rate</label>
-                                <div class="input-group">
-                                    <input min=1 onkeypress="return event.charCode >= 48" required type="number" [(ngModel)]="nuevoItem.equipmentRate" name="equipmentRate" class="form-control">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col">
-                                <label>Descripción</label>
-                                <textarea class="form-control" #descripcion="ngModel" required type="text" name="descripcion" [(ngModel)]="nuevoItem.descripcion"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </form>
-            <!--MODAL FOOTER-->
+            <div class="modal-body">
+            <table class="table table-sm">
+                <tbody>
+                    <tr>
+                    <th>ID</th>
+                        <td></td>
+                        <td>{{ infoItem.id }}</td>
+                    </tr>
+                    <tr *ngIf="infoItem.categoria!= null">
+                    <th>Categoría</th>
+                        <td></td>
+                        <td>{{ infoItem.categoria }}</td>
+                    </tr>
+                    <tr *ngIf="infoItem.subcategoria!=null">
+                    <th>Subcategoría</th>
+                        <td></td>
+                        <td>{{ infoItem.subcategoria }}</td>
+                    </tr>
+                    <tr *ngIf="infoItem.unidad!=null">
+                    <th>Unidad</th>
+                        <td></td>
+                        <td>{{ infoItem.unidad }}</td>
+                    </tr>
+                    <tr *ngIf="infoItem.laborRate!=null">
+                    <th>Labor Rate</th>
+                        <td></td>
+                        <td>{{ infoItem.laborRate }}</td>
+                    </tr>
+                    <tr *ngIf="infoItem.materialRate!=null">
+                    <th>Material Rate</th>
+                        <td></td>
+                        <td>{{ infoItem.materialRate }}</td>
+                    </tr>
+                    <tr *ngIf="infoItem.equipmentRate!=null">
+                    <th>Equipment Rate</th>
+                        <td></td>
+                        <td>{{ infoItem.equipmentRate }}</td>
+                    </tr>
+                    <tr *ngIf="infoItem.descripcion != null">
+                    <th>Descripción</th>
+                        <td></td>
+                        <td>{{ infoItem.descripcion }}</td>
+                    </tr>
+                    <tr>
+                    <th>Creado por</th>
+                        <td></td>
+                        <td>{{ infoItem.idUsuario }}</td>
+                    </tr>
+                    <tr>
+                    <th>Fecha</th>
+                        <td></td>
+                        <td>{{ infoItem.fecha | date:'short' }}</td>
+                    </tr>
+                    <tr><th></th><td></td><td></td></tr>
+                </tbody>
+            </table>
+            </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" (click)="cerrarModal()" data-bs-dismiss="modal">
-                    Cerrar
-                </button>
-                <button data-dismiss="modal" type="button" class="btn btn-primary">
-                    Ingresar
-                </button>
+            <button type="button" class="btn btn-secondary" (click)="cerrarModal()" data-bs-dismiss="modal">Cerrar</button>
             </div>
         </div>
     </div>
 </div>
-<!--FIN DEL MODAL AGREGAR ITEM-->
+<!-- FIN DEL MODAL INFO ITEM -->
+
+
+<!--DIRECCIONES HACIA COMPONENTES DE AGREGAR Y MODIFICAR-->
+
+    <!-- MODAL INGRESAR ITEM EN BASE DE DATOS-->
+    <div id="modalIngresar" class="modal fade" data-bs-backdrop="static" ata-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" role="dialog">
+        <app-ingresar></app-ingresar>
+    </div>

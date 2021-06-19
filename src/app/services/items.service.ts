@@ -34,7 +34,7 @@ export class ItemsService {
 
   //FUNCION AGREGAR ITEM EN LA BASE DE DATOS
   agregarItem(nuevoItem: Item) {
-    this.itemsColeccion.doc(nuevoItem.id).set(nuevoItem);
+    this.itemsColeccion.doc().set(nuevoItem);
   }
 
   //FUNCION MODIFICAR ITEM DE LA BASE DE DATOS

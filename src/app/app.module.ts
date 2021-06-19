@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { PresupuestoComponent } from './components/presupuesto/presupuesto.component';
 import { ListaPresupuestoComponent } from './components/lista-presupuesto/lista-presupuesto.component';
 import { InventarioComponent } from './components/inventario/inventario.component';
+import { IngresarComponent } from './components/inventario/ingresar/ingresar.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { InventarioComponent } from './components/inventario/inventario.componen
     LoginComponent,
     PresupuestoComponent,
     ListaPresupuestoComponent,
-    InventarioComponent
+    InventarioComponent,
+    IngresarComponent
   ],
   imports: [
     BrowserModule,

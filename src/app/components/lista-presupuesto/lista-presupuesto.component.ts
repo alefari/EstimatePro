@@ -68,21 +68,9 @@ export class ListaPresupuestoComponent implements OnInit {
   recibirInformacion(presupuesto: Presupuesto){
     this.infoPresupuesto = presupuesto;
   }
+
   //FUNCION CERRAR MODAL (REINICIO DE CAMPOS)
   cerrarModal() {
     this.form.reset();
-    this.nuevoPresupuesto = {
-      id: null,
-      nombre: null,
-      tipo: null,
-      precio: null,
-      fecha: null,
-      laborGubernamental: null,
-      laborRate: null,
-      materialRate: null,
-      equipmentRate: null,
-      idUsuario: null,
-      descripcion: null,
-      };
   }
 }

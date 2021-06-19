@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Item } from '../../models/item.models'
-import { Unidad } from 'src/app/models/unidad.models';
 import { CategoriasService } from '../../services/categorias.service'
-import { UnidadesService } from '../../services/unidades.service'
 import { ItemsService } from '../../services/items.service'
 import { SubcategoriasService } from 'src/app/services/subcategorias.service';
 
@@ -20,26 +18,22 @@ export class InventarioComponent implements OnInit {
   listaItems: Item[];
   listaCategorias: any[];
   listaSubcategorias: any[];
-  listaUnidades: any[];
-  
 
-                                                    //FARIIIIII TENEMOS QUE VERIFICAR EN EL MODEL, COLOQUE TODO COMO ANY EN LOS TIPOS DE VARIABLE PORQUE ME ESTABAN DANDO ERROR
-  nuevoItem: Item = {
+  infoItem: Item = {
     id: null,
     nombre: null,
     categoria: null,
     subcategoria: null,
     unidad: null,
-    descripcion: null,
+    fecha: null,
     laborRate: null,
     materialRate: null,
     equipmentRate: null,
-    fecha: null,
     idUsuario: null,
-    };
+    descripcion: null,
+}
 
   constructor(private servicioCategorias: CategoriasService,
-              private servicioUnidades: UnidadesService,
               private servicioItems: ItemsService,
               private servicioSubcategorias: SubcategoriasService) { }
 
@@ -53,29 +47,16 @@ export class InventarioComponent implements OnInit {
     this.servicioSubcategorias.obtenerSubcategorias().subscribe(subcategorias => {
       this.listaSubcategorias = subcategorias.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
     })
-    this.servicioUnidades.obtenerUnidades().subscribe(unidades => {
-      this.listaUnidades = unidades.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
-    })
   }
 
+    //FUNCION PARA OBTENER DATOS DE PRODUCTO E IMPRIMIR EN MODAL DE INFO
+    recibirInformacion(item: Item){
+      this.infoItem = item;
+    }
 
-
-  //FUNCION CERRAR MODAL (REINICIO DE CAMPOS)
-  cerrarModal() {
+    //FUNCION CERRAR MODAL (REINICIO DE CAMPOS)
+    cerrarModal() {
     this.form.reset();
-    this.nuevoItem = {
-      id: null,
-      nombre: null,
-      categoria: null,
-      subcategoria: null,
-      unidad: null,
-      descripcion: null,
-      laborRate: null,
-      materialRate: null,
-      equipmentRate: null,
-      fecha: null,
-      idUsuario: null,
-      };
   }
 
 }
