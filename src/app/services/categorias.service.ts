@@ -11,15 +11,15 @@ export class CategoriasService {
 
   //VARIABLE QUE VA A CONTENER NUESTRA LISTA DE CATEGORIAS
 
-  categoriasColeccion: AngularFirestoreCollection<Categoria>;
-  categorias: Observable<Categoria[]>;
+  categoriasColeccion: AngularFirestoreCollection<any>;
+  categorias: Observable<any[]>;
 
   constructor(private readonly afs: AngularFirestore) {
 
-    this.categoriasColeccion = afs.collection<Categoria>('categorias');
+    this.categoriasColeccion = afs.collection<any>('categorias');
     this.categorias = this.categoriasColeccion.snapshotChanges().pipe(
       map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Categoria;
+        const data = a.payload.doc.data() as any;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
@@ -33,12 +33,12 @@ export class CategoriasService {
   }
 
   //FUNCION AGREGAR CATEGORIA EN LA BASE DE DATOS
-  agregarCategoria(nuevaCategoria: Categoria) {
+  agregarCategoria(nuevaCategoria: any) {
     this.categoriasColeccion.doc(nuevaCategoria.id).set(nuevaCategoria);
   }
 
   //FUNCION MODIFICAR CATEGORIA DE LA BASE DE DATOS
-  editarCategoria(categoriaEditada: Categoria) {
+  editarCategoria(categoriaEditada: any) {
     return this.categoriasColeccion.doc(categoriaEditada.id).update(categoriaEditada);
   }
 

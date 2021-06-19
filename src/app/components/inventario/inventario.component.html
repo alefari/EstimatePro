@@ -1,9 +1,16 @@
 <div class="container">
-
     <div class="row mt-lg-5">    
         <div class="col">
             <h1>Inventario:</h1>
         </div> 
+    </div>
+    <!--BOTONES DE CONTROL-->
+    <div class="col">
+        <div class="btn-group float-left">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalIngreso">
+                Ingresar Item
+            </button>
+        </div>
     </div>
     
     <div class="row mt-3">
@@ -18,18 +25,23 @@
                 <th scope="col">Labor Rate</th>
                 <th scope="col">Material Rate</th>
                 <th scope="col">Equipment Rate</th>
+                <th scope="col"></th>
                 </tr>
             </thead>
     <!--FILTROS DE TABLA INVENTARIO-->
             <thead class="table-dark">
                 <tr>
-                    <th scope="col"><input class="w-75 form-control form-control-sm" ngModel type="text" placeholder="Filtro por nombre"></th>
+                    <th scope="col"><input #filtroNombre="ngModel" class="w-75 form-control form-control-sm" ngModel name="filtroNombre" type="text" placeholder="Filtro por nombre"></th>
                     <th scope="col">
-                        <select class="form-control form-control-sm" ngModel name="filtroCategoria">
+                        <select #filtroCategoria="ngModel" class="form-control-sm" ngModel name="filtroCategoria">
                             <option value="">Categoría (Todas)</option>
-                            <option value="">Gubernamental</option>
-                            <option value="">Privado</option>
-                            <option value="">Mixto</option>
+                            <option *ngFor="let cat of listaCategorias" [value]="cat.nombre">{{ cat.nombre }}</option>
+                        </select>
+                    </th>
+                    <th scope="col">
+                        <select #filtroSubcategoria="ngModel" class="form-control-sm" ngModel name="filtroSubcategoria">
+                            <option value="">Subcategoría (Todas)</option>
+                            <option *ngFor="let subcat of listaSubcategorias" [value]="subcat.nombre">{{ subcat.nombre }}</option>
                         </select>
                     </th>
                     <th scope="col"></th>
@@ -37,22 +49,29 @@
                     <th scope="col"></th>
                     <th scope="col"></th>
                     <th scope="col"></th>
+
                 </tr>
             </thead>
     <!--CUERPO DE TABLA DE INVENTARIO-->
             <tbody>
-                <ng-container>
-                    <tr class="table-light" scope>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                <ng-container *ngFor="let item of listaItems">
+                    <tr *ngIf="(item.nombre.toLocaleLowerCase().includes(filtroNombre.value.toLocaleLowerCase()) || filtroNombre.value=='') &&
+                                (item.categoria.includes(filtroCategoria.value) || filtroCategoria.value=='') &&
+                                (item.subcategoria.includes(filtroSubcategoria.value) || filtroSubcategoria.value=='')"
+                    class="table-light" scope>
+                        <td>{{ item.nombre }}</td>
+                        <td>{{ item.categoria }}</td>
+                        <td>{{ item.subcategoria }}</td>
+                        <td>{{ item.unidad }}</td>
+                        <td>{{ item.laborRate }}</td>
+                        <td>{{ item.materialRate }}</td>
+                        <td>{{ item.equipmentRate }}</td>
                         <td>
                             <div class="btn-group">
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalInfoProducto">
-                                    Rename
+                                <button class="btn btn-info btn-sm" data-toggle="modal">
+                                    Detalles
                                 </button>
-                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminarProducto">
+                                <button class="btn btn-danger btn-sm" data-toggle="modal">
                                     Eliminar
                                 </button>
                             </div>
@@ -63,3 +82,86 @@
         </table>
     </div>
 </div>
+
+<!--MODAL AGREGAR ITEM-->
+<div id="modalIngreso" class="modal fade" data-bs-backdrop="static" ata-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Ingreso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModal()" aria-label="Close"></button>
+            </div>
+            <form #f='ngForm'>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <h3>Nuevo Item</h3>
+                        <div class="row">
+                            <div class="col-4 mb-3">
+                                <label class="form-label">Nombre</label>
+                                <input #nombre="ngModel" required type="text" name="nombre" [(ngModel)]="nuevoItem.nombre" class="form-control">
+                            </div>
+                            <div class="col-4 mb-3">
+                                <label for="exampleFormControlSelect1" class="mb-2">Categoría</label>
+                                <select #categoria="ngModel" required class="form-select" name="categoria" [(ngModel)]="nuevoItem.categoria">
+                                    <option *ngFor="let categoria of listaCategorias" value="{{categoria.nombre}}" > {{ categoria.nombre }}</option>
+                                </select>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <label for="exampleFormControlSelect1" class="mb-2">Subcategoría</label>
+                                <select #subcategoria="ngModel" required class="form-select" name="subcategoria" [(ngModel)]="nuevoItem.subcategoria">
+                                    <option *ngFor="let subcategoria of listaSubcategorias" value="{{subcategoria.nombre}}" > {{ subcategoria.nombre }}</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-3 mb-3">
+                                <label for="exampleFormControlSelect1" class="mb-2">Unidad</label>
+                                <select #unidad="ngModel" required class="form-select" name="unidad" [(ngModel)]="nuevoItem.unidad">
+                                    <option *ngFor="let unidad of listaUnidades" value="{{unidad.nombre}}" > {{ unidad.nombre }}</option>
+                                </select>
+                            </div>
+                            <div class="col-3 mb-3">
+                                <label for="exampleInputPassword1" class="mb-2">Labor Rate</label>
+                                <div class="input-group">
+                                    <input min=1 onkeypress="return event.charCode > 45" required type="number" [(ngModel)]="nuevoItem.laborRate" name="laborRate" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-3 mb-3">
+                                <label for="exampleInputPassword1" class="mb-2">Material Rate</label>
+                                <div class="input-group">
+                                    <input min=1 onkeypress="return event.charCode >= 48" required type="number" [(ngModel)]="nuevoItem.materialRate" name="materialRate" class="form-control">
+                                </div>
+                                </div>
+                            <div class="col-3 mb-3">
+                                <label for="exampleInputPassword1" class="mb-2">Equipment Rate</label>
+                                <div class="input-group">
+                                    <input min=1 onkeypress="return event.charCode >= 48" required type="number" [(ngModel)]="nuevoItem.equipmentRate" name="equipmentRate" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label>Descripción</label>
+                                <textarea class="form-control" #descipcion="ngModel" required type="text" name="descripcion" [(ngModel)]="nuevoItem.descripcion"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--MODAL FOOTER-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="cerrarModal()" data-bs-dismiss="modal">
+                    Cerrar
+                </button>
+                <button data-dismiss="modal" type="button" class="btn btn-primary">
+                    Ingresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--FIN DEL MODAL AGREGAR ITEM-->
