@@ -52,10 +52,10 @@
                         <td>{{ presupuesto.tipo }}</td>
                         <td>{{ presupuesto.estatus }}</td>
                         <td>{{ presupuesto.precio }}</td>
-                        <td>{{ presupuesto.fecha }}</td>
+                        <td>{{ presupuesto.fecha | date:'short'}}</td>
                         <td>
                             <div class="btn-group">
-                                <button class="btn btn-info btn-sm" data-toggle="modal">
+                                <button class="btn btn-info text-white btn-sm" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#modalInfoPresupuesto" (click)="recibirInformacion(presupuesto)">
                                     Detalles
                                 </button>
                                 <button class="btn btn-danger btn-sm" data-toggle="modal">
@@ -138,7 +138,7 @@
                 <button type="button" class="btn btn-secondary" (click)="cerrarModal()" data-bs-dismiss="modal">
                     Cerrar
                 </button>
-                <button data-dismiss="modal" type="button" (click)="onSubmit()" class="btn btn-primary">
+                <button data-bs-dismiss="modal" type="button" (click)="onSubmit()" class="btn btn-primary">
                     Ingresar
                 </button>
             </div>
@@ -146,4 +146,82 @@
     </div>
 </div>
 <!--FIN DEL MODAL AGREGAR PRESUPUESTO-->
+
+<!-- MODAL DE INFO -->
+<div class="modal fade" id="modalInfoPresupuesto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-info">
+                <h5 class="modal-title text-white" id="exampleModalLabel"><strong>{{ infoPresupuesto.nombre }}</strong></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <table class="table table-sm">
+                <tbody>
+                    <tr>
+                    <th>ID</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.id }}</td>
+                    </tr>
+                    <tr *ngIf="infoPresupuesto.tipo != null">
+                    <th>Tipo</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.tipo }}</td>
+                    </tr>
+                    <tr *ngIf="infoPresupuesto.laborGubernamental!=null">
+                    <th>Costo por labor gubernamental</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.laborGubernamental }}</td>
+                    </tr>
+                    <tr>
+                    <th>Estatus</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.estatus }}</td>
+                    </tr>
+                    <tr *ngIf="infoPresupuesto.precio!=null">
+                    <th>Precio</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.precio }}</td>
+                    </tr>
+                    <tr *ngIf="infoPresupuesto.laborRate!=null">
+                    <th>Labor Rate</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.laborRate }}</td>
+                    </tr>
+                    <tr *ngIf="infoPresupuesto.materialRate!=null">
+                    <th>Material Rate</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.materialRate }}</td>
+                    </tr>
+                    <tr *ngIf="infoPresupuesto.equipmentRate!=null">
+                    <th>Equipment Rate</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.equipmentRate }}</td>
+                    </tr>
+                    <tr *ngIf="infoPresupuesto.descripcion != null">
+                    <th>Descripción</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.descripcion }}</td>
+                    </tr>
+                    <tr>
+                    <th>Creado por</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.idUsuario }}</td>
+                    </tr>
+                    <tr>
+                    <th>Fecha</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.fecha | date:'short' }}</td>
+                    </tr>
+                    <tr><th></th><td></td><td></td></tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- FIN DEL MODAL INFO -->
 

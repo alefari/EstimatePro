@@ -34,7 +34,7 @@ export class PresupuestosService {
 
   //FUNCION AGREGAR PRESUPUESTO EN LA BASE DE DATOS
   agregarPresupuesto(nuevoPresupuesto: Presupuesto) {
-    this.presupuestosColeccion.doc(nuevoPresupuesto.id).set(nuevoPresupuesto);
+    this.presupuestosColeccion.doc().set(nuevoPresupuesto);
   }
 
   //FUNCION MODIFICAR PRESUPUESTO DE LA BASE DE DATOS
