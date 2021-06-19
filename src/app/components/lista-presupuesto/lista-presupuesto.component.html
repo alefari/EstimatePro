@@ -1,34 +1,31 @@
 <div class="container">
-
     <div class="row mt-lg-5">    
         <div class="col">
             <h1>Presupuestos:</h1>
         </div> 
     </div>
-    
     <div class="row mt-3">
-    <!--HEAD DE TABLA DE INVENTARIO-->
+    <!--HEAD DE TABLA DE PRESUPUESTOS-->
         <table class="table shadow table-hover">
             <thead class="table-dark">
                 <tr>
                 <th scope="col">Nombre</th>
-                <th scope="col">Categoría</th>
+                <th scope="col">Tipo</th>
                 <th scope="col">Estatus</th>
                 <th scope="col">Precio</th>
                 <th scope="col">Fecha</th>
                 <th></th>
                 </tr>
             </thead>
-    <!--FILTROS DE TABLA INVENTARIO-->
+    <!--FILTROS DE TABLA PRESUPUESTOS-->
             <thead class="table-dark">
                 <tr>
-                    <th scope="col"><input class="w-75 form-control form-control-sm" ngModel type="text" placeholder="Filtro por nombre"></th>
+                    <th scope="col"><input #filtroNombre="ngModel" class="w-75 form-control form-control-sm" ngModel type="text" placeholder="Filtro por nombre"></th>
                     <th scope="col">
-                        <select class="form-control form-control-sm" ngModel name="filtroCategoria">
-                            <option value="">Categoría (Todas)</option>
-                            <option value="">Gubernamental</option>
-                            <option value="">Privado</option>
-                            <option value="">Mixto</option>
+                        <select #filtroTipo="ngModel" class="form-control-sm form-select-sm" ngModel name="filtroTipo">
+                            <option value="">Tipo (Todos)</option>
+                            <option value="Privado">Privado</option>
+                            <option value="Gobierno">Gobierno</option>
                         </select>
                     </th>
                     <th scope="col"></th>
@@ -37,20 +34,23 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
-    <!--CUERPO DE TABLA DE INVENTARIO-->
+    <!--CUERPO DE TABLA DE PRESUPUESTOS-->
             <tbody>
-                <ng-container>
-                    <tr class="table-light" scope>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                <ng-container *ngFor="let presupuesto of listaPresupuestos">
+                    <tr *ngIf="(presupuesto.nombre.toLocaleLowerCase().includes(filtroNombre.value.toLocaleLowerCase()) || filtroNombre.value=='') &&
+                                (presupuesto.tipo.includes(filtroTipo.value) || filtroTipo.value=='')"
+                    class="table-light" scope>
+                        <td>{{ presupuesto.nombre }}</td>
+                        <td>{{ presupuesto.tipo }}</td>
+                        <td>{{ presupuesto.estatus }}</td>
+                        <td>{{ presupuesto.precio }}</td>
+                        <td>{{ presupuesto.fecha }}</td>
                         <td>
                             <div class="btn-group">
-                                <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#modalInfoProducto">
-                                    Rename
+                                <button class="btn btn-info btn-sm" data-toggle="modal">
+                                    Detalles
                                 </button>
-                                <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalEliminarProducto">
+                                <button class="btn btn-danger btn-sm" data-toggle="modal">
                                     Eliminar
                                 </button>
                             </div>

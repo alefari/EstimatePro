@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PresupuestosService } from '../../services/presupuestos.service'
+import { Presupuesto } from '../../models/presupuesto.models'
 
 @Component({
   selector: 'app-lista-presupuesto',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaPresupuestoComponent implements OnInit {
 
-  constructor() { }
+  listaPresupuestos: Presupuesto[];
 
-  ngOnInit(): void {
+  constructor(private servicioPresupuestos: PresupuestosService) { }
+
+  ngOnInit(): void { 
+    this.servicioPresupuestos.obtenerPresupuestos().subscribe(presupuestos => {
+      this.listaPresupuestos = presupuestos.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
+    })
   }
 
 }
