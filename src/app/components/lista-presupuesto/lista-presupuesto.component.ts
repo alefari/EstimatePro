@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { PresupuestosService } from '../../services/presupuestos.service'
 import { Presupuesto } from '../../models/presupuesto.models'
 
@@ -9,7 +10,23 @@ import { Presupuesto } from '../../models/presupuesto.models'
 })
 export class ListaPresupuestoComponent implements OnInit {
 
+  @ViewChild('f') form: NgForm;
+
   listaPresupuestos: Presupuesto[];
+
+  nuevoPresupuesto = {
+    id: null,
+      nombre: null,
+      tipo: null,
+      precio: null,
+      fecha: null,
+      laborGubernamental: null,
+      laborRate: null,
+      materialRate: null,
+      equipmentRate: null,
+      idUsuario: null,
+      descripcion: null,
+  }
 
   constructor(private servicioPresupuestos: PresupuestosService) { }
 
@@ -19,4 +36,27 @@ export class ListaPresupuestoComponent implements OnInit {
     })
   }
 
+  //FUNCION PARA AGREGAR PRESUPUESTO A LA BD
+  onSubmit(){
+    this.servicioPresupuestos.agregarPresupuesto(this.nuevoPresupuesto);
+    this.form.reset();
+    }
+      
+  //FUNCION CERRAR MODAL (REINICIO DE CAMPOS)
+  cerrarModal() {
+    this.form.reset();
+    this.nuevoPresupuesto = {
+      id: null,
+      nombre: null,
+      tipo: null,
+      precio: null,
+      fecha: null,
+      laborGubernamental: null,
+      laborRate: null,
+      materialRate: null,
+      equipmentRate: null,
+      idUsuario: null,
+      descripcion: null,
+      };
+  }
 }

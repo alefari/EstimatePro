@@ -4,6 +4,14 @@
             <h1>Presupuestos:</h1>
         </div> 
     </div>
+    <!--BOTONES DE CONTROL-->
+    <div class="col">
+        <div class="btn-group float-left">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalIngreso">
+                Ingresar Presupuesto
+            </button>
+        </div>
+    </div>
     <div class="row mt-3">
     <!--HEAD DE TABLA DE PRESUPUESTOS-->
         <table class="table shadow table-hover">
@@ -61,3 +69,81 @@
         </table>
     </div>
 </div>
+
+
+<!--MODAL AGREGAR PRESUPUESTO-->
+<div id="modalIngreso" class="modal fade" data-bs-backdrop="static" ata-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Ingreso</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModal()" aria-label="Close"></button>
+            </div>
+            <form #f='ngForm'>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <h3>Nuevo Presupuesto</h3>
+                        <div class="row">
+                            <div class="col-4 mb-3">
+                                <label class="form-label">Nombre</label>
+                                <input #nombre="ngModel" required type="text" name="nombre" [(ngModel)]="nuevoPresupuesto.nombre" class="form-control">
+                            </div>
+                            <div class="col-4 mb-3">
+                                <label for="exampleFormControlSelect1" class="mb-2">Tipo</label>
+                                <select #tipoPresupuesto="ngModel" ngModel required class="form-select" name="categoria" [(ngModel)]="nuevoPresupuesto.tipo">
+                                    <option value="Privado">Privado</option>
+                                    <option value="Gobierno">Gobierno</option>
+                                </select>
+                            </div>
+                            <div class="col-4 mb-3" *ngIf='tipoPresupuesto.value=="Gobierno"'>
+                                <label for="exampleFormControlSelect1" class="mb-2">Labor Price</label>
+                                <input min=1 onkeypress="return event.charCode > 45" required type="number" [(ngModel)]="nuevoPresupuesto.laborGubernamental" name="laborGubernamental" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-4 mb-3">
+                                <label for="exampleInputPassword1" class="mb-2">Labor Rate</label>
+                                <div class="input-group">
+                                    <input min=1 onkeypress="return event.charCode > 45" required type="number" [(ngModel)]="nuevoPresupuesto.laborRate" name="laborRate" class="form-control">
+                                </div>
+                            </div>
+                            <div class="col-4 mb-3">
+                                <label for="exampleInputPassword1" class="mb-2">Material Rate</label>
+                                <div class="input-group">
+                                    <input min=1 onkeypress="return event.charCode >= 48" required type="number" [(ngModel)]="nuevoPresupuesto.materialRate" name="materialRate" class="form-control">
+                                </div>
+                                </div>
+                            <div class="col-4 mb-3">
+                                <label for="exampleInputPassword1" class="mb-2">Equipment Rate</label>
+                                <div class="input-group">
+                                    <input min=1 onkeypress="return event.charCode >= 48" required type="number" [(ngModel)]="nuevoPresupuesto.equipmentRate" name="equipmentRate" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col">
+                                <label>Descripción</label>
+                                <textarea class="form-control" #descripcion="ngModel" required type="text" name="descripcion" [(ngModel)]="nuevoPresupuesto.descripcion"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <!--MODAL FOOTER-->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="cerrarModal()" data-bs-dismiss="modal">
+                    Cerrar
+                </button>
+                <button data-dismiss="modal" type="button" (click)="onSubmit()" class="btn btn-primary">
+                    Ingresar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--FIN DEL MODAL AGREGAR PRESUPUESTO-->
+
