@@ -1,60 +1,63 @@
 <div class="container">
-    <div class="row mt-lg-5">    
-        <div class="col">
-            <h1>Presupuestos:</h1>
-        </div> 
-    </div>
-    <!--BOTONES DE CONTROL-->
+  <div class="row mt-3">
     <div class="col">
-        <div class="btn-group float-left">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalIngreso">
-                Ingresar Presupuesto
-            </button>
-        </div>
+        <h1 class="text-white">Presupuestos:</h1>
     </div>
+    <div class="col">
+      <div class="btn-group float-end pt-3">
+          <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngreso">
+              Crear Nuevo
+          </button>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-3 row-cols-1 row-cols-md-auto">
+    <div class="col py-2">
+        <input #filtroNombre="ngModel" class="w-75 form-control" ngModel type="text" placeholder="Filtro por nombre">
+    </div>
+    <div class="col pt-3">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+        <label class="form-check-label text-light" for="flexCheckDefault">
+          Gubernamental
+        </label>
+      </div>
+    </div>
+    <div class="col pt-3">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+        <label class="form-check-label text-light" for="flexCheckChecked">
+          Privado
+        </label>
+      </div>
+    </div>
+    <div class="col py-2">
+      <input class="form-control form-control-sm" type="month" name="fechaVencimiento" value=""  class="form-control" id="floatingInput" placeholder="Filtro por fecha">
+    </div>
+  </div>
     <div class="row mt-3">
     <!--HEAD DE TABLA DE PRESUPUESTOS-->
-        <table class="table shadow table-hover">
-            <thead class="table-dark">
-                <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Estatus</th>
-                <th scope="col">Precio</th>
-                <th scope="col">Fecha</th>
-                <th></th>
-                </tr>
-            </thead>
-    <!--FILTROS DE TABLA PRESUPUESTOS-->
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col"><input #filtroNombre="ngModel" class="w-75 form-control form-control-sm" ngModel type="text" placeholder="Filtro por nombre"></th>
-                    <th scope="col">
-                        <select #filtroTipo="ngModel" class="form-control-sm form-select-sm" ngModel name="filtroTipo">
-                            <option value="">Tipo (Todos)</option>
-                            <option value="Privado">Privado</option>
-                            <option value="Gobierno">Gobierno</option>
-                        </select>
-                    </th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
+        <table class="table shadow table-hover table-striped table-light table-borderless">
+            <thead class="">
+                <tr class="">
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Estatus</th>
+                  <th scope="col">Fecha</th>
+                  <th></th>
                 </tr>
             </thead>
     <!--CUERPO DE TABLA DE PRESUPUESTOS-->
-            <tbody>
+            <tbody class="">
+              <!-- (presupuesto.tipo.includes(filtroTipo.value) || filtroTipo.value=='') -->
                 <ng-container *ngFor="let presupuesto of listaPresupuestos">
-                    <tr *ngIf="(presupuesto.nombre.toLocaleLowerCase().includes(filtroNombre.value.toLocaleLowerCase()) || filtroNombre.value=='') &&
-                                (presupuesto.tipo.includes(filtroTipo.value) || filtroTipo.value=='')"
-                    class="table-light" scope>
+                    <tr *ngIf="(presupuesto.nombre.toLocaleLowerCase().includes(filtroNombre.value.toLocaleLowerCase()) || filtroNombre.value=='')"
+                    class="" scope>
                         <td>{{ presupuesto.nombre }}</td>
-                        <td>{{ presupuesto.tipo }}</td>
+                        <!-- <td>{{ presupuesto.tipo }}</td> -->
                         <td>{{ presupuesto.estatus }}</td>
-                        <td>{{ presupuesto.precio }}</td>
-                        <td>{{ presupuesto.fecha | date:'short'}}</td>
+                        <td>{{ presupuesto.fecha | date:'mediumDate'}}</td>
                         <td>
-                            <div class="btn-group">
+                            <div class="btn-group float-end" role="group">
                                 <button class="btn btn-success text-white btn-sm" data-bs-toggle="modal">
                                     Editar
                                 </button>
