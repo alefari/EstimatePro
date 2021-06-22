@@ -1,8 +1,8 @@
 <div class="container">
-    <div class="row mt-lg-5">    
+    <div class="row mt-lg-5">
         <div class="col">
             <h1>Inventario:</h1>
-        </div> 
+        </div>
     </div>
     <!--BOTONES DE CONTROL-->
     <div class="row">
@@ -12,16 +12,16 @@
                     Ingresar Item
                 </button>
             </div>
-        </div>    
+        </div>
         <div class="col">
             <div class="btn-group float-end">
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalModificar">
                     Modificar Item
                 </button>
             </div>
-        </div> 
+        </div>
     </div>
-    
+
     <div class="row mt-3">
     <!--HEAD DE TABLA DE INVENTARIO-->
         <table class="table shadow table-hover">
@@ -104,11 +104,6 @@
             <div class="modal-body">
             <table class="table table-sm">
                 <tbody>
-                    <tr>
-                    <th>ID</th>
-                        <td></td>
-                        <td>{{ infoItem.id }}</td>
-                    </tr>
                     <tr *ngIf="infoItem.categoria!= null">
                     <th>Categoría</th>
                         <td></td>
@@ -138,16 +133,6 @@
                     <th>Equipment Rate</th>
                         <td></td>
                         <td>{{ infoItem.equipmentRate }}</td>
-                    </tr>
-                    <tr *ngIf="infoItem.descripcion != null">
-                    <th>Descripción</th>
-                        <td></td>
-                        <td>{{ infoItem.descripcion }}</td>
-                    </tr>
-                    <tr>
-                    <th>Creado por</th>
-                        <td></td>
-                        <td>{{ infoItem.idUsuario }}</td>
                     </tr>
                     <tr>
                     <th>Fecha</th>

@@ -38,9 +38,9 @@ export class ItemsService {
   }
 
   //FUNCION MODIFICAR ITEM DE LA BASE DE DATOS
-  editarItem(itemEditado: Item) {
-    return this.itemsColeccion.doc(itemEditado.id).update(itemEditado);
-  }
+  // editarItem(itemEditado: Item) {
+  //   return this.itemsColeccion.doc(itemEditado.id).update(itemEditado);
+  // }
 
   //FUNCION ELIMINAR ITEM DE LA BASE DE DATOS
   eliminarItem(idItemliminar: string){

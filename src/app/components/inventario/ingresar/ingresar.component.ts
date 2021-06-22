@@ -21,20 +21,7 @@ export class IngresarComponent implements OnInit {
   listaSubcategorias: any[];
   listaUnidades: any[];
 
-                                                      //FARIIIIII TENEMOS QUE VERIFICAR EN EL MODEL, COLOQUE TODO COMO ANY EN LOS TIPOS DE VARIABLE PORQUE ME ESTABAN DANDO ERROR
-  nuevoItem: Item = {
-    id: null,
-    nombre: null,
-    categoria: null,
-    subcategoria: null,
-    unidad: null,
-    descripcion: null,
-    laborRate: null,
-    materialRate: null,
-    equipmentRate: null,
-    fecha: null,
-    idUsuario: null,
-  };
+  nuevoItem: Item;
 
   constructor(private servicioCategorias: CategoriasService,
               private servicioUnidades: UnidadesService,
@@ -52,32 +39,26 @@ export class IngresarComponent implements OnInit {
       this.listaUnidades = unidades.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
     })
   }
-  
+
   //FUNCION PARA AGREGAR ITEM A LA BD
   onSubmit(){
     this.nuevoItem.fecha=new Date().toISOString();
-    this.nuevoItem.idUsuario="26778332";
     this.servicioItems.agregarItem(this.nuevoItem);
-    console.log(this.nuevoItem);
-
     this.form.reset();
     }
-    
+
   //FUNCION CERRAR MODAL (REINICIO DE CAMPOS)
   cerrarModal() {
     this.form.reset();
     this.nuevoItem = {
-      id: null,
-      nombre: null,
-      categoria: null,
-      subcategoria: null,
-      unidad: null,
-      descripcion: null,
-      laborRate: null,
-      materialRate: null,
-      equipmentRate: null,
+      nombre: '',
+      categoria: '',
+      subcategoria: '',
+      unidad: '',
+      laborRate: 0,
+      materialRate: 0,
+      equipmentRate: 0,
       fecha: null,
-      idUsuario: null,
       };
   }
 

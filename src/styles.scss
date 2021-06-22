@@ -4,5 +4,9 @@
 @import "../node_modules/bootstrap/scss/variables";
 
 body {
-  background-color: $blue-700;
+  // background-color: $blue-700;
+  // background-color: linear-gradient(160deg, rgba(8,66,152,1) 0%, rgba(110,168,254,1) 100%);
+  // background: linear-gradient(160deg, rgba(8,66,152,1) 0%, rgba(110,168,254,1) 100%);
+  background: linear-gradient(160deg, $blue-800 0%, $blue-600 100%);
+  height: 100vh;
 }

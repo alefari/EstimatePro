@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { Unidad } from '../models/unidad.models'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 

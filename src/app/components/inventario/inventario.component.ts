@@ -19,19 +19,7 @@ export class InventarioComponent implements OnInit {
   listaCategorias: any[];
   listaSubcategorias: any[];
 
-  infoItem: Item = {
-    id: null,
-    nombre: null,
-    categoria: null,
-    subcategoria: null,
-    unidad: null,
-    fecha: null,
-    laborRate: null,
-    materialRate: null,
-    equipmentRate: null,
-    idUsuario: null,
-    descripcion: null,
-}
+  infoItem: Item;
 
   constructor(private servicioCategorias: CategoriasService,
               private servicioItems: ItemsService,
