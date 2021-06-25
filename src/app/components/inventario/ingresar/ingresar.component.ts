@@ -21,7 +21,16 @@ export class IngresarComponent implements OnInit {
   listaSubcategorias: any[];
   listaUnidades: any[];
 
-  nuevoItem: Item;
+  nuevoItem: Item ={
+    nombre: '',
+    categoria: '',
+    subcategoria: '',
+    unidad: '',
+    laborRate: 0,
+    materialRate: 0,
+    equipmentRate: 0,
+    fecha: null,
+  };
 
   constructor(private servicioCategorias: CategoriasService,
               private servicioUnidades: UnidadesService,

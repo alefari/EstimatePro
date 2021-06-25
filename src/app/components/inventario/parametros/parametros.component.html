@@ -1,0 +1,269 @@
+<div class="container">
+  <div class="row mt-lg-5">
+      <div class="col">
+          <h1 class="text-white">Parámetros:</h1>
+      </div>
+  </div>
+
+  <!--BOTONES DE CONTROL-->
+  <div class="row mt-3">
+    <div class="col-4">
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngresarCategoría">
+        Ingresar Categoría
+      </button>
+    </div>
+    <div class="col-4">
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngresarSubcategoría">
+          Ingresar Subcategoría
+      </button>
+    </div>
+    <div class="col-4">
+      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngresarUnidad">
+          Ingresar Unidad
+      </button>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-4">
+  <!--HEAD DE TABLA DE CATEGORIAS-->
+      <div class="table-responsive">
+        <table class="table shadow table-hover table-striped table-light table-borderless">
+            <thead class="">
+                <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+    <!--CUERPO DE TABLA DE CATEGORIAS-->
+            <tbody class="">
+              <ng-container *ngFor="let categoria of listaCategorias">
+                <tr>
+                  <td>{{ categoria.nombre }}</td>
+                  <td>
+                      <div class="btn-group float-end">
+                          <button class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalModificarCategoria" (click)="recibirInformacionCategoriaModificar(categoria.id, categoria.nombre)">
+                              Modificar
+                          </button>
+                          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCategoria" (click)="recibirInformacionCategoriaEliminar(categoria.id, categoria.nombre)">
+                              Eliminar
+                          </button>
+                      </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-4">
+  <!--HEAD DE TABLA DE SUBCATEGORIAS-->
+    <div class="table-responsive">
+      <table class="table shadow table-hover table-striped table-light table-borderless">
+          <thead class="">
+              <tr>
+              <th scope="col">Nombre</th>
+              <th scope="col"></th>
+              </tr>
+          </thead>
+    <!--CUERPO DE TABLA DE SUBCATEGORIAS-->
+            <tbody class="">
+              <ng-container *ngFor="let subcategoria of listaSubcategorias">
+                <tr>
+                  <td>{{ subcategoria.nombre }}</td>
+                  <td>
+                      <div class="btn-group float-end">
+                          <button class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalModificarSubcategoria" (click)="recibirInformacionSubcategoriaModificar(subcategoria.id, subcategoria.nombre)">
+                              Modificar
+                          </button>
+                          <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarSubcategoria" (click)="recibirInformacionSubcategoriaEliminar(subcategoria.id, subcategoria.nombre)">
+                              Eliminar
+                          </button>
+                      </div>
+                  </td>
+                </tr>
+              </ng-container>
+            </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="col-4">
+    <!--HEAD DE TABLA DE UNIDADES -->
+      <div class="table-responsive">
+        <table class="table shadow table-hover table-striped table-light table-borderless">
+            <thead class="">
+                <tr>
+                <th scope="col">Nombre</th>
+                <th scope="col"></th>
+                </tr>
+            </thead>
+      <!--CUERPO DE TABLA DE UNIDADES-->
+              <tbody class="">
+                <ng-container *ngFor="let unidad of listaUnidades">
+                  <tr>
+                    <td>{{ unidad.nombre }}</td>
+                    <td>
+                        <div class="btn-group float-end">
+                            <button class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalModificarUnidad" (click)="recibirInformacionUnidadModificar(unidad.id, unidad.nombre)">
+                                Modificar
+                            </button>
+                            <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarUnidad" (click)="recibirInformacionUnidadEliminar(unidad.id, unidad.nombre)">
+                                Eliminar
+                            </button>
+                        </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+</div>
+<!-- FIN TABLA DE PARAMETROS -->
+
+<!--MODAL MODIFICAR CATEGORIAS-->
+<div class="modal fade" id="modalModificarCategoria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Modificar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row pt-3">
+          <div class="col">
+            <h5>Nombre</h5>
+          </div>
+          <div class="col">
+            <input #nombreCategoriaModificar="ngModel" required type="text" name="nombreCategoriaModificar" [(ngModel)]="nuevoNombreCategoria" class="form-control">
+          </div>
+        </div>
+        <p>¿Estás seguro de modificar <strong>{{ infoCategoriaModificar.nombre }}</strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="modificarCategoria()">Modificar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--FIN MODAL MODIFICAR CATEGORIAS-->
+
+<!--MODAL MODIFICAR SUBCATEGORIAS-->
+<div class="modal fade" id="modalModificarSubcategoria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Modificar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row pt-3">
+          <div class="col">
+            <h3>Nombre</h3>
+          </div>
+          <div class="col">
+            <input #nombreSubcategoriaModificar="ngModel" required type="text" name="nombreSubcategoriaModificar" [(ngModel)]="nuevoNombreSubcategoria" class="form-control">
+          </div>
+        </div>
+        <p>¿Estás seguro de modificar <strong>{{ infoSubcategoriaModificar.nombre }}</strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="modificarSubcategoria()">Modificar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--FIN MODAL MODIFICAR SUBCATEGORIAS-->
+
+<!--MODAL MODIFICAR UNIDAD-->
+<div class="modal fade" id="modalModificarUnidad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Modificar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row pt-3">
+          <div class="col">
+            <h3>Nombre</h3>
+          </div>
+          <div class="col">
+            <input #nombreUnidadModificar="ngModel" required type="text" name="nombreUnidadModificar" [(ngModel)]="nuevoNombreUnidad" class="form-control">
+          </div>
+        </div>
+        <p>¿Estás seguro de modificar <strong>{{ infoUnidadModificar.nombre }}</strong>?</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="modificarUnidad()">Modificar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--FIN MODAL MODIFICAR UNIDAD-->
+
+<!--MODAL ELIMINAR CATEGORIAS-->
+<div class="modal fade" id="modalEliminarCategoria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Eliminar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro de eliminar <strong>{{ infoCategoriaEliminar.nombre }}</strong>? <br> Esta acción no podrá ser revertida.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarCategoria()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--FIN MODAL ELIMINAR CATEGORIAS-->
+
+<!--MODAL ELIMINAR SUBCATEGORIAS-->
+<div class="modal fade" id="modalEliminarSubcategoria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Eliminar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro de eliminar <strong>{{ infoSubcategoriaEliminar.nombre }}</strong>? <br> Esta acción no podrá ser revertida.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarSubcategoria()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--FIN MODAL ELIMINAR SUBCATEGORIAS-->
+
+<!--MODAL ELIMINAR UNIDAD-->
+<div class="modal fade" id="modalEliminarUnidad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Eliminar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro de eliminar <strong>{{ infoUnidadEliminar.nombre }}</strong>? <br> Esta acción no podrá ser revertida.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarUnidad()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--FIN MODAL ELIMINAR UNIDAD-->

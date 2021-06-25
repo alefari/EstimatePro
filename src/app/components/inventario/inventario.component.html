@@ -1,31 +1,50 @@
 <div class="container">
     <div class="row mt-lg-5">
         <div class="col">
-            <h1>Inventario:</h1>
+            <h1 class="text-white">Inventario:</h1>
         </div>
     </div>
     <!--BOTONES DE CONTROL-->
     <div class="row">
         <div class="col">
-            <div class="btn-group float-end">
+            <div class="btn-group float-end pt-3">
                 <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngresar">
                     Ingresar Item
                 </button>
             </div>
         </div>
         <div class="col">
-            <div class="btn-group float-end">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalModificar">
+            <div class="btn-group float-end pt-3">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" routerLink="/parametros">
                     Modificar Item
                 </button>
             </div>
         </div>
     </div>
+    <!--FILTROS DE LA TABLA DE INVENTARIO-->
+    <div class="row mt-3 row-cols-1 row-cols-md-auto">
+      <div class="col py-2">
+          <input #filtroNombre="ngModel" class="w-75 form-control" ngModel type="text" placeholder="Filtro por nombre">
+      </div>
+      <div class="col pt-3">
+        <select #filtroCategoria="ngModel" class="form-control-sm" ngModel name="filtroCategoria">
+            <option value="">Categoría (Todas)</option>
+            <option *ngFor="let cat of listaCategorias" [value]="cat.nombre">{{ cat.nombre }}</option>
+        </select>
+      </div>
+      <div class="col pt-3">
+        <select #filtroSubcategoria="ngModel" class="form-control-sm" ngModel name="filtroSubcategoria">
+          <option value="">Subcategoría (Todas)</option>
+          <option *ngFor="let subcat of listaSubcategorias" [value]="subcat.nombre">{{ subcat.nombre }}</option>
+        </select>
+      </div>
+    </div>
 
     <div class="row mt-3">
     <!--HEAD DE TABLA DE INVENTARIO-->
-        <table class="table shadow table-hover">
-            <thead class="table-dark">
+      <div class="table-responsive">
+        <table class="table shadow table-hover table-striped table-light table-borderless">
+            <thead class="">
                 <tr>
                 <th scope="col">Nombre</th>
                 <th scope="col">Categoría</th>
@@ -37,32 +56,8 @@
                 <th scope="col"></th>
                 </tr>
             </thead>
-    <!--FILTROS DE TABLA INVENTARIO-->
-            <thead class="table-dark">
-                <tr>
-                    <th scope="col"><input #filtroNombre="ngModel" class="w-75 form-control form-control-sm" ngModel name="filtroNombre" type="text" placeholder="Filtro por nombre"></th>
-                    <th scope="col">
-                        <select #filtroCategoria="ngModel" class="form-control-sm" ngModel name="filtroCategoria">
-                            <option value="">Categoría (Todas)</option>
-                            <option *ngFor="let cat of listaCategorias" [value]="cat.nombre">{{ cat.nombre }}</option>
-                        </select>
-                    </th>
-                    <th scope="col">
-                        <select #filtroSubcategoria="ngModel" class="form-control-sm" ngModel name="filtroSubcategoria">
-                            <option value="">Subcategoría (Todas)</option>
-                            <option *ngFor="let subcat of listaSubcategorias" [value]="subcat.nombre">{{ subcat.nombre }}</option>
-                        </select>
-                    </th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-
-                </tr>
-            </thead>
     <!--CUERPO DE TABLA DE INVENTARIO-->
-            <tbody>
+            <tbody class="">
                 <ng-container *ngFor="let item of listaItems">
                     <tr *ngIf="(item.nombre.toLocaleLowerCase().includes(filtroNombre.value.toLocaleLowerCase()) || filtroNombre.value=='') &&
                                 (item.categoria.includes(filtroCategoria.value) || filtroCategoria.value=='') &&
@@ -76,7 +71,7 @@
                         <td>{{ item.materialRate }}</td>
                         <td>{{ item.equipmentRate }}</td>
                         <td>
-                            <div class="btn-group">
+                            <div class="btn-group float-end">
                                 <button class="btn btn-info btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalInfoItem"  (click)="recibirInformacion(item)">
                                     Detalles
                                 </button>
@@ -89,6 +84,7 @@
                 </ng-container>
             </tbody>
         </table>
+      </div>
     </div>
 </div>
 <!-- FIN TABLA DE INVENTARIO -->

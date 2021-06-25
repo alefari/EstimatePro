@@ -12,6 +12,7 @@ import { PresupuestoComponent } from './components/presupuesto/presupuesto.compo
 import { ListaPresupuestoComponent } from './components/lista-presupuesto/lista-presupuesto.component';
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { IngresarComponent } from './components/inventario/ingresar/ingresar.component';
+import { ParametrosComponent } from './components/inventario/parametros/parametros.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { IngresarComponent } from './components/inventario/ingresar/ingresar.com
     PresupuestoComponent,
     ListaPresupuestoComponent,
     InventarioComponent,
-    IngresarComponent
+    IngresarComponent,
+    ParametrosComponent
   ],
   imports: [
     BrowserModule,

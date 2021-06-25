@@ -47,7 +47,7 @@ export class ListaPresupuestoComponent implements OnInit {
 
   constructor(private servicioPresupuestos: PresupuestosService) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.servicioPresupuestos.obtenerPresupuestos().subscribe(presupuestos => {
       this.listaPresupuestos = presupuestos.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
     })
