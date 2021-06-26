@@ -33,7 +33,7 @@ export class CategoriasService {
 
   //FUNCION AGREGAR CATEGORIA EN LA BASE DE DATOS
   agregarCategoria(nuevaCategoria: any) {
-    this.categoriasColeccion.doc(nuevaCategoria.id).set(nuevaCategoria);
+    this.categoriasColeccion.doc().set(nuevaCategoria);
   }
 
   //FUNCION MODIFICAR CATEGORIA DE LA BASE DE DATOS

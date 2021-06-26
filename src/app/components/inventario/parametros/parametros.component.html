@@ -7,19 +7,28 @@
 
   <!--BOTONES DE CONTROL-->
   <div class="row mt-3">
-    <div class="col-4">
-      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngresarCategoría">
-        Ingresar Categoría
+    <div class="col-2">
+      <input required type="text" name="nombreCategoriaAgregar" [(ngModel)]="nuevaCategoria.nombre" class="form-control" placeholder="Nueva Categoría">
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-success" (click)="agregarCategoria()">
+        Categoría
       </button>
     </div>
-    <div class="col-4">
-      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngresarSubcategoría">
-          Ingresar Subcategoría
+    <div class="col-2">
+      <input required type="text" name="nombreSubcategoriaAgregar" [(ngModel)]="nuevaSubcategoria.nombre" class="form-control" placeholder="Nueva Subcategoría">
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-success" (click)="agregarSubcategoria()">
+          Subcategoría
       </button>
     </div>
-    <div class="col-4">
-      <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngresarUnidad">
-          Ingresar Unidad
+    <div class="col-2">
+      <input required type="text" name="nombreUnidadAgregar" [(ngModel)]="nuevaUnidad.nombre" class="form-control" placeholder="Nueva Unidad">
+    </div>
+    <div class="col-2">
+      <button type="button" class="btn btn-success" (click)="agregarUnidad()">
+          Unidad
       </button>
     </div>
   </div>
@@ -267,3 +276,4 @@
   </div>
 </div>
 <!--FIN MODAL ELIMINAR UNIDAD-->
+

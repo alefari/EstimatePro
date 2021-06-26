@@ -33,7 +33,7 @@ export class UnidadesService {
 
   //FUNCION AGREGAR UNIDAD EN LA BASE DE DATOS
   agregarUnidad(nuevaUnidad: any) {
-    this.unidadesColeccion.doc(nuevaUnidad.id).set(nuevaUnidad);
+    this.unidadesColeccion.doc().set(nuevaUnidad);
   }
 
   //FUNCION MODIFICAR UNIDAD DE LA BASE DE DATOS

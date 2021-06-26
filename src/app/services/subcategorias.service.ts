@@ -33,7 +33,7 @@ export class SubcategoriasService {
 
   //FUNCION AGREGAR SUBCATEGORIA EN LA BASE DE DATOS
   agregarSubcategoria(nuevaSubcategoria: any) {
-    this.subcategoriasColeccion.doc(nuevaSubcategoria.id).set(nuevaSubcategoria);
+    this.subcategoriasColeccion.doc().set(nuevaSubcategoria);
   }
 
   //FUNCION MODIFICAR SUBCATEGORIA DE LA BASE DE DATOS

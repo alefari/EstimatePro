@@ -14,6 +14,11 @@ export class ParametrosComponent implements OnInit {
   listaSubcategorias: any[];
   listaUnidades: any[];
 
+  //VARIABLE QUE OBTIENE DATOS PARA AGREGAR
+  nuevaCategoria:any = {nombre:""};
+  nuevaSubcategoria:any = {nombre:""};
+  nuevaUnidad:any = {nombre:""};
+
   //VARIABLE QUE OBTIENE DATOS PARA MODIFICAR
   infoCategoriaModificar = {id: "", nombre: "",};
   infoSubcategoriaModificar = {id: "", nombre: "",};
@@ -42,6 +47,30 @@ export class ParametrosComponent implements OnInit {
       this.listaUnidades = unidades.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
     })
   }
+
+                                                                  //FUNCIONES PARA AGREGAR REGISTROS
+  //FUNCIONES AGREGAR CATEGORIA
+  agregarCategoria(){
+    if (this.nuevaCategoria.nombre!="" && this.nuevaCategoria.nombre!= null) {
+      this.servicioCategorias.agregarCategoria(this.nuevaCategoria);
+      this.nuevaCategoria.nombre="";
+    }
+  }
+  //FUNCIONES AGREGAR SUBCATEGORIA
+  agregarSubcategoria(){
+    if (this.nuevaSubcategoria.nombre!="" && this.nuevaSubcategoria.nombre!= null) {
+      this.servicioSubcategorias.agregarSubcategoria(this.nuevaSubcategoria);
+      this.nuevaSubcategoria.nombre="";
+    }
+  }
+  //FUNCIONES AGREGAR UNIDAD
+  agregarUnidad(){
+    if (this.nuevaUnidad.nombre!="" && this.nuevaUnidad.nombre!= null) {
+      this.servicioUnidades.agregarUnidad(this.nuevaUnidad);
+      this.nuevaUnidad.nombre="";
+    }
+  }
+
                                                                   //FUNCIONES PARA MODIFICAR REGISTROS
   //FUNCIONES MODIFICAR CATEGORIA
   recibirInformacionCategoriaModificar(idCategoriaModificar: string, nombreCategoriaModificar:string){
@@ -51,6 +80,7 @@ export class ParametrosComponent implements OnInit {
   modificarCategoria(){
     this.infoCategoriaModificar.nombre = this.nuevoNombreCategoria;
     this.servicioCategorias.editarCategoria(this.infoCategoriaModificar);
+    this.nuevoNombreCategoria="";
   }
   //FUNCIONES MODIFICAR SUBCATEGORIA
   recibirInformacionSubcategoriaModificar(idSubcategoriaModificar: string, nombreSubcategoriaModificar:string){
@@ -60,6 +90,7 @@ export class ParametrosComponent implements OnInit {
   modificarSubcategoria(){
     this.infoSubcategoriaModificar.nombre = this.nuevoNombreSubcategoria;
     this.servicioSubcategorias.editarSubcategoria(this.infoSubcategoriaModificar);
+    this.nuevoNombreSubcategoria="";
   }
   //FUNCIONES MODIFICAR UNIDAD
   recibirInformacionUnidadModificar(idUnidadModificar: string, nombreUnidadaModificar:string){
@@ -69,9 +100,10 @@ export class ParametrosComponent implements OnInit {
   modificarUnidad(){
     this.infoUnidadModificar.nombre = this.nuevoNombreUnidad;
     this.servicioUnidades.editarUnidad(this.infoUnidadModificar);
+    this.nuevoNombreUnidad="";
   }
-                                                                  //FUNCIONES PARA ELIMINAR REGISTROS
 
+                                                                  //FUNCIONES PARA ELIMINAR REGISTROS
     //FUNCIONES ELIMINAR CATEGORIA
   recibirInformacionCategoriaEliminar(idCategoriaEliminar: string, nombreCategoriaEliminar:string){
     this.infoCategoriaEliminar.id = idCategoriaEliminar;
