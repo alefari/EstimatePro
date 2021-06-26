@@ -13,13 +13,6 @@
                 </button>
             </div>
         </div>
-        <div class="col">
-            <div class="btn-group float-end pt-3">
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" routerLink="/parametros">
-                    Modificar Item
-                </button>
-            </div>
-        </div>
     </div>
     <!--FILTROS DE LA TABLA DE INVENTARIO-->
     <div class="row mt-3 row-cols-1 row-cols-md-auto">
@@ -67,16 +60,19 @@
                         <td>{{ item.categoria }}</td>
                         <td>{{ item.subcategoria }}</td>
                         <td>{{ item.unidad }}</td>
-                        <td>{{ item.laborRate }}</td>
-                        <td>{{ item.materialRate }}</td>
-                        <td>{{ item.equipmentRate }}</td>
+                        <td>${{ item.laborRate }}</td>
+                        <td>${{ item.materialRate }}</td>
+                        <td>${{ item.equipmentRate }}</td>
                         <td>
                             <div class="btn-group float-end">
                                 <button class="btn btn-info btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalInfoItem"  (click)="recibirInformacion(item)">
-                                    Detalles
+                                  Detalles
                                 </button>
-                                <button class="btn btn-danger btn-sm" data-toggle="modal">
-                                    Eliminar
+                                <button class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalModificarItem"  (click)="recibirInformacion(item)">
+                                  Modificar
+                                </button>
+                                <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarItem" (click)="recibirInformacionItemEliminar(item.id, item.nombre)">
+                                  Eliminar
                                 </button>
                             </div>
                         </td>
@@ -118,17 +114,17 @@
                     <tr *ngIf="infoItem.laborRate!=null">
                     <th>Labor Rate</th>
                         <td></td>
-                        <td>{{ infoItem.laborRate }}</td>
+                        <td>${{ infoItem.laborRate }}</td>
                     </tr>
                     <tr *ngIf="infoItem.materialRate!=null">
                     <th>Material Rate</th>
                         <td></td>
-                        <td>{{ infoItem.materialRate }}</td>
+                        <td>${{ infoItem.materialRate }}</td>
                     </tr>
                     <tr *ngIf="infoItem.equipmentRate!=null">
                     <th>Equipment Rate</th>
                         <td></td>
-                        <td>{{ infoItem.equipmentRate }}</td>
+                        <td>${{ infoItem.equipmentRate }}</td>
                     </tr>
                     <tr>
                     <th>Fecha</th>
@@ -146,6 +142,26 @@
     </div>
 </div>
 <!-- FIN DEL MODAL INFO ITEM -->
+
+<!--MODAL ELIMINAR ITEM-->
+<div class="modal fade" id="modalEliminarItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Eliminar</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Estás seguro de eliminar <strong>{{ infoItemEliminar.nombre }}</strong>? <br> Esta acción no podrá ser revertida.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarItem()">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--FIN MODAL ELIMINAR ITEM-->
 
 
 <!--DIRECCIONES HACIA COMPONENTES DE AGREGAR Y MODIFICAR-->

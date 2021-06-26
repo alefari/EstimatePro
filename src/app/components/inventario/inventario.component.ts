@@ -30,6 +30,9 @@ export class InventarioComponent implements OnInit {
       fecha: null,
   };
 
+  //VARIABLE QUE OBTIENE DATOS PARA ELIMINAR
+  infoItemEliminar = {id: "", nombre: "",}
+
   constructor(private servicioCategorias: CategoriasService,
               private servicioItems: ItemsService,
               private servicioSubcategorias: SubcategoriasService) { }
@@ -46,14 +49,24 @@ export class InventarioComponent implements OnInit {
     })
   }
 
-    //FUNCION PARA OBTENER DATOS DE PRODUCTO E IMPRIMIR EN MODAL DE INFO
-    recibirInformacion(item: Item){
-      this.infoItem = item;
-    }
+  //FUNCIONES ELIMINAR ITEM
+  recibirInformacionItemEliminar(idItemEliminar: string, nombreItemEliminar:string){
+    this.infoItemEliminar.id = idItemEliminar;
+    this.infoItemEliminar.nombre= nombreItemEliminar;
+  }
+  eliminarItem(){
+    this.servicioItems.eliminarItem(this.infoItemEliminar.id);
+    this.infoItemEliminar = {id: "", nombre: "",}
+  }
 
-    //FUNCION CERRAR MODAL (REINICIO DE CAMPOS)
-    cerrarModal() {
-    this.form.reset();
+  //FUNCION PARA OBTENER DATOS DE PRODUCTO E IMPRIMIR EN MODAL DE INFO
+  recibirInformacion(item: Item){
+    this.infoItem = item;
+  }
+
+  //FUNCION CERRAR MODAL (REINICIO DE CAMPOS)
+  cerrarModal() {
+  this.form.reset();
   }
 
 }
