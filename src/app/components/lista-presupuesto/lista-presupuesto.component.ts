@@ -47,10 +47,11 @@ export class ListaPresupuestoComponent implements OnInit {
 
   constructor(private servicioPresupuestos: PresupuestosService) { }
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
     this.servicioPresupuestos.obtenerPresupuestos().subscribe(presupuestos => {
-      this.listaPresupuestos = presupuestos.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
+      this.listaPresupuestos = presupuestos;
     })
+
   }
 
   //FUNCION PARA AGREGAR PRESUPUESTO A LA BD
@@ -72,5 +73,11 @@ export class ListaPresupuestoComponent implements OnInit {
   //FUNCION CERRAR MODAL (REINICIO DE CAMPOS)
   cerrarModal() {
     this.form.reset();
+  }
+
+  loadNextBatch() {
+    this.servicioPresupuestos.obtenerPresupuestos(this.listaPresupuestos).subscribe(presupuestos => {
+      this.listaPresupuestos = presupuestos;
+    })
   }
 }

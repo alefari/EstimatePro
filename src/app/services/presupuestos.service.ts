@@ -16,7 +16,16 @@ export class PresupuestosService {
 
   constructor(private readonly afs: AngularFirestore) {
 
-    this.presupuestosColeccion = afs.collection<Presupuesto>('presupuestos');
+  }
+
+  extraer(lastBatch?: Presupuesto[]) {
+    if(lastBatch) {
+      this.presupuestosColeccion = this.afs.collection<Presupuesto>('presupuestos', ref => ref.startAfter(lastBatch.pop().nombre).limit(3));
+    }
+    else{
+      this.presupuestosColeccion = this.afs.collection<Presupuesto>('presupuestos', ref => ref.limit(3));
+    }
+
     this.presupuestos = this.presupuestosColeccion.snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Presupuesto;
@@ -24,11 +33,29 @@ export class PresupuestosService {
         return { id, ...data };
       }))
     )
-
   }
 
+
+
   //FUNCION OBTENER PRESUPUESTOS DE LA BASE DE DATOS
-  obtenerPresupuestos() {
+  obtenerPresupuestos(lastBatch?: Presupuesto[]) {
+    if(lastBatch) this.extraer(lastBatch)
+    else this.extraer()
+
+    return this.presupuestos;
+  }
+
+
+
+  obtenerPresupuestos2(lastBatch: Presupuesto[]) {
+    this.presupuestosColeccion = this.afs.collection<Presupuesto>('presupuestos', ref => ref.startAfter(lastBatch.pop()).limit(3));
+    this.presupuestos = this.presupuestosColeccion.snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as Presupuesto;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    )
     return this.presupuestos;
   }
 
