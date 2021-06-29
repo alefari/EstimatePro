@@ -16,20 +16,20 @@
 
     </div>
     <!--FILTROS DE LA TABLA DE INVENTARIO-->
-    <div class="row">
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 text-end">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-auto justify-content-end">
+      <div class="text-end">
         <h5 class="text-white">Filtrar por:</h5>
       </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 pb-2">
+      <div class="pb-2">
           <input #filtroNombre="ngModel" class="form-control" ngModel type="text" placeholder="Nombre">
       </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 pb-2">
+      <div class="pb-2">
         <select #filtroCategoria="ngModel" class="form-select" ngModel name="filtroCategoria">
             <option value="">Categoría (Todas)</option>
             <option *ngFor="let cat of listaCategorias" [value]="cat.nombre">{{ cat.nombre }}</option>
         </select>
       </div>
-      <div class="col-12 col-sm-6 col-md-4 col-lg-3 pb-2">
+      <div class="pb-2">
         <select #filtroSubcategoria="ngModel" class="form-select" ngModel name="filtroSubcategoria">
           <option value="">Subcategoría (Todas)</option>
           <option *ngFor="let subcat of listaSubcategorias" [value]="subcat.nombre">{{ subcat.nombre }}</option>
