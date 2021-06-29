@@ -20,7 +20,8 @@ export class PresupuestosService {
 
   extraer(lastBatch?: Presupuesto[]) {
     if(lastBatch) {
-      this.presupuestosColeccion = this.afs.collection<Presupuesto>('presupuestos', ref => ref.startAfter(lastBatch.pop().nombre).limit(3));
+      this.presupuestosColeccion = this.afs.collection<Presupuesto>('presupuestos', ref => ref.limit(3));
+      // this.presupuestosColeccion = this.afs.collection<Presupuesto>('presupuestos', ref => ref.startAfter(lastBatch.pop().nombre).limit(3));
     }
     else{
       this.presupuestosColeccion = this.afs.collection<Presupuesto>('presupuestos', ref => ref.limit(3));
