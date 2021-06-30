@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row mt-5">
       <div class="col">
-          <h1 class="text-white">Parámetros:</h1>
+          <h1 class="text-white">Parameters:</h1>
       </div>
   </div>
 
@@ -11,12 +11,12 @@
       <div class="row mb-3 justify-content-end">
         <div class="col-12 col-sm-7 col-md-10">
           <div class="input-group">
-            <input required type="text" name="nombreCategoriaAgregar" [(ngModel)]="nuevaCategoria.nombre" class="form-control" placeholder="Categoría">
+            <input required type="text" name="nombreCategoriaAgregar" [(ngModel)]="nuevaCategoria.nombre" class="form-control" placeholder="Category">
             <button type="button" class="btn btn-success" (click)="agregarCategoria()">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
                 <path d="M8 0c-.176 0-.35.006-.523.017l.064.998a7.117 7.117 0 0 1 .918 0l.064-.998A8.113 8.113 0 0 0 8 0zM6.44.152c-.346.069-.684.16-1.012.27l.321.948c.287-.098.582-.177.884-.237L6.44.153zm4.132.271a7.946 7.946 0 0 0-1.011-.27l-.194.98c.302.06.597.14.884.237l.321-.947zm1.873.925a8 8 0 0 0-.906-.524l-.443.896c.275.136.54.29.793.459l.556-.831zM4.46.824c-.314.155-.616.33-.905.524l.556.83a7.07 7.07 0 0 1 .793-.458L4.46.824zM2.725 1.985c-.262.23-.51.478-.74.74l.752.66c.202-.23.418-.446.648-.648l-.66-.752zm11.29.74a8.058 8.058 0 0 0-.74-.74l-.66.752c.23.202.447.418.648.648l.752-.66zm1.161 1.735a7.98 7.98 0 0 0-.524-.905l-.83.556c.169.253.322.518.458.793l.896-.443zM1.348 3.555c-.194.289-.37.591-.524.906l.896.443c.136-.275.29-.54.459-.793l-.831-.556zM.423 5.428a7.945 7.945 0 0 0-.27 1.011l.98.194c.06-.302.14-.597.237-.884l-.947-.321zM15.848 6.44a7.943 7.943 0 0 0-.27-1.012l-.948.321c.098.287.177.582.237.884l.98-.194zM.017 7.477a8.113 8.113 0 0 0 0 1.046l.998-.064a7.117 7.117 0 0 1 0-.918l-.998-.064zM16 8a8.1 8.1 0 0 0-.017-.523l-.998.064a7.11 7.11 0 0 1 0 .918l.998.064A8.1 8.1 0 0 0 16 8zM.152 9.56c.069.346.16.684.27 1.012l.948-.321a6.944 6.944 0 0 1-.237-.884l-.98.194zm15.425 1.012c.112-.328.202-.666.27-1.011l-.98-.194c-.06.302-.14.597-.237.884l.947.321zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a6.999 6.999 0 0 1-.458-.793l-.896.443zm13.828.905c.194-.289.37-.591.524-.906l-.896-.443c-.136.275-.29.54-.459.793l.831.556zm-12.667.83c.23.262.478.51.74.74l.66-.752a7.047 7.047 0 0 1-.648-.648l-.752.66zm11.29.74c.262-.23.51-.478.74-.74l-.752-.66c-.201.23-.418.447-.648.648l.66.752zm-1.735 1.161c.314-.155.616-.33.905-.524l-.556-.83a7.07 7.07 0 0 1-.793.458l.443.896zm-7.985-.524c.289.194.591.37.906.524l.443-.896a6.998 6.998 0 0 1-.793-.459l-.556.831zm1.873.925c.328.112.666.202 1.011.27l.194-.98a6.953 6.953 0 0 1-.884-.237l-.321.947zm4.132.271a7.944 7.944 0 0 0 1.012-.27l-.321-.948a6.954 6.954 0 0 1-.884.237l.194.98zm-2.083.135a8.1 8.1 0 0 0 1.046 0l-.064-.998a7.11 7.11 0 0 1-.918 0l-.064.998zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
               </svg>
-              Agregar
+              Create
             </button>
           </div>
         </div>
@@ -27,7 +27,7 @@
           <table class="table shadow table-hover table-striped table-light table-borderless">
               <thead class="">
                   <tr>
-                  <th scope="col">Categorías</th>
+                  <th scope="col">Categories</th>
                   <th scope="col"></th>
                   </tr>
               </thead>
@@ -38,11 +38,8 @@
                     <td>{{ categoria.nombre }}</td>
                     <td>
                         <div class="btn-group float-end">
-                            <button class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalModificarCategoria" (click)="recibirInformacionCategoriaModificar(categoria.id, categoria.nombre)">
-                                Modificar
-                            </button>
                             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarCategoria" (click)="recibirInformacionCategoriaEliminar(categoria.id, categoria.nombre)">
-                                Eliminar
+                                Delete
                             </button>
                         </div>
                     </td>
@@ -58,12 +55,12 @@
       <div class="row mb-3 justify-content-end">
         <div class="col-12 col-sm-7 col-md-10">
           <div class="input-group">
-            <input required type="text" name="nombreSubcategoriaAgregar" [(ngModel)]="nuevaSubcategoria.nombre" class="form-control" placeholder="Subcategoría">
+            <input required type="text" name="nombreSubcategoriaAgregar" [(ngModel)]="nuevaSubcategoria.nombre" class="form-control" placeholder="Type">
             <button type="button" class="btn btn-success" (click)="agregarSubcategoria()">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
                 <path d="M8 0c-.176 0-.35.006-.523.017l.064.998a7.117 7.117 0 0 1 .918 0l.064-.998A8.113 8.113 0 0 0 8 0zM6.44.152c-.346.069-.684.16-1.012.27l.321.948c.287-.098.582-.177.884-.237L6.44.153zm4.132.271a7.946 7.946 0 0 0-1.011-.27l-.194.98c.302.06.597.14.884.237l.321-.947zm1.873.925a8 8 0 0 0-.906-.524l-.443.896c.275.136.54.29.793.459l.556-.831zM4.46.824c-.314.155-.616.33-.905.524l.556.83a7.07 7.07 0 0 1 .793-.458L4.46.824zM2.725 1.985c-.262.23-.51.478-.74.74l.752.66c.202-.23.418-.446.648-.648l-.66-.752zm11.29.74a8.058 8.058 0 0 0-.74-.74l-.66.752c.23.202.447.418.648.648l.752-.66zm1.161 1.735a7.98 7.98 0 0 0-.524-.905l-.83.556c.169.253.322.518.458.793l.896-.443zM1.348 3.555c-.194.289-.37.591-.524.906l.896.443c.136-.275.29-.54.459-.793l-.831-.556zM.423 5.428a7.945 7.945 0 0 0-.27 1.011l.98.194c.06-.302.14-.597.237-.884l-.947-.321zM15.848 6.44a7.943 7.943 0 0 0-.27-1.012l-.948.321c.098.287.177.582.237.884l.98-.194zM.017 7.477a8.113 8.113 0 0 0 0 1.046l.998-.064a7.117 7.117 0 0 1 0-.918l-.998-.064zM16 8a8.1 8.1 0 0 0-.017-.523l-.998.064a7.11 7.11 0 0 1 0 .918l.998.064A8.1 8.1 0 0 0 16 8zM.152 9.56c.069.346.16.684.27 1.012l.948-.321a6.944 6.944 0 0 1-.237-.884l-.98.194zm15.425 1.012c.112-.328.202-.666.27-1.011l-.98-.194c-.06.302-.14.597-.237.884l.947.321zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a6.999 6.999 0 0 1-.458-.793l-.896.443zm13.828.905c.194-.289.37-.591.524-.906l-.896-.443c-.136.275-.29.54-.459.793l.831.556zm-12.667.83c.23.262.478.51.74.74l.66-.752a7.047 7.047 0 0 1-.648-.648l-.752.66zm11.29.74c.262-.23.51-.478.74-.74l-.752-.66c-.201.23-.418.447-.648.648l.66.752zm-1.735 1.161c.314-.155.616-.33.905-.524l-.556-.83a7.07 7.07 0 0 1-.793.458l.443.896zm-7.985-.524c.289.194.591.37.906.524l.443-.896a6.998 6.998 0 0 1-.793-.459l-.556.831zm1.873.925c.328.112.666.202 1.011.27l.194-.98a6.953 6.953 0 0 1-.884-.237l-.321.947zm4.132.271a7.944 7.944 0 0 0 1.012-.27l-.321-.948a6.954 6.954 0 0 1-.884.237l.194.98zm-2.083.135a8.1 8.1 0 0 0 1.046 0l-.064-.998a7.11 7.11 0 0 1-.918 0l-.064.998zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
               </svg>
-              Agregar
+              Create
             </button>
           </div>
         </div>
@@ -74,7 +71,7 @@
       <table class="table shadow table-hover table-striped table-light table-borderless">
           <thead class="">
               <tr>
-              <th scope="col">Subcategorías</th>
+              <th scope="col">Types</th>
               <th scope="col"></th>
               </tr>
           </thead>
@@ -85,11 +82,8 @@
                   <td>{{ subcategoria.nombre }}</td>
                   <td>
                       <div class="btn-group float-end">
-                          <button class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalModificarSubcategoria" (click)="recibirInformacionSubcategoriaModificar(subcategoria.id, subcategoria.nombre)">
-                              Modificar
-                          </button>
                           <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarSubcategoria" (click)="recibirInformacionSubcategoriaEliminar(subcategoria.id, subcategoria.nombre)">
-                              Eliminar
+                              Delete
                           </button>
                       </div>
                   </td>
@@ -105,12 +99,12 @@
       <div class="row mb-3 justify-content-end">
         <div class="col-12 col-sm-7 col-md-10">
           <div class="input-group">
-            <input required type="text" name="nombreUnidadAgregar" [(ngModel)]="nuevaUnidad.nombre" class="form-control" placeholder="Unidad">
+            <input required type="text" name="nombreUnidadAgregar" [(ngModel)]="nuevaUnidad.nombre" class="form-control" placeholder="Unit">
             <button type="button" class="btn btn-success" (click)="agregarUnidad()">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-dotted" viewBox="0 0 16 16">
                 <path d="M8 0c-.176 0-.35.006-.523.017l.064.998a7.117 7.117 0 0 1 .918 0l.064-.998A8.113 8.113 0 0 0 8 0zM6.44.152c-.346.069-.684.16-1.012.27l.321.948c.287-.098.582-.177.884-.237L6.44.153zm4.132.271a7.946 7.946 0 0 0-1.011-.27l-.194.98c.302.06.597.14.884.237l.321-.947zm1.873.925a8 8 0 0 0-.906-.524l-.443.896c.275.136.54.29.793.459l.556-.831zM4.46.824c-.314.155-.616.33-.905.524l.556.83a7.07 7.07 0 0 1 .793-.458L4.46.824zM2.725 1.985c-.262.23-.51.478-.74.74l.752.66c.202-.23.418-.446.648-.648l-.66-.752zm11.29.74a8.058 8.058 0 0 0-.74-.74l-.66.752c.23.202.447.418.648.648l.752-.66zm1.161 1.735a7.98 7.98 0 0 0-.524-.905l-.83.556c.169.253.322.518.458.793l.896-.443zM1.348 3.555c-.194.289-.37.591-.524.906l.896.443c.136-.275.29-.54.459-.793l-.831-.556zM.423 5.428a7.945 7.945 0 0 0-.27 1.011l.98.194c.06-.302.14-.597.237-.884l-.947-.321zM15.848 6.44a7.943 7.943 0 0 0-.27-1.012l-.948.321c.098.287.177.582.237.884l.98-.194zM.017 7.477a8.113 8.113 0 0 0 0 1.046l.998-.064a7.117 7.117 0 0 1 0-.918l-.998-.064zM16 8a8.1 8.1 0 0 0-.017-.523l-.998.064a7.11 7.11 0 0 1 0 .918l.998.064A8.1 8.1 0 0 0 16 8zM.152 9.56c.069.346.16.684.27 1.012l.948-.321a6.944 6.944 0 0 1-.237-.884l-.98.194zm15.425 1.012c.112-.328.202-.666.27-1.011l-.98-.194c-.06.302-.14.597-.237.884l.947.321zM.824 11.54a8 8 0 0 0 .524.905l.83-.556a6.999 6.999 0 0 1-.458-.793l-.896.443zm13.828.905c.194-.289.37-.591.524-.906l-.896-.443c-.136.275-.29.54-.459.793l.831.556zm-12.667.83c.23.262.478.51.74.74l.66-.752a7.047 7.047 0 0 1-.648-.648l-.752.66zm11.29.74c.262-.23.51-.478.74-.74l-.752-.66c-.201.23-.418.447-.648.648l.66.752zm-1.735 1.161c.314-.155.616-.33.905-.524l-.556-.83a7.07 7.07 0 0 1-.793.458l.443.896zm-7.985-.524c.289.194.591.37.906.524l.443-.896a6.998 6.998 0 0 1-.793-.459l-.556.831zm1.873.925c.328.112.666.202 1.011.27l.194-.98a6.953 6.953 0 0 1-.884-.237l-.321.947zm4.132.271a7.944 7.944 0 0 0 1.012-.27l-.321-.948a6.954 6.954 0 0 1-.884.237l.194.98zm-2.083.135a8.1 8.1 0 0 0 1.046 0l-.064-.998a7.11 7.11 0 0 1-.918 0l-.064.998zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
               </svg>
-              Agregar
+              Create
             </button>
           </div>
         </div>
@@ -121,7 +115,7 @@
         <table class="table shadow table-hover table-striped table-light table-borderless">
             <thead class="">
                 <tr>
-                <th scope="col">Unidades</th>
+                <th scope="col">Units</th>
                 <th scope="col"></th>
                 </tr>
             </thead>
@@ -132,11 +126,8 @@
                     <td>{{ unidad.nombre }}</td>
                     <td>
                         <div class="btn-group float-end">
-                            <button class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalModificarUnidad" (click)="recibirInformacionUnidadModificar(unidad.id, unidad.nombre)">
-                                Modificar
-                            </button>
                             <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarUnidad" (click)="recibirInformacionUnidadEliminar(unidad.id, unidad.nombre)">
-                                Eliminar
+                                Delete
                             </button>
                         </div>
                     </td>
@@ -151,104 +142,20 @@
 </div>
 <!-- FIN TABLA DE PARAMETROS -->
 
-<!--MODAL MODIFICAR CATEGORIAS-->
-<div class="modal fade" id="modalModificarCategoria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <h5 class="modal-title text-white" id="staticBackdropLabel">Modificar</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row pt-3">
-          <div class="col">
-            <h5>Nombre</h5>
-          </div>
-          <div class="col">
-            <input #nombreCategoriaModificar="ngModel" required type="text" name="nombreCategoriaModificar" [(ngModel)]="nuevoNombreCategoria" class="form-control">
-          </div>
-        </div>
-        <p>¿Estás seguro de modificar <strong>{{ infoCategoriaModificar.nombre }}</strong>?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="modificarCategoria()">Modificar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--FIN MODAL MODIFICAR CATEGORIAS-->
-
-<!--MODAL MODIFICAR SUBCATEGORIAS-->
-<div class="modal fade" id="modalModificarSubcategoria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <h5 class="modal-title text-white" id="staticBackdropLabel">Modificar</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row pt-3">
-          <div class="col">
-            <h3>Nombre</h3>
-          </div>
-          <div class="col">
-            <input #nombreSubcategoriaModificar="ngModel" required type="text" name="nombreSubcategoriaModificar" [(ngModel)]="nuevoNombreSubcategoria" class="form-control">
-          </div>
-        </div>
-        <p>¿Estás seguro de modificar <strong>{{ infoSubcategoriaModificar.nombre }}</strong>?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="modificarSubcategoria()">Modificar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--FIN MODAL MODIFICAR SUBCATEGORIAS-->
-
-<!--MODAL MODIFICAR UNIDAD-->
-<div class="modal fade" id="modalModificarUnidad" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header bg-primary">
-        <h5 class="modal-title text-white" id="staticBackdropLabel">Modificar</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row pt-3">
-          <div class="col">
-            <h3>Nombre</h3>
-          </div>
-          <div class="col">
-            <input #nombreUnidadModificar="ngModel" required type="text" name="nombreUnidadModificar" [(ngModel)]="nuevoNombreUnidad" class="form-control">
-          </div>
-        </div>
-        <p>¿Estás seguro de modificar <strong>{{ infoUnidadModificar.nombre }}</strong>?</p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="modificarUnidad()">Modificar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!--FIN MODAL MODIFICAR UNIDAD-->
-
 <!--MODAL ELIMINAR CATEGORIAS-->
 <div class="modal fade" id="modalEliminarCategoria" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-danger">
-        <h5 class="modal-title text-white" id="staticBackdropLabel">Eliminar</h5>
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Delete</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>¿Estás seguro de eliminar <strong>{{ infoCategoriaEliminar.nombre }}</strong>? <br> Esta acción no podrá ser revertida.</p>
+        <p>¿Are you sure you want to delete <strong>{{ infoCategoriaEliminar.nombre }}</strong>? <br><br> This action cannot be undone.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarCategoria()">Eliminar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarCategoria()">Delete</button>
       </div>
     </div>
   </div>
@@ -260,15 +167,15 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-danger">
-        <h5 class="modal-title text-white" id="staticBackdropLabel">Eliminar</h5>
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Delete</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>¿Estás seguro de eliminar <strong>{{ infoSubcategoriaEliminar.nombre }}</strong>? <br> Esta acción no podrá ser revertida.</p>
+        <p>¿Are you sure you want to delete <strong>{{ infoSubcategoriaEliminar.nombre }}</strong>? <br> This action cannot be undone.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarSubcategoria()">Eliminar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarSubcategoria()">Delete</button>
       </div>
     </div>
   </div>
@@ -280,15 +187,15 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-danger">
-        <h5 class="modal-title text-white" id="staticBackdropLabel">Eliminar</h5>
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Delete</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>¿Estás seguro de eliminar <strong>{{ infoUnidadEliminar.nombre }}</strong>? <br> Esta acción no podrá ser revertida.</p>
+        <p>¿Are you sure you want to delete <strong>{{ infoUnidadEliminar.nombre }}</strong>? <br> This action cannot be undone.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarUnidad()">Eliminar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarUnidad()">Delete</button>
       </div>
     </div>
   </div>
