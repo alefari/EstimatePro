@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Item } from 'src/app/models/item.models';
+import { Presupuesto } from 'src/app/models/presupuesto.models';
 import { CategoriasService } from 'src/app/services/categorias.service';
+import { EstimateService } from 'src/app/services/estimate.service';
 import { ItemsPresupuestoService } from 'src/app/services/items-presupuesto.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { SubcategoriasService } from 'src/app/services/subcategorias.service';
@@ -18,11 +20,12 @@ export class PresupuestoComponent implements OnInit {
   listaSubcategorias: any[];
 
   itemsPresupuesto: Item[] = [];
-
+  presupuesto: Presupuesto;
   idPresupuesto: string = '';
 
   constructor(private servicioCategorias: CategoriasService,
               private servicioItems: ItemsService,
+              private servicioEstimate: EstimateService,
               private servicioItemsPresupuesto: ItemsPresupuestoService,
               private servicioSubcategorias: SubcategoriasService,
               private route: ActivatedRoute) { }
@@ -42,6 +45,10 @@ export class PresupuestoComponent implements OnInit {
     this.servicioSubcategorias.obtenerSubcategorias().subscribe(subcategorias => {
       this.listaSubcategorias = subcategorias.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
     })
+    this.servicioEstimate.obtenerPresupuesto(this.idPresupuesto).subscribe(presupuesto => {
+      this.presupuesto = presupuesto;
+    })
+
   }
 
   onSubmit() {
