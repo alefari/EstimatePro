@@ -71,38 +71,6 @@ export class ParametrosComponent implements OnInit {
     }
   }
 
-                                                                  //FUNCIONES PARA MODIFICAR REGISTROS
-  //FUNCIONES MODIFICAR CATEGORIA
-  recibirInformacionCategoriaModificar(idCategoriaModificar: string, nombreCategoriaModificar:string){
-    this.infoCategoriaModificar.id = idCategoriaModificar;
-    this.infoCategoriaModificar.nombre= nombreCategoriaModificar;
-  }
-  modificarCategoria(){
-    this.infoCategoriaModificar.nombre = this.nuevoNombreCategoria;
-    this.servicioCategorias.editarCategoria(this.infoCategoriaModificar);
-    this.nuevoNombreCategoria="";
-  }
-  //FUNCIONES MODIFICAR SUBCATEGORIA
-  recibirInformacionSubcategoriaModificar(idSubcategoriaModificar: string, nombreSubcategoriaModificar:string){
-    this.infoSubcategoriaModificar.id = idSubcategoriaModificar;
-    this.infoSubcategoriaModificar.nombre= nombreSubcategoriaModificar;
-  }
-  modificarSubcategoria(){
-    this.infoSubcategoriaModificar.nombre = this.nuevoNombreSubcategoria;
-    this.servicioSubcategorias.editarSubcategoria(this.infoSubcategoriaModificar);
-    this.nuevoNombreSubcategoria="";
-  }
-  //FUNCIONES MODIFICAR UNIDAD
-  recibirInformacionUnidadModificar(idUnidadModificar: string, nombreUnidadaModificar:string){
-    this.infoUnidadModificar.id = idUnidadModificar;
-    this.infoUnidadModificar.nombre= nombreUnidadaModificar;
-  }
-  modificarUnidad(){
-    this.infoUnidadModificar.nombre = this.nuevoNombreUnidad;
-    this.servicioUnidades.editarUnidad(this.infoUnidadModificar);
-    this.nuevoNombreUnidad="";
-  }
-
                                                                   //FUNCIONES PARA ELIMINAR REGISTROS
     //FUNCIONES ELIMINAR CATEGORIA
   recibirInformacionCategoriaEliminar(idCategoriaEliminar: string, nombreCategoriaEliminar:string){

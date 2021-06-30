@@ -2,26 +2,25 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header bg-success text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Ingreso</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Create New Item</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModal()" aria-label="Close"></button>
             </div>
             <form #f='ngForm'>
                 <div class="modal-body">
                     <div class="form-group">
-                        <h3>Nuevo Item</h3>
                         <div class="row">
                             <div class="col-4 mb-3">
-                                <label class="form-label">Nombre</label>
-                                <input #nombre="ngModel" required type="text" name="nombre" [(ngModel)]="nuevoItem.nombre" class="form-control">
+                                <label class="form-label">Name</label>
+                                <input #nombre="ngModel" required type="text" placeholder="Name" name="nombre" [(ngModel)]="nuevoItem.nombre" class="form-control">
                             </div>
                             <div class="col-4 mb-3">
-                                <label for="exampleFormControlSelect1" class="mb-2">Categoría</label>
+                                <label for="exampleFormControlSelect1" class="mb-2">Category</label>
                                 <select #categoria="ngModel" required class="form-select" name="categoria" [(ngModel)]="nuevoItem.categoria">
                                     <option *ngFor="let categoria of listaCategorias" value="{{categoria.nombre}}" > {{ categoria.nombre }}</option>
                                 </select>
                             </div>
                             <div class="col-4 mb-3">
-                                <label for="exampleFormControlSelect1" class="mb-2">Subcategoría</label>
+                                <label for="exampleFormControlSelect1" class="mb-2">Type</label>
                                 <select #subcategoria="ngModel" required class="form-select" name="subcategoria" [(ngModel)]="nuevoItem.subcategoria">
                                     <option *ngFor="let subcategoria of listaSubcategorias" value="{{subcategoria.nombre}}" > {{ subcategoria.nombre }}</option>
                                 </select>
@@ -31,7 +30,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-3 mb-3">
-                                <label for="exampleFormControlSelect1" class="mb-2">Unidad</label>
+                                <label for="exampleFormControlSelect1" class="mb-2">Unit</label>
                                 <select #unidad="ngModel" required class="form-select" name="unidad" [(ngModel)]="nuevoItem.unidad">
                                     <option *ngFor="let unidad of listaUnidades" value="{{unidad.nombre}}" > {{ unidad.nombre }}</option>
                                 </select>
@@ -39,19 +38,19 @@
                             <div class="col-3 mb-3">
                                 <label for="exampleInputPassword1" class="mb-2">Labor Rate</label>
                                 <div class="input-group">
-                                    <input min=1 onkeypress="return event.charCode > 45" required type="number" [(ngModel)]="nuevoItem.laborRate" name="laborRate" class="form-control">
+                                    <input min=1 onkeypress="return event.charCode > 45" placeholder="0" required type="number" [(ngModel)]="nuevoItem.laborRate" name="laborRate" class="form-control">
                                 </div>
                             </div>
                             <div class="col-3 mb-3">
                                 <label for="exampleInputPassword1" class="mb-2">Material Rate</label>
                                 <div class="input-group">
-                                    <input min=1 onkeypress="return event.charCode >= 48" required type="number" [(ngModel)]="nuevoItem.materialRate" name="materialRate" class="form-control">
+                                    <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="nuevoItem.materialRate" name="materialRate" class="form-control">
                                 </div>
                                 </div>
                             <div class="col-3 mb-3">
                                 <label for="exampleInputPassword1" class="mb-2">Equipment Rate</label>
                                 <div class="input-group">
-                                    <input min=1 onkeypress="return event.charCode >= 48" required type="number" [(ngModel)]="nuevoItem.equipmentRate" name="equipmentRate" class="form-control">
+                                    <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="nuevoItem.equipmentRate" name="equipmentRate" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -61,10 +60,10 @@
             <!--MODAL FOOTER-->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="cerrarModal()" data-bs-dismiss="modal">
-                    Cerrar
+                    Close
                 </button>
                 <button data-bs-dismiss="modal" type="button" (click)="onSubmit()" class="btn btn-success">
-                    Ingresar
+                    Create
                 </button>
             </div>
         </div>

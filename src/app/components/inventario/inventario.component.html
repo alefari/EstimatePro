@@ -1,12 +1,12 @@
 <div class="container">
     <div class="row mt-5 mb-3">
         <div class="col">
-            <h1 class="text-white">Inventario:</h1>
+            <h1 class="text-white">Inventory:</h1>
         </div>
         <div class="col">
           <div class="btn-group float-end pt-3">
               <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngresar">
-                  Ingresar Item
+                  Create New
               </button>
           </div>
       </div>
@@ -18,20 +18,20 @@
     <!--FILTROS DE LA TABLA DE INVENTARIO-->
     <div class="row row-cols-1 row-cols-md-2 row-cols-lg-auto justify-content-end">
       <div class="text-end">
-        <h5 class="text-white">Filtrar por:</h5>
+        <h5 class="text-white">Filter by:</h5>
       </div>
       <div class="pb-2">
-          <input #filtroNombre="ngModel" class="form-control" ngModel type="text" placeholder="Nombre">
+          <input #filtroNombre="ngModel" class="form-control" ngModel type="text" placeholder="Name">
       </div>
       <div class="pb-2">
         <select #filtroCategoria="ngModel" class="form-select" ngModel name="filtroCategoria">
-            <option value="">Categoría (Todas)</option>
+            <option value="">Category (All)</option>
             <option *ngFor="let cat of listaCategorias" [value]="cat.nombre">{{ cat.nombre }}</option>
         </select>
       </div>
       <div class="pb-2">
         <select #filtroSubcategoria="ngModel" class="form-select" ngModel name="filtroSubcategoria">
-          <option value="">Subcategoría (Todas)</option>
+          <option value="">Type (All)</option>
           <option *ngFor="let subcat of listaSubcategorias" [value]="subcat.nombre">{{ subcat.nombre }}</option>
         </select>
       </div>
@@ -43,10 +43,10 @@
         <table class="table shadow table-hover table-striped table-light table-borderless">
             <thead class="">
                 <tr>
-                <th scope="col">Nombre</th>
-                <th scope="col">Categoría</th>
-                <th scope="col">Subcategoría</th>
-                <th scope="col">Unidad</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category</th>
+                <th scope="col">Type</th>
+                <th scope="col">Unit</th>
                 <th scope="col">Labor Rate</th>
                 <th scope="col">Material Rate</th>
                 <th scope="col">Equipment Rate</th>
@@ -70,13 +70,13 @@
                         <td>
                             <div class="btn-group float-end">
                                 <button class="btn btn-info btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalInfoItem"  (click)="recibirInformacion(item)">
-                                  Detalles
+                                  Details
                                 </button>
                                 <button class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalModificarItem"  (click)="recibirInformacion(item)">
-                                  Modificar
+                                  Modify
                                 </button>
                                 <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarItem" (click)="recibirInformacionItemEliminar(item.id, item.nombre)">
-                                  Eliminar
+                                  Delete
                                 </button>
                             </div>
                         </td>
@@ -101,17 +101,17 @@
             <table class="table table-sm">
                 <tbody>
                     <tr *ngIf="infoItem.categoria!= null">
-                    <th>Categoría</th>
+                    <th>Category</th>
                         <td></td>
                         <td>{{ infoItem.categoria }}</td>
                     </tr>
                     <tr *ngIf="infoItem.subcategoria!=null">
-                    <th>Subcategoría</th>
+                    <th>Type</th>
                         <td></td>
                         <td>{{ infoItem.subcategoria }}</td>
                     </tr>
                     <tr *ngIf="infoItem.unidad!=null">
-                    <th>Unidad</th>
+                    <th>Unit</th>
                         <td></td>
                         <td>{{ infoItem.unidad }}</td>
                     </tr>
@@ -131,7 +131,7 @@
                         <td>${{ infoItem.equipmentRate }}</td>
                     </tr>
                     <tr>
-                    <th>Fecha</th>
+                    <th>Creation Date</th>
                         <td></td>
                         <td>{{ infoItem.fecha | date:'short' }}</td>
                     </tr>
@@ -140,7 +140,7 @@
             </table>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="cerrarModal()" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-secondary" (click)="cerrarModal()" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -152,15 +152,15 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header bg-danger">
-        <h5 class="modal-title text-white" id="staticBackdropLabel">Eliminar</h5>
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Delete</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>¿Estás seguro de eliminar <strong>{{ infoItemEliminar.nombre }}</strong>? <br> Esta acción no podrá ser revertida.</p>
+        <p>¿Are you sure you want to delete <strong>{{ infoItemEliminar.nombre }}</strong>? <br><br> This action cannot be undone.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarItem()">Eliminar</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarItem()">Delete</button>
       </div>
     </div>
   </div>
