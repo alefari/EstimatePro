@@ -21,7 +21,7 @@ export class PresupuestosService {
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as Presupuesto;
         const id = a.payload.doc.id;
-        return { id, ...data };
+        return { id,...data };
       }))
     )
 

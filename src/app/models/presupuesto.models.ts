@@ -1,8 +1,8 @@
 export interface Presupuesto {
-    id?: any,
-    nombre?: any,
-    tipo?: any,
-    estatus?: any,
+    id?: string,
+    nombre: string,
+    tipo: string,
+    estatus: string,
     laborGubernamental?: any,
     zipCode?: any,
     laborRate?: any,

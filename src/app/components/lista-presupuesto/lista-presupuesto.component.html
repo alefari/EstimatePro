@@ -56,7 +56,7 @@
                                 <button class="btn btn-info text-white btn-sm" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#modalInfoPresupuesto" (click)="recibirInformacion(presupuesto)">
                                   Details
                                 </button>
-                                <button class="btn btn-primary text-white btn-sm" data-bs-toggle="modal">
+                                <button (click)="onModify(presupuesto.id)" class="btn btn-primary text-white btn-sm">
                                   Modify
                                 </button>
                                 <button class="btn btn-danger btn-sm" data-toggle="modal">

@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { PresupuestosService } from '../../services/presupuestos.service'
 import { Presupuesto } from '../../models/presupuesto.models'
 import { timestamp } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-presupuesto',
@@ -16,15 +17,14 @@ export class ListaPresupuestoComponent implements OnInit {
   listaPresupuestos: Presupuesto[];
 
   nuevoPresupuesto:Presupuesto = {
-      id: null,
-      nombre: null,
-      tipo: null,
+      nombre: '',
+      tipo: '',
       totalProjectCost: null,
       contingencyPercentage: null,
       taxPercentage: null,
       profitPercentage: null,
       zipCode: null,
-      estatus: null,
+      estatus: '',
       fecha: null,
       laborGubernamental: null,
       laborRate: null,
@@ -35,15 +35,15 @@ export class ListaPresupuestoComponent implements OnInit {
   }
 
   infoPresupuesto: Presupuesto = {
-    id: null,
-    nombre: null,
-    tipo: null,
+    id: '',
+    nombre: '',
+    tipo: '',
     totalProjectCost: null,
     contingencyPercentage: null,
     taxPercentage: null,
     profitPercentage: null,
     zipCode: null,
-    estatus: null,
+    estatus: '',
     fecha: null,
     laborGubernamental: null,
     laborRate: null,
@@ -53,12 +53,13 @@ export class ListaPresupuestoComponent implements OnInit {
     descripcion: null,
 }
 
-  constructor(private servicioPresupuestos: PresupuestosService) { }
+  constructor(private servicioPresupuestos: PresupuestosService, public router: Router) { }
 
   ngOnInit(): void {
     this.servicioPresupuestos.obtenerPresupuestos().subscribe(presupuestos => {
       this.listaPresupuestos = presupuestos.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
     })
+
   }
 
   //FUNCION PARA AGREGAR PRESUPUESTO A LA BD
@@ -80,5 +81,9 @@ export class ListaPresupuestoComponent implements OnInit {
   //FUNCION CERRAR MODAL (REINICIO DE CAMPOS)
   cerrarModal() {
     this.form.reset();
+  }
+
+  onModify(id: any) {
+    this.router.navigate([`estimates/${id}`])
   }
 }

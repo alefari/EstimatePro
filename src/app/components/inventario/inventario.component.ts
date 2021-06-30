@@ -40,6 +40,7 @@ export class InventarioComponent implements OnInit {
   ngOnInit(): void {
     this.servicioItems.obtenerItems().subscribe(items => {
       this.listaItems = items.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
+      console.log(this.listaItems)
     })
     this.servicioCategorias.obtenerCategorias().subscribe(categorias => {
       this.listaCategorias = categorias.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);

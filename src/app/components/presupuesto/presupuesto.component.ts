@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Item } from 'src/app/models/item.models';
 import { CategoriasService } from 'src/app/services/categorias.service';
+import { ItemsPresupuestoService } from 'src/app/services/items-presupuesto.service';
 import { ItemsService } from 'src/app/services/items.service';
 import { SubcategoriasService } from 'src/app/services/subcategorias.service';
 
@@ -17,11 +19,20 @@ export class PresupuestoComponent implements OnInit {
 
   itemsPresupuesto: Item[] = [];
 
+  idPresupuesto: string = '';
+
   constructor(private servicioCategorias: CategoriasService,
               private servicioItems: ItemsService,
-              private servicioSubcategorias: SubcategoriasService) { }
+              private servicioItemsPresupuesto: ItemsPresupuestoService,
+              private servicioSubcategorias: SubcategoriasService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.idPresupuesto = this.route.snapshot.params['id'];
+    this.servicioItemsPresupuesto.cargarColeccion(this.idPresupuesto);
+    this.servicioItemsPresupuesto.obtenerItems().subscribe(items => {
+      this.itemsPresupuesto = items.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
+    })
     this.servicioItems.obtenerItems().subscribe(items => {
       this.listaItems = items.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
     })
@@ -38,7 +49,7 @@ export class PresupuestoComponent implements OnInit {
   }
 
   onAddItem(item: Item) {
-    this.itemsPresupuesto.push(item);
+    this.servicioItemsPresupuesto.agregarItem(item);
   }
 
 }

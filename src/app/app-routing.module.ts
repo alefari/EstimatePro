@@ -7,9 +7,10 @@ import { PresupuestoComponent } from '../app/components/presupuesto/presupuesto.
 import { ParametrosComponent } from './components/inventario/parametros/parametros.component';
 
 const routes: Routes = [
-  {path: '', component: ListaPresupuestoComponent },
+  { path: '', redirectTo: '/estimates', pathMatch: 'full' },
+  {path: 'estimates', component: ListaPresupuestoComponent },
   {path: 'inventario', component: InventarioComponent },
-  {path: 'presupuesto', component: PresupuestoComponent },
+  {path: 'estimates/:id', component: PresupuestoComponent },
   {path: 'login', component: LoginComponent },
   {path: 'parametros', component: ParametrosComponent }
 ];
