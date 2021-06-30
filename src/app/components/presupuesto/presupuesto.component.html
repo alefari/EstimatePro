@@ -1,1 +1,107 @@
-<p>presupuesto works!</p>
+<div class="container">
+  <div class="row mt-5">
+    <div class="col">
+      <h1 class="text-white">Presupuesto Ejemplo</h1>
+    </div>
+    <div class="col text-end">
+      <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngresar">
+        Add Item
+      </button>
+    </div>
+  </div>
+  <div class="row mt-4">
+    <div class="table-responsive">
+      <table class="table shadow table-hover table-striped table-light table-borderless">
+          <thead class="">
+              <tr class="">
+                <th scope="col">L</th>
+                <th scope="col">M</th>
+                <th scope="col">Scope</th>
+                <th scope="col">Qty.</th>
+                <th scope="col">Unit</th>
+                <th scope="col">Labor Rate</th>
+                <th scope="col">Material Rate</th>
+                <th scope="col">Equipment Rate</th>
+                <th scope="col">Est. Labor Costs</th>
+                <th scope="col">Est. Equipment (Tax Incl.)</th>
+                <th scope="col">Est. Mat. (Tax Incl.)</th>
+                <th scope="col">Est. Sub. Markup</th>
+                <th scope="col">Totals</th>
+                <th scope="col">Note</th>
+              </tr>
+          </thead>
+          <tbody class="">
+            <tr *ngFor="let item of itemsPresupuesto">
+              <td></td>
+              <td></td>
+              <td>{{ item.nombre }}</td>
+              <td></td>
+              <td>{{ item.unidad }}</td>
+              <td>{{ item.laborRate }}</td>
+              <td>{{ item.materialRate }}</td>
+              <td>{{ item.equipmentRate }}</td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div id="modalIngresar" class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header bg-success text-white">
+            <h5 class="modal-title" id="exampleModalLabel">Add Item</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col">
+              <select #filtroCategoria="ngModel" class="form-select" ngModel name="filtroCategoria" aria-label="Default select example">
+              <option value="">Category (All)</option>
+              <option *ngFor="let categoria of listaCategorias" [value]="categoria.nombre">{{ categoria.nombre }}</option>
+            </select>
+          </div>
+            <div class="col">
+              <select #filtroSubcategoria="ngModel" class="form-select" ngModel name="filtroSubcategoria" aria-label="Default select example">
+                <option value="">Type (All)</option>
+                <option *ngFor="let subcategoria of listaSubcategorias" [value]="subcategoria.nombre">{{ subcategoria.nombre }}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col">
+              <ul class="list-group">
+                <ng-container *ngFor="let item of listaItems">
+                  <li *ngIf="(item.categoria == filtroCategoria.value || filtroCategoria.value == '') &&
+                  (item.subcategoria == filtroSubcategoria.value || filtroSubcategoria.value == '')" class="list-group-item">
+                    <span>{{ item.nombre }} </span>
+                    <button (click)="onAddItem(item)" class="btn btn-success rounded-pill float-end justify-content-center align-items-center">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                        <path d="M8 0a1 1 0 0 1 1 1v6h6a1 1 0 1 1 0 2H9v6a1 1 0 1 1-2 0V9H1a1 1 0 0 1 0-2h6V1a1 1 0 0 1 1-1z"/>
+                      </svg>
+                      Add
+                    </button>
+                  </li>
+                </ng-container>
+
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!--MODAL FOOTER-->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Close
+            </button>
+        </div>
+    </div>
+</div>
+</div>
