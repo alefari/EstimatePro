@@ -161,10 +161,7 @@
             <table class="table table-sm">
                 <tbody>
                     <tr>
-                    <th>ID</th>
-                        <td></td>
-                        <td>{{ infoPresupuesto.id }}</td>
-                    </tr>
+
                     <tr *ngIf="infoPresupuesto.tipo != null">
                     <th>Tipo</th>
                         <td></td>
@@ -180,10 +177,10 @@
                         <td></td>
                         <td>{{ infoPresupuesto.estatus }}</td>
                     </tr>
-                    <tr *ngIf="infoPresupuesto.precio!=null">
+                    <tr *ngIf="infoPresupuesto.totalProjectCost!=null">
                     <th>Precio</th>
                         <td></td>
-                        <td>{{ infoPresupuesto.precio }}</td>
+                        <td>{{ infoPresupuesto.totalProjectCost }}</td>
                     </tr>
                     <tr *ngIf="infoPresupuesto.laborRate!=null">
                     <th>Labor Rate</th>
