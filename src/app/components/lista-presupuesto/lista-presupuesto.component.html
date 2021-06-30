@@ -1,28 +1,28 @@
 <div class="container">
   <div class="row mt-5">
     <div class="col">
-        <h1 class="text-white">Presupuestos:</h1>
+        <h1 class="text-white">Budgets:</h1>
     </div>
     <div class="col">
       <div class="btn-group float-end pt-3">
           <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngreso">
-              Crear Nuevo
+              Create New
           </button>
       </div>
     </div>
   </div>
   <div class="row mt-3 row-cols-1 row-cols-md-2 row-cols-lg-auto justify-content-end">
     <div class="col text-end pb-2">
-      <h5 class="text-white">Filtrar por:</h5>
+      <h5 class="text-white">Filter by:</h5>
     </div>
     <div class="col pb-2">
-        <input #filtroNombre="ngModel" class="form-control" ngModel type="text" placeholder="Nombre">
+        <input #filtroNombre="ngModel" class="form-control" ngModel type="text" placeholder="Name">
     </div>
     <div class="col pb-2">
-      <select class="form-select" aria-label="SelectTipo">
-        <option selected>Tipo (Todos)</option>
-        <option value="1">Privado</option>
-        <option value="2">Gubernamntal</option>
+      <select #filtroTipo="ngModel" class="form-select" ngModel aria-label="SelectTipo">
+        <option value="">Type (All)</option>
+        <option value="Private">Private</option>
+        <option value="Government">Government</option>
       </select>
     </div>
     <div class="col pb-2">
@@ -35,9 +35,9 @@
         <table class="table shadow table-hover table-striped table-light table-borderless">
             <thead class="">
                 <tr class="">
-                  <th scope="col">Nombre</th>
-                  <th scope="col">Estatus</th>
-                  <th scope="col">Fecha</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Date</th>
                   <th></th>
                 </tr>
             </thead>
@@ -45,7 +45,7 @@
             <tbody class="">
               <!-- (presupuesto.tipo.includes(filtroTipo.value) || filtroTipo.value=='') -->
                 <ng-container *ngFor="let presupuesto of listaPresupuestos">
-                    <tr *ngIf="(presupuesto.nombre.toLocaleLowerCase().includes(filtroNombre.value.toLocaleLowerCase()) || filtroNombre.value=='')"
+                    <tr *ngIf="(presupuesto.nombre.toLocaleLowerCase().includes(filtroNombre.value.toLocaleLowerCase()) || filtroNombre.value=='') && (presupuesto.tipo.toLocaleLowerCase().includes(filtroTipo.value.toLocaleLowerCase()) || filtroTipo.value=='')"
                     class="" scope>
                         <td>{{ presupuesto.nombre }}</td>
                         <!-- <td>{{ presupuesto.tipo }}</td> -->
@@ -54,13 +54,13 @@
                         <td>
                             <div class="btn-group float-end" role="group">
                                 <button class="btn btn-info text-white btn-sm" data-toggle="modal" data-bs-toggle="modal" data-bs-target="#modalInfoPresupuesto" (click)="recibirInformacion(presupuesto)">
-                                    Detalles
+                                  Details
                                 </button>
                                 <button class="btn btn-primary text-white btn-sm" data-bs-toggle="modal">
-                                  Editar Presupuesto
+                                  Modify
                                 </button>
                                 <button class="btn btn-danger btn-sm" data-toggle="modal">
-                                    Eliminar
+                                  Delete
                                 </button>
                             </div>
                         </td>
@@ -77,29 +77,28 @@
 <div id="modalIngreso" class="modal fade" data-bs-backdrop="static" ata-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
-            <div class="modal-header bg-primary text-white">
-                <h5 class="modal-title" id="exampleModalLabel">Ingreso</h5>
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title" id="exampleModalLabel">Create New Budget</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModal()" aria-label="Close"></button>
             </div>
             <form #f='ngForm'>
                 <div class="modal-body">
                     <div class="form-group">
-                        <h3>Nuevo Presupuesto</h3>
                         <div class="row">
                             <div class="col-4 mb-3">
-                                <label class="form-label">Nombre</label>
-                                <input #nombre="ngModel" required type="text" name="nombre" [(ngModel)]="nuevoPresupuesto.nombre" class="form-control">
+                                <label class="form-label">Name</label>
+                                <input #nombre="ngModel" required type="text" name="nombre" [(ngModel)]="nuevoPresupuesto.nombre" class="form-control" placeholder="Name">
                             </div>
                             <div class="col-4 mb-3">
-                                <label for="exampleFormControlSelect1" class="mb-2">Tipo</label>
+                                <label for="exampleFormControlSelect1" class="mb-2">Type</label>
                                 <select #tipoPresupuesto="ngModel" ngModel required class="form-select" name="categoria" [(ngModel)]="nuevoPresupuesto.tipo">
-                                    <option value="Privado">Privado</option>
-                                    <option value="Gobierno">Gobierno</option>
+                                    <option value="Private">Private</option>
+                                    <option value="Government">Government</option>
                                 </select>
                             </div>
-                            <div class="col-4 mb-3" *ngIf='tipoPresupuesto.value=="Gobierno"'>
-                                <label for="exampleFormControlSelect1" class="mb-2">Labor Price</label>
-                                <input min=1 onkeypress="return event.charCode > 45" required type="number" [(ngModel)]="nuevoPresupuesto.laborGubernamental" name="laborGubernamental" class="form-control">
+                            <div class="col-4 mb-3" *ngIf='tipoPresupuesto.value=="Government"'>
+                                <label for="exampleFormControlSelect1" class="mb-2">Government Labor Rate</label>
+                                <input min=1 onkeypress="return event.charCode > 45"  placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.laborGubernamental" name="laborGubernamental" class="form-control">
                             </div>
                         </div>
                     </div>
@@ -108,19 +107,19 @@
                             <div class="col-4 mb-3">
                                 <label for="exampleInputPassword1" class="mb-2">Labor Rate</label>
                                 <div class="input-group">
-                                    <input min=1 onkeypress="return event.charCode > 45" required type="number" [(ngModel)]="nuevoPresupuesto.laborRate" name="laborRate" class="form-control">
+                                    <input min=1 onkeypress="return event.charCode > 45" placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.laborRate" name="laborRate" class="form-control">
                                 </div>
                             </div>
                             <div class="col-4 mb-3">
                                 <label for="exampleInputPassword1" class="mb-2">Material Rate</label>
                                 <div class="input-group">
-                                    <input min=1 onkeypress="return event.charCode >= 48" required type="number" [(ngModel)]="nuevoPresupuesto.materialRate" name="materialRate" class="form-control">
+                                    <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.materialRate" name="materialRate" class="form-control">
                                 </div>
                                 </div>
                             <div class="col-4 mb-3">
                                 <label for="exampleInputPassword1" class="mb-2">Equipment Rate</label>
                                 <div class="input-group">
-                                    <input min=1 onkeypress="return event.charCode >= 48" required type="number" [(ngModel)]="nuevoPresupuesto.equipmentRate" name="equipmentRate" class="form-control">
+                                    <input min=1 onkeypress="return event.charCode >= 48"  placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.equipmentRate" name="equipmentRate" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -128,8 +127,8 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col">
-                                <label>Descripción</label>
-                                <textarea class="form-control" #descripcion="ngModel" required type="text" name="descripcion" [(ngModel)]="nuevoPresupuesto.descripcion"></textarea>
+                                <label>Description</label>
+                                <textarea class="form-control" placeholder="Add Description" #descripcion="ngModel" required type="text" name="descripcion" [(ngModel)]="nuevoPresupuesto.descripcion"></textarea>
                             </div>
                         </div>
                     </div>
@@ -138,10 +137,10 @@
             <!--MODAL FOOTER-->
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="cerrarModal()" data-bs-dismiss="modal">
-                    Cerrar
+                    Close
                 </button>
-                <button data-bs-dismiss="modal" type="button" (click)="onSubmit()" class="btn btn-primary">
-                    Ingresar
+                <button data-bs-dismiss="modal" type="button" (click)="onSubmit()" class="btn btn-success">
+                    Create
                 </button>
             </div>
         </div>
@@ -163,22 +162,22 @@
                     <tr>
 
                     <tr *ngIf="infoPresupuesto.tipo != null">
-                    <th>Tipo</th>
+                    <th>Type</th>
                         <td></td>
                         <td>{{ infoPresupuesto.tipo }}</td>
                     </tr>
                     <tr *ngIf="infoPresupuesto.laborGubernamental!=null">
-                    <th>Costo por labor gubernamental</th>
+                    <th>Government Labor Cost</th>
                         <td></td>
                         <td>{{ infoPresupuesto.laborGubernamental }}</td>
                     </tr>
                     <tr>
-                    <th>Estatus</th>
+                    <th>Status</th>
                         <td></td>
                         <td>{{ infoPresupuesto.estatus }}</td>
                     </tr>
                     <tr *ngIf="infoPresupuesto.totalProjectCost!=null">
-                    <th>Precio</th>
+                    <th>Total Project Cost</th>
                         <td></td>
                         <td>{{ infoPresupuesto.totalProjectCost }}</td>
                     </tr>
@@ -198,17 +197,17 @@
                         <td>{{ infoPresupuesto.equipmentRate }}</td>
                     </tr>
                     <tr *ngIf="infoPresupuesto.descripcion != null">
-                    <th>Descripción</th>
+                    <th>Description</th>
                         <td></td>
                         <td>{{ infoPresupuesto.descripcion }}</td>
                     </tr>
                     <tr>
-                    <th>Creado por</th>
+                    <th>Created by</th>
                         <td></td>
                         <td>{{ infoPresupuesto.idUsuario }}</td>
                     </tr>
                     <tr>
-                    <th>Fecha</th>
+                    <th>Creation Date</th>
                         <td></td>
                         <td>{{ infoPresupuesto.fecha | date:'short' }}</td>
                     </tr>
@@ -217,7 +216,7 @@
             </table>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>

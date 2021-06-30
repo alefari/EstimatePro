@@ -55,7 +55,7 @@ export class ListaPresupuestoComponent implements OnInit {
 
   //FUNCION PARA AGREGAR PRESUPUESTO A LA BD
   onSubmit(){
-    this.nuevoPresupuesto.estatus="Incompleto";
+    this.nuevoPresupuesto.estatus="Incomplete";
     this.nuevoPresupuesto.fecha=new Date().toISOString();
     this.nuevoPresupuesto.idUsuario="26778332";
     this.servicioPresupuestos.agregarPresupuesto(this.nuevoPresupuesto);
