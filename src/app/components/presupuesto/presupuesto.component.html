@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container-fluid">
   <div class="row mt-5">
     <div class="col">
       <h1 class="text-white">{{ presupuesto.nombre }}</h1>
@@ -11,7 +11,7 @@
   </div>
   <div class="row mt-4">
     <div class="table-responsive">
-      <table class="table shadow table-hover table-striped table-light table-borderless">
+      <table class="table table-sm shadow table-hover table-striped table-light table-borderless">
           <thead class="">
               <tr class="">
                 <th scope="col">L</th>
@@ -32,8 +32,8 @@
           </thead>
           <tbody class="">
             <tr *ngFor="let item of itemsPresupuesto">
-              <td></td>
-              <td></td>
+              <td><input type="number" class="form-control form-control-sm bg-transparent border-0"></td>
+              <td><input type="number" class="form-control form-control-sm bg-transparent border-0"></td>
               <td>{{ item.nombre }}</td>
               <td></td>
               <td>{{ item.unidad }}</td>

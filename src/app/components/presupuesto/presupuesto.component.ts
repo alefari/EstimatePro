@@ -32,8 +32,7 @@ export class PresupuestoComponent implements OnInit {
 
   ngOnInit(): void {
     this.idPresupuesto = this.route.snapshot.params['id'];
-    this.servicioItemsPresupuesto.cargarColeccion(this.idPresupuesto);
-    this.servicioItemsPresupuesto.obtenerItems().subscribe(items => {
+    this.servicioItemsPresupuesto.obtenerItems(this.idPresupuesto).subscribe(items => {
       this.itemsPresupuesto = items.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
     })
     this.servicioItems.obtenerItems().subscribe(items => {

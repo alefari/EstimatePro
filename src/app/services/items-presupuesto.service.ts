@@ -16,7 +16,11 @@ export class ItemsPresupuestoService {
 
   }
 
-  cargarColeccion(idPresupuesto: string) {
+  agregarItem(nuevoItem: Item) {
+    this.itemsColeccion.doc().set(nuevoItem);
+  }
+
+  obtenerItems(idPresupuesto: string) {
     this.itemsColeccion = this.afs.collection<Item>(`presupuestos/${idPresupuesto}/items`);
     this.items = this.itemsColeccion.snapshotChanges().pipe(
       map(actions => actions.map(a => {
@@ -25,13 +29,6 @@ export class ItemsPresupuestoService {
         return { id, ...data };
       }))
     )
-  }
-
-  agregarItem(nuevoItem: Item) {
-    this.itemsColeccion.doc().set(nuevoItem);
-  }
-
-  obtenerItems() {
     return this.items;
   }
 
