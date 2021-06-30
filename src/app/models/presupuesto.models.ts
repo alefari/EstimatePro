@@ -9,7 +9,7 @@ export interface Presupuesto {
     equipmentRate?: any,
     materialRate?: any,
     descripcion?: any,
-    tax?: any,
+    taxPercentage?: any,
     subcontractorMarkup?: any,
     estRes?: any,
     estComm?: any,

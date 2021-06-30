@@ -85,18 +85,18 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-4 mb-3">
+                            <div class="col-6 mb-3">
                                 <label class="form-label">Name</label>
-                                <input #nombre="ngModel" required type="text" name="nombre" [(ngModel)]="nuevoPresupuesto.nombre" class="form-control" placeholder="Name">
+                                <input required type="text" name="nombre" [(ngModel)]="nuevoPresupuesto.nombre" class="form-control" placeholder="Name">
                             </div>
-                            <div class="col-4 mb-3">
+                            <div class="col-3 mb-3">
                                 <label for="exampleFormControlSelect1" class="mb-2">Type</label>
                                 <select #tipoPresupuesto="ngModel" ngModel required class="form-select" name="categoria" [(ngModel)]="nuevoPresupuesto.tipo">
                                     <option value="Private">Private</option>
                                     <option value="Government">Government</option>
                                 </select>
                             </div>
-                            <div class="col-4 mb-3" *ngIf='tipoPresupuesto.value=="Government"'>
+                            <div class="col-3 mb-3" *ngIf='tipoPresupuesto.value=="Government"'>
                                 <label for="exampleFormControlSelect1" class="mb-2">Government Labor Rate</label>
                                 <input min=1 onkeypress="return event.charCode > 45"  placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.laborGubernamental" name="laborGubernamental" class="form-control">
                             </div>
@@ -104,19 +104,23 @@
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <div class="col-4 mb-3">
+                          <div class="col-3 mb-3">
+                            <label for="exampleInputPassword1" class="mb-2">Zip Code</label>
+                            <input required type="text" name="zipCode" [(ngModel)]="nuevoPresupuesto.zipCode" class="form-control" placeholder="XX-XXXX">
+                        </div>
+                            <div class="col-3 mb-3">
                                 <label for="exampleInputPassword1" class="mb-2">Labor Rate</label>
                                 <div class="input-group">
                                     <input min=1 onkeypress="return event.charCode > 45" placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.laborRate" name="laborRate" class="form-control">
                                 </div>
                             </div>
-                            <div class="col-4 mb-3">
+                            <div class="col-3 mb-3">
                                 <label for="exampleInputPassword1" class="mb-2">Material Rate</label>
                                 <div class="input-group">
                                     <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.materialRate" name="materialRate" class="form-control">
                                 </div>
                                 </div>
-                            <div class="col-4 mb-3">
+                            <div class="col-3 mb-3">
                                 <label for="exampleInputPassword1" class="mb-2">Equipment Rate</label>
                                 <div class="input-group">
                                     <input min=1 onkeypress="return event.charCode >= 48"  placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.equipmentRate" name="equipmentRate" class="form-control">
@@ -124,6 +128,28 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                      <div class="row">
+                          <div class="col-4 mb-3">
+                              <label for="exampleInputPassword1" class="mb-2">Tax Percentage</label>
+                              <div class="input-group">
+                                  <input min=1 onkeypress="return event.charCode > 45" placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.taxPercentage" name="taxPercentage" class="form-control">
+                              </div>
+                          </div>
+                          <div class="col-4 mb-3">
+                              <label for="exampleInputPassword1" class="mb-2">Contingency Percentage</label>
+                              <div class="input-group">
+                                  <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.contingencyPercentage" name="contingencyPercentage" class="form-control">
+                              </div>
+                              </div>
+                          <div class="col-4 mb-3">
+                              <label for="exampleInputPassword1" class="mb-2">Profit Percentage</label>
+                              <div class="input-group">
+                                  <input min=1 onkeypress="return event.charCode >= 48"  placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.profitPercentage" name="profitPercentage" class="form-control">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
                     <div class="form-group">
                         <div class="row">
                             <div class="col">
@@ -181,6 +207,11 @@
                         <td></td>
                         <td>{{ infoPresupuesto.totalProjectCost }}</td>
                     </tr>
+                    <tr *ngIf="infoPresupuesto.zipCode!=null">
+                      <th>zip Code</th>
+                          <td></td>
+                          <td>{{ infoPresupuesto.zipCode }}</td>
+                      </tr>
                     <tr *ngIf="infoPresupuesto.laborRate!=null">
                     <th>Labor Rate</th>
                         <td></td>
@@ -195,6 +226,21 @@
                     <th>Equipment Rate</th>
                         <td></td>
                         <td>{{ infoPresupuesto.equipmentRate }}</td>
+                    </tr>
+                    <tr *ngIf="infoPresupuesto.contingencyPercentage!=null">
+                      <th>Contingency Percentage</th>
+                          <td></td>
+                          <td>{{ infoPresupuesto.contingencyPercentage }}</td>
+                    </tr>
+                    <tr *ngIf="infoPresupuesto.profitPercentage!=null">
+                      <th>Profit Percentage</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.profitPercentage }}</td>
+                    </tr>
+                    <tr *ngIf="infoPresupuesto.taxPercentage!=null">
+                      <th>Tax Percentage</th>
+                        <td></td>
+                        <td>{{ infoPresupuesto.taxPercentage }}</td>
                     </tr>
                     <tr *ngIf="infoPresupuesto.descripcion != null">
                     <th>Description</th>
