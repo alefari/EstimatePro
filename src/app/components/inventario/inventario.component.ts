@@ -4,6 +4,7 @@ import { Item } from '../../models/item.models'
 import { CategoriasService } from '../../services/categorias.service'
 import { ItemsService } from '../../services/items.service'
 import { SubcategoriasService } from 'src/app/services/subcategorias.service';
+import { UnidadesService } from 'src/app/services/unidades.service';
 
 @Component({
   selector: 'app-inventario',
@@ -18,6 +19,7 @@ export class InventarioComponent implements OnInit {
   listaItems: Item[];
   listaCategorias: any[];
   listaSubcategorias: any[];
+  listaUnidades: any[];
 
   infoItem: Item = {
       nombre: '',
@@ -30,17 +32,28 @@ export class InventarioComponent implements OnInit {
       fecha: null,
   };
 
+  datosItemModificar: any = {
+      nombre: '',
+      categoria: '',
+      subcategoria: '',
+      unidad: '',
+      laborRate: 0,
+      materialRate: 0,
+      equipmentRate: 0,
+      fecha: null,
+  }
+
   //VARIABLE QUE OBTIENE DATOS PARA ELIMINAR
   infoItemEliminar = {id: "", nombre: "",}
 
   constructor(private servicioCategorias: CategoriasService,
               private servicioItems: ItemsService,
-              private servicioSubcategorias: SubcategoriasService) { }
+              private servicioSubcategorias: SubcategoriasService,
+              private servicioUnidades: UnidadesService) { }
 
   ngOnInit(): void {
     this.servicioItems.obtenerItems().subscribe(items => {
       this.listaItems = items.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
-      console.log(this.listaItems)
     })
     this.servicioCategorias.obtenerCategorias().subscribe(categorias => {
       this.listaCategorias = categorias.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
@@ -48,6 +61,19 @@ export class InventarioComponent implements OnInit {
     this.servicioSubcategorias.obtenerSubcategorias().subscribe(subcategorias => {
       this.listaSubcategorias = subcategorias.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
     })
+    this.servicioUnidades.obtenerUnidades().subscribe(unidades => {
+      this.listaUnidades = unidades.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
+    })
+  }
+  //FUNCIONES MODIFICAR ITEM
+  recibirInformacionModificarItem(idItemModificar:any){
+    this.datosItemModificar = this.listaItems.find(producto => producto.id == idItemModificar);
+
+  }
+  modificarItem(){
+    console.log(this.datosItemModificar)
+    this.servicioItems.editarItem(this.datosItemModificar);
+    this.form.reset();
   }
 
   //FUNCIONES ELIMINAR ITEM

@@ -52,6 +52,7 @@ export class ListaPresupuestoComponent implements OnInit {
     idUsuario: null,
     descripcion: null,
 }
+  infoPresupuestoEliminar = {id: "", nombre: "",}
 
   constructor(private servicioPresupuestos: PresupuestosService, public router: Router) { }
 
@@ -85,5 +86,15 @@ export class ListaPresupuestoComponent implements OnInit {
 
   onModify(id: any) {
     this.router.navigate([`estimates/${id}`])
+  }
+
+  //FUNCIONES ELIMINAR PRESUPUESTO
+  recibirInformacionPresupuestoEliminar(idPresupuestoEliminar: any, nombrePresupuestoEliminar:any){
+    this.infoPresupuestoEliminar.id = idPresupuestoEliminar;
+    this.infoPresupuestoEliminar.nombre= nombrePresupuestoEliminar;
+  }
+  eliminarPresupuesto(){
+    this.servicioPresupuestos.eliminarPresupuesto(this.infoPresupuestoEliminar.id);
+    this.infoPresupuestoEliminar = {id: "", nombre: "",}
   }
 }

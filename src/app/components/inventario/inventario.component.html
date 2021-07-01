@@ -72,7 +72,7 @@
                                 <button class="btn btn-info btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalInfoItem"  (click)="recibirInformacion(item)">
                                   Details
                                 </button>
-                                <button class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalModificarItem"  (click)="recibirInformacion(item)">
+                                <button class="btn btn-primary btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalModificarItem"  (click)="recibirInformacionModificarItem(item.id)">
                                   Modify
                                 </button>
                                 <button class="btn btn-danger btn-sm" data-bs-toggle="modal" data-bs-target="#modalEliminarItem" (click)="recibirInformacionItemEliminar(item.id, item.nombre)">
@@ -167,6 +167,79 @@
 </div>
 <!--FIN MODAL ELIMINAR ITEM-->
 
+<!--MODAL MODIFICAR ITEM-->
+<div class="modal fade" id="modalModificarItem" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title" id="exampleModalLabel">Modify Item</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" (click)="cerrarModal()" aria-label="Close"></button>
+        </div>
+        <form #f='ngForm'>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-4 mb-3">
+                            <label class="form-label">Name</label>
+                            <input required type="text" placeholder="Name" name="nombreModal" [(ngModel)]="datosItemModificar.nombre" class="form-control">
+                        </div>
+                        <div class="col-4 mb-3">
+                            <label for="exampleFormControlSelect1" class="mb-2">Category</label>
+                            <select required class="form-select" name="categoriaModal" [(ngModel)]="datosItemModificar.categoria">
+                                <option *ngFor="let categoria of listaCategorias" value="{{categoria.nombre}}" > {{ categoria.nombre }}</option>
+                            </select>
+                        </div>
+                        <div class="col-4 mb-3">
+                            <label for="exampleFormControlSelect1" class="mb-2">Type</label>
+                            <select required class="form-select" name="subcategoriaModal" [(ngModel)]="datosItemModificar.subcategoria">
+                                <option *ngFor="let subcategoria of listaSubcategorias" value="{{subcategoria.nombre}}" > {{ subcategoria.nombre }}</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-3 mb-3">
+                            <label for="exampleFormControlSelect1" class="mb-2">Unit</label>
+                            <select required class="form-select" name="unidadModal" [(ngModel)]="datosItemModificar.unidad">
+                                <option *ngFor="let unidad of listaUnidades" value="{{unidad.nombre}}" > {{ unidad.nombre }}</option>
+                            </select>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <label for="exampleInputPassword1" class="mb-2">Labor Rate</label>
+                            <div class="input-group">
+                                <input min=1 onkeypress="return event.charCode > 45" placeholder="0" required type="number" [(ngModel)]="datosItemModificar.laborRate" name="laborRate" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-3 mb-3">
+                            <label for="exampleInputPassword1" class="mb-2">Material Rate</label>
+                            <div class="input-group">
+                                <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="datosItemModificar.materialRate" name="materialRate" class="form-control">
+                            </div>
+                            </div>
+                        <div class="col-3 mb-3">
+                            <label for="exampleInputPassword1" class="mb-2">Equipment Rate</label>
+                            <div class="input-group">
+                                <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="datosItemModificar.equipmentRate" name="equipmentRate" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--MODAL FOOTER-->
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="cerrarModal()" data-bs-dismiss="modal">
+                Close
+            </button>
+            <button data-bs-dismiss="modal" type="button" (click)="modificarItem()" class="btn btn-primary">
+                Modify
+            </button>
+        </div>
+    </div>
+  </div>
+</div>
+<!--FIN DEL MODAL MODIFICAR ITEM-->
 
 <!--DIRECCIONES HACIA COMPONENTES DE AGREGAR Y MODIFICAR-->
 
