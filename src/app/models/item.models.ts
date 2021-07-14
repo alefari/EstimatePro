@@ -6,6 +6,6 @@ export interface Item {
     unidad: string,
     laborRate: number,
     materialRate?: number,
-    equipmentRate?: number,
+    equipmentRate: number,
     fecha: any,
 }

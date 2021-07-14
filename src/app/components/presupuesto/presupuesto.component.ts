@@ -35,6 +35,7 @@ export class PresupuestoComponent implements OnInit {
     this.idPresupuesto = this.route.snapshot.params['id'];
     this.servicioItemsPresupuesto.obtenerItems(this.idPresupuesto).subscribe(items => {
       this.itemsPresupuesto = items;
+      this.updateCalc();
     })
     this.servicioItems.obtenerItems().subscribe(items => {
       this.listaItems = items.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
@@ -55,9 +56,20 @@ export class PresupuestoComponent implements OnInit {
 
   }
 
+  valueChanged() {
+    this.updateCalc()
+    // this.updateItemsFirebase()
+  }
+
   updateCalc() {
     this.itemsPresupuesto.forEach(item => {
-      item.estLaborCosts = item.qty * item.laborRate;
+      if(this.presupuesto.tipo == "Private") {
+        item.estLaborCosts = item.qty * item.laborRate
+      }
+      else {
+        item.estLaborCosts = item.qty * this.presupuesto.laborGubernamental
+      }
+      item.estEquipment = item.qty * item.equipmentRate + (item.qty * item.equipmentRate * this.presupuesto.taxPercentage);
     });
   }
 
@@ -74,6 +86,7 @@ export class PresupuestoComponent implements OnInit {
       totals: 0
     }
     this.servicioItemsPresupuesto.agregarItem(itemPresupuesto);
+    this.updateCalc()
   }
 
 }

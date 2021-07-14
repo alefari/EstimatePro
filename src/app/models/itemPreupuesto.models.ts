@@ -9,7 +9,7 @@ export interface ItemPresupuesto {
   unidad: string,
   laborRate: number,
   materialRate?: number,
-  equipmentRate?: number,
+  equipmentRate: number,
   fecha: any,
   estLaborCosts?: number,
   estEquipment?: number,

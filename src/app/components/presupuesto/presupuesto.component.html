@@ -32,19 +32,19 @@
           </thead>
           <tbody class="">
             <tr *ngFor="let item of itemsPresupuesto">
-              <td><input type="number" class="form-control form-control-sm bg-transparent border-0"></td>
-              <td><input type="number" class="form-control form-control-sm bg-transparent border-0"></td>
+              <td><input (change)="valueChanged()" [(ngModel)]="item.L" type="number" class="form-control form-control-sm bg-transparent border-0"></td>
+              <td><input (change)="valueChanged()" [(ngModel)]="item.M" type="number" class="form-control form-control-sm bg-transparent border-0"></td>
               <td>{{ item.nombre }}</td>
-              <td></td>
+              <td><input (change)="valueChanged()" [(ngModel)]="item.qty" type="number" class="form-control form-control-sm bg-transparent border-0"></td>
               <td>{{ item.unidad }}</td>
               <td>{{ item.laborRate }}</td>
               <td>{{ item.materialRate }}</td>
               <td>{{ item.equipmentRate }}</td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+              <td>{{ item.estLaborCosts }}</td>
+              <td>{{ item.estEquipment }}</td>
+              <td>{{ item.estMat }}</td>
+              <td>{{ item.estSubMarkup }}</td>
+              <td>{{ item.totals }}</td>
               <td></td>
             </tr>
           </tbody>
