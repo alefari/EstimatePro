@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Item } from 'src/app/models/item.models';
+import { ItemPresupuesto } from 'src/app/models/itemPreupuesto.models';
 import { Presupuesto } from 'src/app/models/presupuesto.models';
 import { CategoriasService } from 'src/app/services/categorias.service';
 import { EstimateService } from 'src/app/services/estimate.service';
@@ -19,7 +20,7 @@ export class PresupuestoComponent implements OnInit {
   listaCategorias: any[];
   listaSubcategorias: any[];
 
-  itemsPresupuesto: Item[] = [];
+  itemsPresupuesto: ItemPresupuesto[] = [];
   presupuesto: Presupuesto;
   idPresupuesto: string = '';
 
@@ -33,7 +34,7 @@ export class PresupuestoComponent implements OnInit {
   ngOnInit(): void {
     this.idPresupuesto = this.route.snapshot.params['id'];
     this.servicioItemsPresupuesto.obtenerItems(this.idPresupuesto).subscribe(items => {
-      this.itemsPresupuesto = items.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
+      this.itemsPresupuesto = items;
     })
     this.servicioItems.obtenerItems().subscribe(items => {
       this.listaItems = items.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
@@ -54,8 +55,25 @@ export class PresupuestoComponent implements OnInit {
 
   }
 
+  updateCalc() {
+    this.itemsPresupuesto.forEach(item => {
+      item.estLaborCosts = item.qty * item.laborRate;
+    });
+  }
+
   onAddItem(item: Item) {
-    this.servicioItemsPresupuesto.agregarItem(item);
+    let itemPresupuesto: ItemPresupuesto = {
+      ...item,
+      L: 1,
+      M: 1,
+      qty: 1,
+      estLaborCosts: 0,
+      estEquipment: 0,
+      estMat: 0,
+      estSubMarkup: 0,
+      totals: 0
+    }
+    this.servicioItemsPresupuesto.agregarItem(itemPresupuesto);
   }
 
 }

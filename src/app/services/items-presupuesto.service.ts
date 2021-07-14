@@ -3,28 +3,29 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Item } from '../models/item.models'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ItemPresupuesto } from '../models/itemPreupuesto.models';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ItemsPresupuestoService {
 
-  itemsColeccion: AngularFirestoreCollection<Item>;
-  items: Observable<Item[]>;
+  itemsColeccion: AngularFirestoreCollection<ItemPresupuesto>;
+  items: Observable<ItemPresupuesto[]>;
 
   constructor(private readonly afs: AngularFirestore) {
 
   }
 
-  agregarItem(nuevoItem: Item) {
+  agregarItem(nuevoItem: ItemPresupuesto) {
     this.itemsColeccion.doc().set(nuevoItem);
   }
 
   obtenerItems(idPresupuesto: string) {
-    this.itemsColeccion = this.afs.collection<Item>(`presupuestos/${idPresupuesto}/items`);
+    this.itemsColeccion = this.afs.collection<ItemPresupuesto>(`presupuestos/${idPresupuesto}/items`);
     this.items = this.itemsColeccion.snapshotChanges().pipe(
       map(actions => actions.map(a => {
-        const data = a.payload.doc.data() as Item;
+        const data = a.payload.doc.data() as ItemPresupuesto;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
