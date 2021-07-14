@@ -34,8 +34,12 @@ export class ItemsPresupuestoService {
     return this.items;
   }
 
-  // eliminarItem(idPresupuesto: any, idItemEliminar: any){
-  //   this.presupuestoDoc = this.afs.doc<Presupuesto>(`presupuestos/${idPresupuesto}`);
-  //   return this.presupuestoDoc.collection("items").doc(idItemEliminar).delete();
-  // }
+  editarItem(item: ItemPresupuesto) {
+    // return this.itemsColeccion.doc(item.id).update(item);
+  }
+
+  eliminarItem(idItemEliminar: any){
+    // this.presupuestoDoc = this.afs.doc<Presupuesto>(`presupuestos/${idPresupuesto}`);
+    return this.itemsColeccion.doc(idItemEliminar).delete();
+  }
 }

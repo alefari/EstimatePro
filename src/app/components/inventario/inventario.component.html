@@ -64,9 +64,9 @@
                         <td>{{ item.categoria }}</td>
                         <td>{{ item.subcategoria }}</td>
                         <td>{{ item.unidad }}</td>
-                        <td>${{ item.laborRate }}</td>
-                        <td>${{ item.materialRate }}</td>
-                        <td>${{ item.equipmentRate }}</td>
+                        <td>${{ item.laborRateBase }}</td>
+                        <td>${{ item.materialRateBase }}</td>
+                        <td>${{ item.equipmentRateBase }}</td>
                         <td>
                             <div class="btn-group float-end">
                                 <button class="btn btn-info btn-sm text-white" data-bs-toggle="modal" data-bs-target="#modalInfoItem"  (click)="recibirInformacion(item)">
@@ -115,20 +115,20 @@
                         <td></td>
                         <td>{{ infoItem.unidad }}</td>
                     </tr>
-                    <tr *ngIf="infoItem.laborRate!=null">
+                    <tr *ngIf="infoItem.laborRateBase!=null">
                     <th>Labor Rate</th>
                         <td></td>
-                        <td>${{ infoItem.laborRate }}</td>
+                        <td>${{ infoItem.laborRateBase }}</td>
                     </tr>
-                    <tr *ngIf="infoItem.materialRate!=null">
+                    <tr *ngIf="infoItem.materialRateBase!=null">
                     <th>Material Rate</th>
                         <td></td>
-                        <td>${{ infoItem.materialRate }}</td>
+                        <td>${{ infoItem.materialRateBase }}</td>
                     </tr>
-                    <tr *ngIf="infoItem.equipmentRate!=null">
+                    <tr *ngIf="infoItem.equipmentRateBase!=null">
                     <th>Equipment Rate</th>
                         <td></td>
-                        <td>${{ infoItem.equipmentRate }}</td>
+                        <td>${{ infoItem.equipmentRateBase }}</td>
                     </tr>
                     <tr>
                     <th>Creation Date</th>

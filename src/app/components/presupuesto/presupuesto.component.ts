@@ -40,9 +40,9 @@ export class PresupuestoComponent implements OnInit {
     estatus: '',
     fecha: null,
     laborGubernamental: null,
-    laborRate: null,
-    materialRate: null,
-    equipmentRate: null,
+    laborModifier: null,
+    materialModifier: null,
+    equipmentModifier: null,
     idUsuario: null,
     descripcion: null,
 }
@@ -61,7 +61,12 @@ export class PresupuestoComponent implements OnInit {
     this.idPresupuesto = this.route.snapshot.params['id'];
     this.servicioItemsPresupuesto.obtenerItems(this.idPresupuesto).subscribe(items => {
       this.itemsPresupuesto = items;
-      this.updateCalc();
+      this.updateCalc()
+    }),
+    this.servicioEstimate.obtenerPresupuesto(this.idPresupuesto).subscribe(presupuesto => {
+      this.presupuesto = presupuesto;
+      this.nuevosDatosPresupuesto = presupuesto;
+      this.updateCalc()
     })
     this.servicioItems.obtenerItems().subscribe(items => {
       this.listaItems = items.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
@@ -72,31 +77,77 @@ export class PresupuestoComponent implements OnInit {
     this.servicioSubcategorias.obtenerSubcategorias().subscribe(subcategorias => {
       this.listaSubcategorias = subcategorias.sort((a, b) => (a.nombre > b.nombre) ? 1 : -1);
     })
-    this.servicioEstimate.obtenerPresupuesto(this.idPresupuesto).subscribe(presupuesto => {
-      this.presupuesto = presupuesto;
-      this.nuevosDatosPresupuesto = presupuesto;
-    })
-
   }
 
   onSubmit() {
 
   }
 
-  valueChanged() {
+  valueChanged(item: ItemPresupuesto) {
     this.updateCalc()
-    // this.updateItemsFirebase()
+    this.updateItemFirebase(item)
+  }
+
+  updateItemFirebase(item: ItemPresupuesto) {
+    console.log(item.id)
+    this.servicioItemsPresupuesto.editarItem(item)
   }
 
   updateCalc() {
     this.itemsPresupuesto.forEach(item => {
-      if(this.presupuesto.tipo == "Private") {
-        item.estLaborCosts = item.qty * item.laborRate
+      // PRODUCTION RATE (VALOR INTERNO)
+      item.productionRate = item.productionRateBase * item.L;
+
+      // LABOR HOURS (VALOR INTERNO)
+      item.laborHours = item.productionRate * item.qty
+
+      // LABOR RATE
+      if(this.presupuesto.tipo == "Government") {
+        item.laborRate = this.presupuesto.laborGubernamental
       }
       else {
-        item.estLaborCosts = item.qty * this.presupuesto.laborGubernamental
+        if(this.presupuesto.laborModifier == 0) {
+          item.laborRate = item.laborRateBase * item.L;
+        }
+        else {
+          item.laborRate = item.laborRateBase + item.laborRateBase * this.presupuesto.laborModifier * 0.01 * item.L;
+        }
       }
+
+      // MATERIAL RATE
+      if(this.presupuesto.materialModifier == 0) {
+        item.materialRate = item.materialRateBase * item.M;
+      }
+      else {
+        item.materialRate = item.materialRateBase + item.materialRateBase * this.presupuesto.materialModifier * 0.01 * item.M;
+      }
+
+      // EQUIPMENT RATE
+      if(this.presupuesto.equipmentModifier == 0) {
+        item.equipmentRate = item.equipmentRateBase;
+      }
+      else {
+        item.equipmentRate = item.equipmentRateBase + item.equipmentRateBase * this.presupuesto.equipmentModifier * 0.01;
+      }
+
+      // LABOR COSTS
+      item.estLaborCosts = ((this.presupuesto.tipo == "Private") ? (item.qty * item.laborRate) : item.laborHours * this.presupuesto.laborGubernamental)
+
+      // MATERIAL COSTS
+      item.estMatCosts = item.qty * item.materialRate;
+
+      // EQUIPMENT COSTS
       item.estEquipment = item.qty * item.equipmentRate + (item.qty * item.equipmentRate * this.presupuesto.taxPercentage);
+
+      // EST. MATERIAL
+      item.estMat = item.estMatCosts + item.estMatCosts * this.presupuesto.taxPercentage;
+
+      // EST SUB MARKUP
+      item.estSubMarkup = 0;
+
+      // TOTALS
+      item.totals = (item.estLaborCosts + item.estMat) + (item.estLaborCosts + item.estMat) * (item.estSubMarkup/100) + item.estEquipment;
+
     });
   }
 
@@ -108,6 +159,10 @@ export class PresupuestoComponent implements OnInit {
       qty: 1,
       estLaborCosts: 0,
       estEquipment: 0,
+      laborHours: 0,
+      laborRate: 0,
+      materialRate: 0,
+      equipmentRate: 0,
       estMat: 0,
       estSubMarkup: 0,
       totals: 0
@@ -123,12 +178,12 @@ export class PresupuestoComponent implements OnInit {
   }
 
   //FUNCION MODIFICAR PRESUPUESTO
-  asignarItemPresupuestoEliminar(id: any, nombre: any){
+  asignarItemPresupuestoEliminar(id: string, nombre: string){
     this.infoItemEliminar.id = id;
     this.infoItemEliminar.nombre= nombre;
   }
   eliminarItemPresupuesto(){
-    // this.servicioItemsPresupuesto.eliminarItem(this.presupuesto.id,this.infoItemEliminar.id);
+    this.servicioItemsPresupuesto.eliminarItem(this.infoItemEliminar.id);
   }
 
   //FUNCION CERRAR MODAL (REINICIO DE CAMPOS)

@@ -4,8 +4,9 @@ export interface Item {
     categoria: string,
     subcategoria: string,
     unidad: string,
-    laborRate: number,
-    materialRate?: number,
-    equipmentRate: number,
+    laborRateBase: number,
+    materialRateBase: number,
+    equipmentRateBase: number,
+    productionRateBase: number,
     fecha: any,
 }

@@ -26,9 +26,10 @@ export class IngresarComponent implements OnInit {
     categoria: '',
     subcategoria: '',
     unidad: '',
-    laborRate: 0,
-    materialRate: 0,
-    equipmentRate: 0,
+    laborRateBase: 0,
+    materialRateBase: 0,
+    equipmentRateBase: 0,
+    productionRateBase: 0,
     fecha: null,
   };
 
@@ -64,9 +65,10 @@ export class IngresarComponent implements OnInit {
       categoria: '',
       subcategoria: '',
       unidad: '',
-      laborRate: 0,
-      materialRate: 0,
-      equipmentRate: 0,
+      laborRateBase: 0,
+      materialRateBase: 0,
+      equipmentRateBase: 0,
+      productionRateBase: 0,
       fecha: null,
       };
   }

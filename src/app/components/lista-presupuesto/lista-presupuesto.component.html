@@ -109,21 +109,21 @@
                             <input required type="text" name="zipCode" [(ngModel)]="nuevoPresupuesto.zipCode" class="form-control" placeholder="XX-XXXX">
                         </div>
                             <div class="col-3 mb-3">
-                                <label for="exampleInputPassword1" class="mb-2">Labor Rate</label>
+                                <label for="exampleInputPassword1" class="mb-2">Material Modifier</label>
                                 <div class="input-group">
-                                    <input min=1 onkeypress="return event.charCode > 45" placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.laborRate" name="laborRate" class="form-control">
+                                    <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.materialModifier" name="materialRate" class="form-control">
                                 </div>
                             </div>
                             <div class="col-3 mb-3">
-                                <label for="exampleInputPassword1" class="mb-2">Material Rate</label>
-                                <div class="input-group">
-                                    <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.materialRate" name="materialRate" class="form-control">
-                                </div>
-                                </div>
+                              <label for="exampleInputPassword1" class="mb-2">Labor Modifier</label>
+                              <div class="input-group">
+                                  <input min=1 onkeypress="return event.charCode > 45" placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.laborModifier" name="laborRate" class="form-control">
+                              </div>
+                          </div>
                             <div class="col-3 mb-3">
-                                <label for="exampleInputPassword1" class="mb-2">Equipment Rate</label>
+                                <label for="exampleInputPassword1" class="mb-2">Equipment Modifier</label>
                                 <div class="input-group">
-                                    <input min=1 onkeypress="return event.charCode >= 48"  placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.equipmentRate" name="equipmentRate" class="form-control">
+                                    <input min=1 onkeypress="return event.charCode >= 48"  placeholder="0" required type="number" [(ngModel)]="nuevoPresupuesto.equipmentModifier" name="equipmentRate" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -212,20 +212,20 @@
                           <td></td>
                           <td>{{ infoPresupuesto.zipCode }}</td>
                       </tr>
-                    <tr *ngIf="infoPresupuesto.laborRate!=null">
+                    <tr *ngIf="infoPresupuesto.laborModifier!=null">
                     <th>Labor Rate</th>
                         <td></td>
-                        <td>{{ infoPresupuesto.laborRate }}</td>
+                        <td>{{ infoPresupuesto.laborModifier }}</td>
                     </tr>
-                    <tr *ngIf="infoPresupuesto.materialRate!=null">
+                    <tr *ngIf="infoPresupuesto.materialModifier!=null">
                     <th>Material Rate</th>
                         <td></td>
-                        <td>{{ infoPresupuesto.materialRate }}</td>
+                        <td>{{ infoPresupuesto.materialModifier }}</td>
                     </tr>
-                    <tr *ngIf="infoPresupuesto.equipmentRate!=null">
+                    <tr *ngIf="infoPresupuesto.equipmentModifier!=null">
                     <th>Equipment Rate</th>
                         <td></td>
-                        <td>{{ infoPresupuesto.equipmentRate }}</td>
+                        <td>{{ infoPresupuesto.equipmentModifier }}</td>
                     </tr>
                     <tr *ngIf="infoPresupuesto.contingencyPercentage!=null">
                       <th>Contingency Percentage</th>

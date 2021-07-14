@@ -30,26 +30,28 @@
                 <th scope="col">Est. Mat. (Tax Incl.)</th>
                 <th scope="col">Est. Sub. Markup</th>
                 <th scope="col">Totals</th>
-                <th scope="col">Note</th>
+                <th scope="col"></th>
               </tr>
           </thead>
           <tbody class="">
             <tr *ngFor="let item of itemsPresupuesto">
-              <td><input (change)="valueChanged()" [(ngModel)]="item.L" type="number" class="form-control form-control-sm bg-transparent border-0"></td>
-              <td><input (change)="valueChanged()" [(ngModel)]="item.M" type="number" class="form-control form-control-sm bg-transparent border-0"></td>
+              <td><input (change)="valueChanged(item)" [(ngModel)]="item.L" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
+              <td><input (change)="valueChanged(item)" [(ngModel)]="item.M" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
               <td>{{ item.nombre }}</td>
-              <td><input (change)="valueChanged()" [(ngModel)]="item.qty" type="number" class="form-control form-control-sm bg-transparent border-0"></td>
+              <td><input (change)="valueChanged(item)" [(ngModel)]="item.qty" type="number" class="input-tabla-medium form-control form-control-sm bg-transparent border-0"></td>
               <td>{{ item.unidad }}</td>
-              <td>{{ item.laborRate }}</td>
-              <td>{{ item.materialRate }}</td>
-              <td>{{ item.equipmentRate }}</td>
-              <td>{{ item.estLaborCosts }}</td>
-              <td>{{ item.estEquipment }}</td>
-              <td>{{ item.estMat }}</td>
+              <td>{{ ((presupuesto.tipo == "Private") ? item.laborRate : presupuesto.laborGubernamental) | currency }}</td>
+              <td>{{ item.materialRate | currency }}</td>
+              <td>{{ item.equipmentRate | currency }}</td>
+              <td>{{ item.estLaborCosts | currency }}</td>
+              <td>{{ item.estEquipment | currency }}</td>
+              <td>{{ item.estMat | currency }}</td>
               <td>{{ item.estSubMarkup }}</td>
-              <td>{{ item.totals }}</td>
-              <td><button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#modalEliminarItemPresupuesto" (click)="asignarItemPresupuestoEliminar(item.id, item.nombre)">
-                X
+              <td>{{ item.totals | currency }}</td>
+              <td><button class="btn btn-danger btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalEliminarItemPresupuesto" (click)="asignarItemPresupuestoEliminar(item.id, item.nombre)">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-x-lg" viewBox="1 1 16 16">
+                  <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+                </svg>
               </button></td>
             </tr>
           </tbody>
@@ -149,19 +151,19 @@
                           <div class="col-3 mb-3">
                               <label for="exampleInputPassword1" class="mb-2">Labor Rate</label>
                               <div class="input-group">
-                                  <input min=1 onkeypress="return event.charCode > 45" placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.laborRate" name="laborRate" class="form-control">
+                                  <input min=1 onkeypress="return event.charCode > 45" placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.laborModifier" name="laborRate" class="form-control">
                               </div>
                           </div>
                           <div class="col-3 mb-3">
                               <label for="exampleInputPassword1" class="mb-2">Material Rate</label>
                               <div class="input-group">
-                                  <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.materialRate" name="materialRate" class="form-control">
+                                  <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.materialModifier" name="materialRate" class="form-control">
                               </div>
                               </div>
                           <div class="col-3 mb-3">
                               <label for="exampleInputPassword1" class="mb-2">Equipment Rate</label>
                               <div class="input-group">
-                                  <input min=1 onkeypress="return event.charCode >= 48"  placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.equipmentRate" name="equipmentRate" class="form-control">
+                                  <input min=1 onkeypress="return event.charCode >= 48"  placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.equipmentModifier" name="equipmentRate" class="form-control">
                               </div>
                           </div>
                       </div>
