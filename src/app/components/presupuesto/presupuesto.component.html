@@ -4,6 +4,9 @@
       <h1 class="text-white">{{ presupuesto.nombre }}</h1>
     </div>
     <div class="col text-end">
+      <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalModificarPresupuesto">
+        Modify Estimate
+      </button>
       <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#modalIngresar">
         Add Item
       </button>
@@ -45,7 +48,9 @@
               <td>{{ item.estMat }}</td>
               <td>{{ item.estSubMarkup }}</td>
               <td>{{ item.totals }}</td>
-              <td></td>
+              <td><button class="btn btn-danger rounded-pill" data-bs-toggle="modal" data-bs-target="#modalEliminarItemPresupuesto" (click)="asignarItemPresupuestoEliminar(item.id, item.nombre)">
+                X
+              </button></td>
             </tr>
           </tbody>
       </table>
@@ -105,3 +110,125 @@
     </div>
 </div>
 </div>
+
+<!--MODAL MODIFICAR PRESUPUESTO-->
+<div id="modalModificarPresupuesto" class="modal fade" data-bs-backdrop="static" ata-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+              <h5 class="modal-title" id="exampleModalLabel">Modify Estimate</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form #f='ngForm'>
+              <div class="modal-body">
+                  <div class="form-group">
+                      <div class="row">
+                          <div class="col-6 mb-3">
+                              <label class="form-label">Name</label>
+                              <input required type="text" name="nombre" [(ngModel)]="nuevosDatosPresupuesto.nombre" class="form-control" placeholder="Name">
+                          </div>
+                          <div class="col-3 mb-3">
+                              <label for="exampleFormControlSelect1" class="mb-2">Type</label>
+                              <select #tipoPresupuesto="ngModel" ngModel required class="form-select" name="categoria" [(ngModel)]="nuevosDatosPresupuesto.tipo">
+                                  <option value="Private">Private</option>
+                                  <option value="Government">Government</option>
+                              </select>
+                          </div>
+                          <div class="col-3 mb-3" *ngIf='tipoPresupuesto.value=="Government"'>
+                              <label for="exampleFormControlSelect1" class="mb-2">Government Labor Rate</label>
+                              <input min=1 onkeypress="return event.charCode > 45"  placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.laborGubernamental" name="laborGubernamental" class="form-control">
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                      <div class="row">
+                        <div class="col-3 mb-3">
+                          <label for="exampleInputPassword1" class="mb-2">Zip Code</label>
+                          <input required type="text" name="zipCode" [(ngModel)]="nuevosDatosPresupuesto.zipCode" class="form-control" placeholder="XX-XXXX">
+                      </div>
+                          <div class="col-3 mb-3">
+                              <label for="exampleInputPassword1" class="mb-2">Labor Rate</label>
+                              <div class="input-group">
+                                  <input min=1 onkeypress="return event.charCode > 45" placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.laborRate" name="laborRate" class="form-control">
+                              </div>
+                          </div>
+                          <div class="col-3 mb-3">
+                              <label for="exampleInputPassword1" class="mb-2">Material Rate</label>
+                              <div class="input-group">
+                                  <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.materialRate" name="materialRate" class="form-control">
+                              </div>
+                              </div>
+                          <div class="col-3 mb-3">
+                              <label for="exampleInputPassword1" class="mb-2">Equipment Rate</label>
+                              <div class="input-group">
+                                  <input min=1 onkeypress="return event.charCode >= 48"  placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.equipmentRate" name="equipmentRate" class="form-control">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="row">
+                        <div class="col-4 mb-3">
+                            <label for="exampleInputPassword1" class="mb-2">Tax Percentage</label>
+                            <div class="input-group">
+                                <input min=1 onkeypress="return event.charCode > 45" placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.taxPercentage" name="taxPercentage" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-4 mb-3">
+                            <label for="exampleInputPassword1" class="mb-2">Contingency Percentage</label>
+                            <div class="input-group">
+                                <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.contingencyPercentage" name="contingencyPercentage" class="form-control">
+                            </div>
+                            </div>
+                        <div class="col-4 mb-3">
+                            <label for="exampleInputPassword1" class="mb-2">Profit Percentage</label>
+                            <div class="input-group">
+                                <input min=1 onkeypress="return event.charCode >= 48"  placeholder="0" required type="number" [(ngModel)]="nuevosDatosPresupuesto.profitPercentage" name="profitPercentage" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                  <div class="form-group">
+                      <div class="row">
+                          <div class="col">
+                              <label>Description</label>
+                              <textarea class="form-control" placeholder="Add Description" #descripcion="ngModel" required type="text" name="descripcion" [(ngModel)]="nuevosDatosPresupuesto.descripcion"></textarea>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </form>
+          <!--MODAL FOOTER-->
+          <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Close
+              </button>
+              <button data-bs-dismiss="modal" type="button" (click)="modificarPresupuesto()" class="btn btn-primary">
+                  Modify
+              </button>
+          </div>
+      </div>
+  </div>
+</div>
+<!--FIN DEL MODAL MODIFICAR PRESUPUESTO-->
+
+<!--MODAL ELIMINAR ITEM-->
+<div class="modal fade" id="modalEliminarItemPresupuesto" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-danger">
+        <h5 class="modal-title text-white" id="staticBackdropLabel">Delete</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>¿Are you sure you want to delete <strong>{{ infoItemEliminar.nombre }}</strong> from {{ presupuesto.nombre }}? <br><br> This action cannot be undone.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminarItemPresupuesto()">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--FIN MODAL ELIMINAR ITEM-->
+

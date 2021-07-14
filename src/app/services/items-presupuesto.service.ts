@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { Item } from '../models/item.models'
+import { Presupuesto } from '../models/presupuesto.models'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ItemPresupuesto } from '../models/itemPreupuesto.models';
@@ -33,7 +34,8 @@ export class ItemsPresupuestoService {
     return this.items;
   }
 
-  eliminarItem(idItemliminar: string){
-    return this.itemsColeccion.doc(idItemliminar).delete();
-  }
+  // eliminarItem(idPresupuesto: any, idItemEliminar: any){
+  //   this.presupuestoDoc = this.afs.doc<Presupuesto>(`presupuestos/${idPresupuesto}`);
+  //   return this.presupuestoDoc.collection("items").doc(idItemEliminar).delete();
+  // }
 }
