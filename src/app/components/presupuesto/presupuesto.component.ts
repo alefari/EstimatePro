@@ -25,7 +25,7 @@ export class PresupuestoComponent implements OnInit {
   listaSubcategorias: any[];
 
   itemsPresupuesto: ItemPresupuesto[] = [];
-  presupuesto: Presupuesto;
+  presupuesto = {} as Presupuesto;
   idPresupuesto: string = '';
 
   nuevosDatosPresupuesto:Presupuesto = {
@@ -80,7 +80,6 @@ export class PresupuestoComponent implements OnInit {
   }
 
   onSubmit() {
-
   }
 
   valueChanged(item: ItemPresupuesto) {
@@ -89,11 +88,13 @@ export class PresupuestoComponent implements OnInit {
   }
 
   updateItemFirebase(item: ItemPresupuesto) {
-    console.log(item.id)
     this.servicioItemsPresupuesto.editarItem(item)
   }
 
   updateCalc() {
+    if(typeof this.presupuesto == 'undefined' || typeof this.itemsPresupuesto == 'undefined') {
+      return
+    }
     this.itemsPresupuesto.forEach(item => {
       // PRODUCTION RATE (VALOR INTERNO)
       item.productionRate = item.productionRateBase * item.L;
@@ -167,6 +168,7 @@ export class PresupuestoComponent implements OnInit {
       estSubMarkup: 0,
       totals: 0
     }
+    delete itemPresupuesto.id
     this.servicioItemsPresupuesto.agregarItem(itemPresupuesto);
     this.updateCalc()
   }
@@ -181,6 +183,7 @@ export class PresupuestoComponent implements OnInit {
   asignarItemPresupuestoEliminar(id: string, nombre: string){
     this.infoItemEliminar.id = id;
     this.infoItemEliminar.nombre= nombre;
+    console.log(this.infoItemEliminar)
   }
   eliminarItemPresupuesto(){
     this.servicioItemsPresupuesto.eliminarItem(this.infoItemEliminar.id);

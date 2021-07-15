@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { Presupuesto } from '../models/presupuesto.models'
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { ItemsPresupuestoService } from './items-presupuesto.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class PresupuestosService {
   presupuestosColeccion: AngularFirestoreCollection<Presupuesto>;
   presupuestos: Observable<Presupuesto[]>;
 
-  constructor(private readonly afs: AngularFirestore) {
+  constructor(private readonly afs: AngularFirestore, private servicioItemsPresupuesto: ItemsPresupuestoService) {
 
     this.presupuestosColeccion = afs.collection<Presupuesto>('presupuestos');
     this.presupuestos = this.presupuestosColeccion.snapshotChanges().pipe(
@@ -44,6 +45,8 @@ export class PresupuestosService {
 
   //FUNCION ELIMINAR PRESUPUESTO DE LA BASE DE DATOS
   eliminarPresupuesto(idPresupuestoliminar: string){
+    // return this.presupuestosColeccion.doc(`${idPresupuestoliminar}/items`).delete();
+
     return this.presupuestosColeccion.doc(idPresupuestoliminar).delete();
   }
 }

@@ -35,11 +35,12 @@ export class ItemsPresupuestoService {
   }
 
   editarItem(item: ItemPresupuesto) {
-    // return this.itemsColeccion.doc(item.id).update(item);
+    let id = item.id
+    delete item.id
+    return this.itemsColeccion.doc(id).update(item);
   }
 
   eliminarItem(idItemEliminar: any){
-    // this.presupuestoDoc = this.afs.doc<Presupuesto>(`presupuestos/${idPresupuesto}`);
     return this.itemsColeccion.doc(idItemEliminar).delete();
   }
 }
