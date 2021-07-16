@@ -13,6 +13,7 @@ import { ListaPresupuestoComponent } from './components/lista-presupuesto/lista-
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { IngresarComponent } from './components/inventario/ingresar/ingresar.component';
 import { ParametrosComponent } from './components/inventario/parametros/parametros.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { ParametrosComponent } from './components/inventario/parametros/parametr
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
