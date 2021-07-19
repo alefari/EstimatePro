@@ -14,9 +14,9 @@
   </div>
   <div class="row mt-4">
     <div class="table-responsive">
-      <table class="table table-sm shadow table-hover table-striped table-light table-borderless">
-          <thead class="">
-              <tr class="">
+      <table class="table table-sm shadow table-hover table-light table-borderless">
+          <thead>
+              <tr class="table-dark">
                 <th scope="col">L</th>
                 <th scope="col">M</th>
                 <th scope="col">Scope</th>
@@ -33,27 +33,39 @@
                 <th scope="col"></th>
               </tr>
           </thead>
-          <tbody class="">
-            <tr *ngFor="let item of itemsPresupuesto">
-              <td><input (change)="valueChanged(item)" [(ngModel)]="item.L" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
-              <td><input (change)="valueChanged(item)" [(ngModel)]="item.M" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
-              <td>{{ item.nombre }}</td>
-              <td><input (change)="valueChanged(item)" [(ngModel)]="item.qty" type="number" class="input-tabla-medium form-control form-control-sm bg-transparent border-0"></td>
-              <td>{{ item.unidad }}</td>
-              <td>{{ ((presupuesto.tipo == "Private") ? item.laborRate : presupuesto.laborGubernamental) | currency }}</td>
-              <td>{{ item.materialRate | currency }}</td>
-              <td>{{ item.equipmentRate | currency }}</td>
-              <td>{{ item.estLaborCosts | currency }}</td>
-              <td>{{ item.estEquipment | currency }}</td>
-              <td>{{ item.estMat | currency }}</td>
-              <td>{{ item.estSubMarkup }}</td>
-              <td>{{ item.totals | currency }}</td>
-              <td><button class="btn btn-danger btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalEliminarItemPresupuesto" (click)="asignarItemPresupuestoEliminar(item.id, item.nombre)">
-                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-x-lg" viewBox="1 1 16 16">
-                  <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
-                </svg>
-              </button></td>
-            </tr>
+          <tbody>
+            <ng-container *ngFor="let scope of listaCategorias">
+              <ng-container *ngIf="coincidenciaCategorias(scope.nombre)">
+                <tr class="table-secondary">
+                  <td></td>
+                  <td></td>
+                  <th colspan="12">{{ scope.nombre }}</th>
+                </tr>
+                <ng-container *ngFor="let item of itemsPresupuesto">
+                  <tr *ngIf="item.categoria == scope.nombre">
+                    <td><input (change)="valueChanged(item)" [(ngModel)]="item.L" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
+                    <td><input (change)="valueChanged(item)" [(ngModel)]="item.M" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
+                    <td>{{ item.nombre }}</td>
+                    <td><input (change)="valueChanged(item)" [(ngModel)]="item.qty" type="number" class="input-tabla-medium form-control form-control-sm bg-transparent border-0"></td>
+                    <td>{{ item.unidad }}</td>
+                    <td>{{ ((presupuesto.tipo == "Private") ? item.laborRate : presupuesto.laborGubernamental) | currency }}</td>
+                    <td>{{ item.materialRate | currency }}</td>
+                    <td>{{ item.equipmentRate | currency }}</td>
+                    <td>{{ item.estLaborCosts | currency }}</td>
+                    <td>{{ item.estEquipment | currency }}</td>
+                    <td>{{ item.estMat | currency }}</td>
+                    <td>{{ item.estSubMarkup }}</td>
+                    <td>{{ item.totals | currency }}</td>
+                    <td><button class="btn btn-danger btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modalEliminarItemPresupuesto" (click)="asignarItemPresupuestoEliminar(item.id, item.nombre)">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" class="bi bi-x-lg" viewBox="1 1 16 16">
+                        <path d="M1.293 1.293a1 1 0 0 1 1.414 0L8 6.586l5.293-5.293a1 1 0 1 1 1.414 1.414L9.414 8l5.293 5.293a1 1 0 0 1-1.414 1.414L8 9.414l-5.293 5.293a1 1 0 0 1-1.414-1.414L6.586 8 1.293 2.707a1 1 0 0 1 0-1.414z"/>
+                      </svg>
+                    </button></td>
+                  </tr>
+                </ng-container>
+              </ng-container>
+            </ng-container>
+
           </tbody>
       </table>
     </div>

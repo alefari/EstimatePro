@@ -194,4 +194,8 @@ export class PresupuestoComponent implements OnInit {
     this.form.reset();
     }
 
+  coincidenciaCategorias(scope: string) {
+    return this.itemsPresupuesto.some(item => item.categoria == scope);
+  }
+
 }
