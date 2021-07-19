@@ -4,6 +4,7 @@ import { AngularFireModule } from '@angular/fire';
 import { BrowserModule } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore'
+import { AngularFireAuthModule, PERSISTENCE } from '@angular/fire/auth'
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -13,7 +14,7 @@ import { ListaPresupuestoComponent } from './components/lista-presupuesto/lista-
 import { InventarioComponent } from './components/inventario/inventario.component';
 import { IngresarComponent } from './components/inventario/ingresar/ingresar.component';
 import { ParametrosComponent } from './components/inventario/parametros/parametros.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,10 +32,13 @@ import { HttpClientModule } from '@angular/common/http';
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
+    AngularFireAuthModule,
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {provide: PERSISTENCE, useValue: 'local'}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
