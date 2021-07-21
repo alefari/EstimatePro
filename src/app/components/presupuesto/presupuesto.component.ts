@@ -27,6 +27,8 @@ export class PresupuestoComponent implements OnInit {
   itemsPresupuesto: ItemPresupuesto[] = [];
   presupuesto = {} as Presupuesto;
   idPresupuesto: string = '';
+  categoriasPresupuesto: any[] = [];
+  subcategoriasPresupuesto: any[] = [];
 
   nuevosDatosPresupuesto:Presupuesto = {
     id: "",
@@ -61,6 +63,8 @@ export class PresupuestoComponent implements OnInit {
     this.idPresupuesto = this.route.snapshot.params['id'];
     this.servicioItemsPresupuesto.obtenerItems(this.idPresupuesto).subscribe(items => {
       this.itemsPresupuesto = items;
+      this.updateCategorias()
+      this.updateSubcategorias()
       this.updateCalc()
     }),
     this.servicioEstimate.obtenerPresupuesto(this.idPresupuesto).subscribe(presupuesto => {
@@ -80,6 +84,23 @@ export class PresupuestoComponent implements OnInit {
   }
 
   onSubmit() {
+  }
+
+  updateCategorias() {
+    this.categoriasPresupuesto = [];
+    this.itemsPresupuesto.forEach(item => {
+      if(!this.categoriasPresupuesto.some(cat => cat == item.categoria) && item.categoria != '') {
+        this.categoriasPresupuesto.push(item.categoria);
+      }
+    });
+  }
+  updateSubcategorias() {
+    this.subcategoriasPresupuesto = [];
+    this.itemsPresupuesto.forEach(item => {
+      if(!this.subcategoriasPresupuesto.some(subcat => subcat == item.subcategoria) && item.subcategoria != '') {
+        this.subcategoriasPresupuesto.push(item.subcategoria);
+      }
+    });
   }
 
   valueChanged(item: ItemPresupuesto) {
@@ -194,8 +215,8 @@ export class PresupuestoComponent implements OnInit {
     this.form.reset();
     }
 
-  coincidenciaCategorias(scope: string) {
-    return this.itemsPresupuesto.some(item => item.categoria == scope);
+  coincidenciaSubcategorias(scope: string, subcat: string) {
+    return this.itemsPresupuesto.some(item => item.categoria == scope && item.subcategoria == subcat)
   }
 
 }
