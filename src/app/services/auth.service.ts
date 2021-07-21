@@ -40,6 +40,7 @@ export class AuthService {
           }
         })
       )
+
   }
 
   // signup(email: string, password: string) {
