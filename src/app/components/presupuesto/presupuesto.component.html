@@ -15,7 +15,7 @@
   <div class="row mt-4">
     <div class="table-responsive">
       <table class="table table-sm shadow table-hover table-light table-borderless">
-          <thead>
+          <thead class="text-center">
               <tr class="table-dark">
                 <th scope="col">L</th>
                 <th scope="col">M</th>
@@ -33,15 +33,15 @@
                 <th scope="col"></th>
               </tr>
           </thead>
-          <tbody>
+          <tbody class="text-end">
             <!-- ITEMS SIN CATEGORIA -->
             <ng-container *ngFor="let item of itemsPresupuesto">
               <tr *ngIf="item.categoria == ''">
                 <td><input (change)="valueChanged(item)" [(ngModel)]="item.L" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
                 <td><input (change)="valueChanged(item)" [(ngModel)]="item.M" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
-                <td>{{ item.nombre }}</td>
+                <td class="text-start">{{ item.nombre }}</td>
                 <td><input (change)="valueChanged(item)" [(ngModel)]="item.qty" type="number" class="input-tabla-medium form-control form-control-sm bg-transparent border-0"></td>
-                <td>{{ item.unidad }}</td>
+                <td class="text-start">{{ item.unidad }}</td>
                 <td>{{ ((presupuesto.tipo == "Private") ? item.laborRate : presupuesto.laborGubernamental) | currency }}</td>
                 <td>{{ item.materialRate | currency }}</td>
                 <td>{{ item.equipmentRate | currency }}</td>
@@ -59,7 +59,7 @@
             </ng-container>
             <ng-container *ngFor="let subcat of subcategoriasPresupuesto">
               <ng-container *ngIf="coincidenciaSubcategorias('', subcat)">
-                <tr>
+                <tr class="text-start">
                   <td></td>
                   <td></td>
                   <th colspan="12">{{ subcat }}</th>
@@ -69,9 +69,9 @@
                   <tr *ngIf="item.categoria == '' && item.subcategoria == subcat">
                     <td><input (change)="valueChanged(item)" [(ngModel)]="item.L" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
                     <td><input (change)="valueChanged(item)" [(ngModel)]="item.M" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
-                    <td>{{ item.nombre }}</td>
+                    <td class="text-start">{{ item.nombre }}</td>
                     <td><input (change)="valueChanged(item)" [(ngModel)]="item.qty" type="number" class="input-tabla-medium form-control form-control-sm bg-transparent border-0"></td>
-                    <td>{{ item.unidad }}</td>
+                    <td class="text-start">{{ item.unidad }}</td>
                     <td>{{ ((presupuesto.tipo == "Private") ? item.laborRate : presupuesto.laborGubernamental) | currency }}</td>
                     <td>{{ item.materialRate | currency }}</td>
                     <td>{{ item.equipmentRate | currency }}</td>
@@ -92,7 +92,7 @@
             <!-- ITEMS CON CATEGORIA -->
 
             <ng-container *ngFor="let scope of categoriasPresupuesto">
-              <tr class="table-secondary">
+              <tr class="table-secondary text-start">
                 <td></td>
                 <td></td>
                 <th colspan="12">{{ scope }}</th>
@@ -101,9 +101,9 @@
                 <tr *ngIf="item.categoria == scope && item.subcategoria == ''">
                   <td><input (change)="valueChanged(item)" [(ngModel)]="item.L" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
                   <td><input (change)="valueChanged(item)" [(ngModel)]="item.M" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
-                  <td>{{ item.nombre }}</td>
+                  <td class="text-start">{{ item.nombre }}</td>
                   <td><input (change)="valueChanged(item)" [(ngModel)]="item.qty" type="number" class="input-tabla-medium form-control form-control-sm bg-transparent border-0"></td>
-                  <td>{{ item.unidad }}</td>
+                  <td class="text-start">{{ item.unidad }}</td>
                   <td>{{ ((presupuesto.tipo == "Private") ? item.laborRate : presupuesto.laborGubernamental) | currency }}</td>
                   <td>{{ item.materialRate | currency }}</td>
                   <td>{{ item.equipmentRate | currency }}</td>
@@ -122,7 +122,7 @@
 
               <ng-container *ngFor="let subcat of subcategoriasPresupuesto">
                 <ng-container *ngIf="coincidenciaSubcategorias(scope, subcat)">
-                  <tr>
+                  <tr class="text-start">
                     <td></td>
                     <td></td>
                     <th colspan="12">{{ subcat }}</th>
@@ -132,9 +132,9 @@
                     <tr *ngIf="item.categoria == scope && item.subcategoria == subcat">
                       <td><input (change)="valueChanged(item)" [(ngModel)]="item.L" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
                       <td><input (change)="valueChanged(item)" [(ngModel)]="item.M" type="number" class="input-tabla-short form-control form-control-sm bg-transparent border-0"></td>
-                      <td>{{ item.nombre }}</td>
+                      <td class="text-start">{{ item.nombre }}</td>
                       <td><input (change)="valueChanged(item)" [(ngModel)]="item.qty" type="number" class="input-tabla-medium form-control form-control-sm bg-transparent border-0"></td>
-                      <td>{{ item.unidad }}</td>
+                      <td class="text-start">{{ item.unidad }}</td>
                       <td>{{ ((presupuesto.tipo == "Private") ? item.laborRate : presupuesto.laborGubernamental) | currency }}</td>
                       <td>{{ item.materialRate | currency }}</td>
                       <td>{{ item.equipmentRate | currency }}</td>
@@ -153,7 +153,41 @@
                 </ng-container>
               </ng-container>
             </ng-container>
-
+            <tr class="border-bottom-0 border-start-0 border-end-0 border-2 border-dark">
+              <th class="text-end" colspan="11">Total</th>
+              <th></th>
+              <th colspan="3" class="text-end">{{32 | currency}}</th>
+            </tr>
+            <tr>
+              <th class="text-end" colspan="11">Material Sales Tax</th>
+              <th></th>
+              <th colspan="3" class="text-end">{{34| currency}}</th>
+            </tr>
+            <tr>
+              <th class="text-end" colspan="11">Subcontractor Markup</th>
+              <th></th>
+              <th colspan="3" class="text-end">{{54 | currency}}</th>
+            </tr>
+            <tr>
+              <th class="text-end" colspan="11">Overall Construction Cost</th>
+              <th></th>
+              <th colspan="3" class="text-end">{{65 | currency}}</th>
+            </tr>
+            <tr>
+              <th class="text-end" colspan="11">Contingency %</th>
+              <th class="text-end text-danger">3.00%</th>
+              <th colspan="3" class="text-end">{{66 | currency}}</th>
+            </tr>
+            <tr>
+              <th class="text-end" colspan="11">Profit</th>
+              <th class="text-end text-danger">30.00%</th>
+              <th colspan="3" class="text-end">{{345 | currency}}</th>
+            </tr>
+            <tr>
+              <th class="text-end" colspan="11">Total Project Cost</th>
+              <th></th>
+              <th colspan="3" class="text-end">{{44 | currency}}</th>
+            </tr>
           </tbody>
       </table>
     </div>
