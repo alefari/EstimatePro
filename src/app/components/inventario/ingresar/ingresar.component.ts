@@ -53,6 +53,16 @@ export class IngresarComponent implements OnInit {
   //FUNCION PARA AGREGAR ITEM A LA BD
   onSubmit(){
     this.nuevoItem.fecha=new Date().toISOString();
+
+    for (const key in this.nuevoItem) {
+      if (Object.prototype.hasOwnProperty.call(this.nuevoItem, key)) {
+        if(this.nuevoItem[key] === null) {
+
+          this.nuevoItem[key] = '';
+        }
+      }
+    }
+
     this.servicioItems.agregarItem(this.nuevoItem);
     this.form.reset();
     }

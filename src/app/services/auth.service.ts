@@ -65,7 +65,6 @@ export class AuthService {
   async signUp(email: string, password: string) {
     return this.afAuth.createUserWithEmailAndPassword(email, password)
     .then((credential) => {
-      console.log(credential)
       this.updateUserData(credential.user);
     });
   }

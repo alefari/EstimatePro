@@ -30,8 +30,8 @@ export class LoginComponent implements OnInit {
     this.servicioAuth.login(email, password).then(
       res => {
         if(res) {
-          console.log(res);
-          this.router.navigate(['/'])
+          this.isLoading = false;
+          this.router.navigate(['/estimates'])
         }
       },
       error => {

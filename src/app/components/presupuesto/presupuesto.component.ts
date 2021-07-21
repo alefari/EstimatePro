@@ -204,7 +204,6 @@ export class PresupuestoComponent implements OnInit {
   asignarItemPresupuestoEliminar(id: string, nombre: string){
     this.infoItemEliminar.id = id;
     this.infoItemEliminar.nombre= nombre;
-    console.log(this.infoItemEliminar)
   }
   eliminarItemPresupuesto(){
     this.servicioItemsPresupuesto.eliminarItem(this.infoItemEliminar.id);
