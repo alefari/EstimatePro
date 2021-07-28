@@ -10,6 +10,9 @@ import { ItemsPresupuestoService } from 'src/app/services/items-presupuesto.serv
 import { ItemsService } from 'src/app/services/items.service';
 import { PresupuestosService } from 'src/app/services/presupuestos.service';
 import { SubcategoriasService } from 'src/app/services/subcategorias.service';
+import { AngularFireStorage } from '@angular/fire/storage';
+import { Observable } from 'rxjs';
+import { ExcelService } from 'src/app/services/excel.service';
 
 @Component({
   selector: 'app-presupuesto',
@@ -19,6 +22,8 @@ import { SubcategoriasService } from 'src/app/services/subcategorias.service';
 export class PresupuestoComponent implements OnInit {
 
   @ViewChild('f') form: NgForm;
+
+  excelUrl: Observable<string | null>;
 
   listaItems: Item[];
   listaCategorias: any[];
@@ -57,7 +62,9 @@ export class PresupuestoComponent implements OnInit {
               private servicioItemsPresupuesto: ItemsPresupuestoService,
               private servicioSubcategorias: SubcategoriasService,
               private servicioPresupuestos: PresupuestosService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private storage: AngularFireStorage,
+              private servicioExcel: ExcelService) { }
 
   ngOnInit(): void {
     this.idPresupuesto = this.route.snapshot.params['id'];
@@ -84,6 +91,14 @@ export class PresupuestoComponent implements OnInit {
   }
 
   onSubmit() {
+  }
+
+  downloadExcel() {
+    // const ref = this.storage.ref('EstimateRef.xlsx');
+    // console.log(ref)
+    // this.excelUrl = ref.getDownloadURL();
+    // console.log(this.excelUrl);
+    this.servicioExcel.testExcel(this.itemsPresupuesto);
   }
 
   updateCategorias() {
