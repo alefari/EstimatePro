@@ -15,6 +15,10 @@ export class ListaPresupuestoComponent implements OnInit {
   @ViewChild('f') form: NgForm;
 
   listaPresupuestos: Presupuesto[];
+  filtroFecha:any = {
+    inicial: 0,
+    final: new Date().getTime()
+  }
 
   nuevoPresupuesto:Presupuesto = {
       nombre: '',
@@ -96,5 +100,17 @@ export class ListaPresupuestoComponent implements OnInit {
   eliminarPresupuesto(){
     this.servicioPresupuestos.eliminarPresupuesto(this.infoPresupuestoEliminar.id);
     this.infoPresupuestoEliminar = {id: "", nombre: "",}
+  }
+
+  checkDates(fechaPresup: string) {
+    let fechaPresupMs = new Date(fechaPresup).getTime();
+    let fechaInicialMs = new Date(this.filtroFecha.inicial).getTime();
+    let fechaFinalMs = new Date(this.filtroFecha.final).getTime();
+    if(fechaPresupMs > fechaInicialMs && fechaPresupMs <= fechaFinalMs) {
+      return true
+    }
+    else {
+      return false
+    }
   }
 }
