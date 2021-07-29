@@ -82,7 +82,7 @@ export class InventarioComponent implements OnInit {
       laborRateBase: form.value.laborRateBaseModal,
       materialRateBase: form.value.materialRateBaseModal,
       equipmentRateBase: form.value.equipmentRateBaseModal,
-      productionRateBase: this.datosItemModificar.productionRateBase,
+      productionRateBase: form.value.productionRateBaseModal,
       fecha: this.datosItemModificar.fecha,
     }
     this.servicioItems.editarItem(this.datosItemModificar);

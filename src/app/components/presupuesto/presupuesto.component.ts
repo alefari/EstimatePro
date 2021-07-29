@@ -69,7 +69,7 @@ export class PresupuestoComponent implements OnInit {
     }),
     this.servicioEstimate.obtenerPresupuesto(this.idPresupuesto).subscribe(presupuesto => {
       this.presupuesto = presupuesto;
-      this.nuevosDatosPresupuesto = presupuesto;
+      this.nuevosDatosPresupuesto = {...presupuesto};
       this.updateCalc()
     })
     this.servicioItems.obtenerItems().subscribe(items => {
@@ -194,9 +194,49 @@ export class PresupuestoComponent implements OnInit {
     this.updateCalc()
   }
 
-  //FUNCION MODIFICAR PRESUPUESTO
-  modificarPresupuesto(){
-    this.nuevosDatosPresupuesto.id = this.idPresupuesto;
+  //FUNCION MODIFICAR ITEM
+
+  modificarPresupuesto(form: NgForm){
+    if(form.value.typeModal=="Private"){
+      this.nuevosDatosPresupuesto = {
+        id: this.idPresupuesto,
+        nombre: form.value.nombreModal,
+        tipo: form.value.typeModal,
+        totalProjectCost: this.nuevosDatosPresupuesto.totalProjectCost,
+        contingencyPercentage: form.value.contingencyPercentageModal,
+        taxPercentage: form.value.taxPercentageModal,
+        profitPercentage: form.value.profitPercentageModal,
+        zipCode: form.value.zipCodeModal,
+        estatus: this.nuevosDatosPresupuesto.estatus,
+        fecha: this.nuevosDatosPresupuesto.fecha,
+        laborGubernamental: 0,
+        laborModifier: form.value.laborModifierModal,
+        materialModifier: form.value.materialModifierModal,
+        equipmentModifier: form.value.equipmentModifierModal,
+        idUsuario: this.nuevosDatosPresupuesto.idUsuario,
+        descripcion: form.value.descripcionModal,
+      }
+    } else {
+      this.nuevosDatosPresupuesto = {
+        id: this.idPresupuesto,
+        nombre: form.value.nombreModal,
+        tipo: form.value.typeModal,
+        totalProjectCost: this.nuevosDatosPresupuesto.totalProjectCost,
+        contingencyPercentage: form.value.contingencyPercentageModal,
+        taxPercentage: form.value.taxPercentageModal,
+        profitPercentage: form.value.profitPercentageModal,
+        zipCode: form.value.zipCodeModal,
+        estatus: this.nuevosDatosPresupuesto.estatus,
+        fecha: this.nuevosDatosPresupuesto.fecha,
+        laborGubernamental: form.value.laborGubernamentalModal,
+        laborModifier: form.value.laborModifierModal,
+        materialModifier: form.value.materialModifierModal,
+        equipmentModifier: form.value.equipmentModifierModal,
+        idUsuario: this.nuevosDatosPresupuesto.idUsuario,
+        descripcion: form.value.descripcionModal,
+      }
+    }
+    console.log(this.nuevosDatosPresupuesto);
     this.servicioPresupuestos.editarPresupuesto(this.nuevosDatosPresupuesto);
   }
 

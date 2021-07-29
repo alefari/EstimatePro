@@ -131,6 +131,11 @@
                         <td>${{ infoItem.equipmentRateBase }}</td>
                     </tr>
                     <tr>
+                      <th>Production Rate</th>
+                          <td></td>
+                          <td>{{ infoItem.productionRateBase }}</td>
+                      </tr>
+                    <tr>
                     <th>Creation Date</th>
                         <td></td>
                         <td>{{ infoItem.fecha | date:'short' }}</td>
@@ -179,21 +184,27 @@
             <div class="modal-body">
                 <div class="form-group">
                     <div class="row">
-                        <div class="col-4 mb-3">
+                        <div class="col-3 mb-3">
                             <label class="form-label">Name</label>
                             <input required type="text" placeholder="Name" name="nombreModal" [ngModel]='datosItemModificar.nombre' class="form-control">
                         </div>
-                        <div class="col-4 mb-3">
+                        <div class="col-3 mb-3">
                             <label for="exampleFormControlSelect1" class="mb-2">Category</label>
                             <select required class="form-select" name="categoriaModal" [ngModel]='datosItemModificar.categoria'>
                                 <option *ngFor="let categoria of listaCategorias" value="{{categoria.nombre}}" > {{ categoria.nombre }}</option>
                             </select>
                         </div>
-                        <div class="col-4 mb-3">
+                        <div class="col-3 mb-3">
                             <label for="exampleFormControlSelect1" class="mb-2">Type</label>
                             <select required class="form-select" name="subcategoriaModal" [ngModel]='datosItemModificar.subcategoria'>
                                 <option *ngFor="let subcategoria of listaSubcategorias" value="{{subcategoria.nombre}}" > {{ subcategoria.nombre }}</option>
                             </select>
+                        </div>
+                        <div class="col-3 mb-3">
+                          <label for="exampleInputPassword1" class="mb-2">Prod. Rate</label>
+                            <div class="input-group">
+                              <input placeholder="0" required type="number" name="productionRateBaseModal" [(ngModel)]="datosItemModificar.productionRateBase" name="laborRate" class="form-control">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -208,19 +219,19 @@
                         <div class="col-3 mb-3">
                             <label for="exampleInputPassword1" class="mb-2">Labor Rate</label>
                             <div class="input-group">
-                                <input min=1 onkeypress="return event.charCode > 45" placeholder="0" required type="number" [ngModel]='datosItemModificar.laborRateBase' name="laborRateBaseModal" class="form-control">
+                                <input placeholder="0" required type="number" [ngModel]='datosItemModificar.laborRateBase' name="laborRateBaseModal" class="form-control">
                             </div>
                         </div>
                         <div class="col-3 mb-3">
                             <label for="exampleInputPassword1" class="mb-2">Material Rate</label>
                             <div class="input-group">
-                                <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [ngModel]='datosItemModificar.materialRateBase' name="materialRateBaseModal" class="form-control">
+                                <input placeholder="0" required type="number" [ngModel]='datosItemModificar.materialRateBase' name="materialRateBaseModal" class="form-control">
                             </div>
                             </div>
                         <div class="col-3 mb-3">
                             <label for="exampleInputPassword1" class="mb-2">Equipment Rate</label>
                             <div class="input-group">
-                                <input min=1 onkeypress="return event.charCode >= 48" placeholder="0" required type="number" [ngModel]='datosItemModificar.equipmentRateBase' name="equipmentRateBaseModal" class="form-control">
+                                <input placeholder="0" required type="number" [ngModel]='datosItemModificar.equipmentRateBase' name="equipmentRateBaseModal" class="form-control">
                             </div>
                         </div>
                     </div>
