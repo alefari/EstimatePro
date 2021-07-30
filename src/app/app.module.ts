@@ -15,6 +15,7 @@ import { InventarioComponent } from './components/inventario/inventario.componen
 import { IngresarComponent } from './components/inventario/ingresar/ingresar.component';
 import { ParametrosComponent } from './components/inventario/parametros/parametros.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     AngularFireAuthModule,
+    AngularFireStorageModule,
     FormsModule,
     HttpClientModule
   ],
