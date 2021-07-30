@@ -33,14 +33,15 @@ export class InventarioComponent implements OnInit {
       fecha: null,
   };
 
-  datosItemModificar: any = {
+  datosItemModificar: Item = {
       nombre: '',
       categoria: '',
       subcategoria: '',
       unidad: '',
-      laborRate: 0,
-      materialRate: 0,
-      equipmentRate: 0,
+      laborRateBase: 0,
+      materialRateBase: 0,
+      equipmentRateBase: 0,
+      productionRateBase: 0,
       fecha: null,
   }
 
@@ -67,14 +68,24 @@ export class InventarioComponent implements OnInit {
     })
   }
   //FUNCIONES MODIFICAR ITEM
-  recibirInformacionModificarItem(idItemModificar:any){
-    this.datosItemModificar = this.listaItems.find(producto => producto.id == idItemModificar);
-
+  recibirInformacionModificarItem(itemModificar: Item){
+    this.datosItemModificar = {...itemModificar};
   }
-  modificarItem(){
-    console.log(this.datosItemModificar)
+
+  modificarItem(form: NgForm){
+    this.datosItemModificar = {
+      id: this.datosItemModificar.id,
+      nombre: form.value.nombreModal,
+      categoria: form.value.categoriaModal,
+      subcategoria: form.value.subcategoriaModal,
+      unidad: form.value.unidadModal,
+      laborRateBase: form.value.laborRateBaseModal,
+      materialRateBase: form.value.materialRateBaseModal,
+      equipmentRateBase: form.value.equipmentRateBaseModal,
+      productionRateBase: this.datosItemModificar.productionRateBase,
+      fecha: this.datosItemModificar.fecha,
+    }
     this.servicioItems.editarItem(this.datosItemModificar);
-    this.form.reset();
   }
 
   //FUNCIONES ELIMINAR ITEM
@@ -82,6 +93,7 @@ export class InventarioComponent implements OnInit {
     this.infoItemEliminar.id = idItemEliminar;
     this.infoItemEliminar.nombre= nombreItemEliminar;
   }
+
   eliminarItem(){
     this.servicioItems.eliminarItem(this.infoItemEliminar.id);
     this.infoItemEliminar = {id: "", nombre: "",}
@@ -94,7 +106,7 @@ export class InventarioComponent implements OnInit {
 
   //FUNCION CERRAR MODAL (REINICIO DE CAMPOS)
   cerrarModal() {
-  this.form.reset();
+    // this.form.reset();
   }
 
 }
