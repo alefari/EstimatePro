@@ -18,6 +18,7 @@ export interface Presupuesto {
     contigencyAmount?: any,
     profitPercentage?: any,
     profitAmount?: any,
+    preTotal?: any,
     customHourMultiplier?: any,
     overallConstructionCost?: any,
     totalProjectCost?: any,

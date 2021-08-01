@@ -6,22 +6,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link active" routerLink="/estimates">Estimates</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link active" routerLink="/inventario">Inventory</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" routerLink="/parametros">Parameters</a>
-            </li>
-            <li class="nav-item">
+              <li class="nav-item">
+                  <a class="nav-link active" routerLink="/estimates">Estimates</a>
+              </li>
+              <li class="nav-item">
+                  <a class="nav-link active" routerLink="/inventario">Inventory</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" routerLink="/parametros">Parameters</a>
+              </li>
+              <li class="nav-item">
                 <a (click)="onLogout()" class="nav-link active" style="cursor: pointer;">Logout</a>
-            </li>
-            <li class="nav-item">
-              {{ user.email }}
-            </li>
+              </li>
+              <li class="nav-item float-end">
+                {{ user.email }}
+              </li>
             </ul>
+
         </div>
     </div>
 </nav>
