@@ -29,6 +29,8 @@ export class PresupuestoComponent implements OnInit {
   listaCategorias: any[];
   listaSubcategorias: any[];
 
+  preTotal: number = 0;
+
   itemsPresupuesto: ItemPresupuesto[] = [];
   presupuesto = {} as Presupuesto;
   idPresupuesto: string = '';
@@ -132,6 +134,7 @@ export class PresupuestoComponent implements OnInit {
   }
 
   updateCalc() {
+    this.preTotal = 0;
     if(typeof this.presupuesto == 'undefined' || typeof this.itemsPresupuesto == 'undefined') {
       return
     }
@@ -188,7 +191,13 @@ export class PresupuestoComponent implements OnInit {
 
       // TOTALS
       item.totals = (item.estLaborCosts + item.estMat) + (item.estLaborCosts + item.estMat) * (item.estSubMarkup/100) + item.estEquipment;
-
+      if (item.totals!=null){
+        this.preTotal = this.preTotal + item.totals;
+        this.presupuesto.overallConstructionCost = this.preTotal;
+        this.presupuesto.contigencyAmount = this.presupuesto.overallConstructionCost * this.presupuesto.contingencyPercentage;
+        this.presupuesto.profitAmount = this.presupuesto.overallConstructionCost * this.presupuesto.profitPercentage;
+        this.presupuesto.totalProjectCost = this.presupuesto.overallConstructionCost + this.presupuesto.profitAmount + this.presupuesto.contigencyAmount;
+      }
     });
   }
 

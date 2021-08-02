@@ -160,37 +160,37 @@
             <tr class="border-bottom-0 border-start-0 border-end-0 border-2 border-dark">
               <th class="text-end" colspan="11">Total</th>
               <th></th>
-              <th colspan="3" class="text-end">{{32 | currency}}</th>
+              <th colspan="3" class="text-end">{{ preTotal | currency}}</th>
             </tr>
             <tr>
               <th class="text-end" colspan="11">Material Sales Tax</th>
-              <th></th>
-              <th colspan="3" class="text-end">{{34| currency}}</th>
+              <th class="text-end text-danger">{{ presupuesto.taxPercentage * 100}}%</th>
+              <th colspan="3" class="text-end"></th>
             </tr>
             <tr>
               <th class="text-end" colspan="11">Subcontractor Markup</th>
-              <th></th>
-              <th colspan="3" class="text-end">{{54 | currency}}</th>
+              <th class="text-end text-danger">{{ presupuesto.subcontractorMarkup * 100}}%</th>
+              <th colspan="3" class="text-end"></th>
             </tr>
             <tr>
               <th class="text-end" colspan="11">Overall Construction Cost</th>
               <th></th>
-              <th colspan="3" class="text-end">{{65 | currency}}</th>
+              <th colspan="3" class="text-end">{{presupuesto.overallConstructionCost | currency}}</th>
             </tr>
             <tr>
               <th class="text-end" colspan="11">Contingency %</th>
-              <th class="text-end text-danger">3.00%</th>
-              <th colspan="3" class="text-end">{{66 | currency}}</th>
+              <th class="text-end text-danger">{{ presupuesto.contingencyPercentage * 100}}%</th>
+              <th colspan="3" class="text-end">{{ presupuesto.contigencyAmount | currency}}</th>
             </tr>
             <tr>
               <th class="text-end" colspan="11">Profit</th>
-              <th class="text-end text-danger">30.00%</th>
-              <th colspan="3" class="text-end">{{345 | currency}}</th>
+              <th class="text-end text-danger">{{ presupuesto.profitPercentage * 100}}%</th>
+              <th colspan="3" class="text-end">{{presupuesto.profitAmount | currency}}</th>
             </tr>
             <tr>
               <th class="text-end" colspan="11">Total Project Cost</th>
               <th></th>
-              <th colspan="3" class="text-end">{{44 | currency}}</th>
+              <th colspan="3" class="text-end">{{ presupuesto.totalProjectCost | currency }}</th>
             </tr>
           </tbody>
       </table>
