@@ -104,7 +104,7 @@ export class PresupuestoComponent implements OnInit {
     // this.servicioExcel.excelURL.subscribe(ex => {
     //   console.log(ex);
     // });
-    this.servicioExcel.testExcel(this.itemsPresupuesto, this.presupuesto);
+    this.servicioExcel.testExcel(this.itemsPresupuesto, this.presupuesto, this.categoriasPresupuesto, this.subcategoriasPresupuesto);
   }
 
   updateCategorias() {

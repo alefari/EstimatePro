@@ -17,31 +17,36 @@ export class ExcelService {
     this.excelURL = ref.getDownloadURL();
   }
 
-  testExcel(items: ItemPresupuesto[], presupuesto: Presupuesto) {
+  testExcel(items: ItemPresupuesto[], presupuesto: Presupuesto, categoriasPresupuesto: any[], subcategoriasPresupuesto: any[]) {
     let itemsArray = [];
     let currentRow = 7;
-    items.forEach((objetoItem, i) => {
-      console.log(i)
+    items.forEach((objetoItem) => {
       itemsArray.push([
         objetoItem.L,
         objetoItem.M,
         objetoItem.nombre,
         objetoItem.qty,
         objetoItem.unidad,
-        objetoItem.productionRate,
+        { formula: `Q${currentRow}*A${currentRow}`, result: objetoItem.productionRate },
         { formula: `D${currentRow}*F${currentRow}`, result: objetoItem.laborHours },
-        objetoItem.laborRate,
-        objetoItem.materialRate,
-        objetoItem.equipmentRate,
-        objetoItem.estLaborCosts,
-        { formula: `D${currentRow}*I${currentRow}`, result: objetoItem.estMatCosts },
-        { formula: `D${currentRow}*J${currentRow}+(D${currentRow}*J${currentRow}*0.0725)`, result: objetoItem.estMatCosts },
-        objetoItem.estMat,
+        { formula: `IF(Y4="Government",Z4,IF(T4=0,Q${currentRow}*A${currentRow},Q${currentRow}+Q${currentRow}*T4*0.01*A${currentRow}))`},
+        { formula: `IF(U4=0,R${currentRow}*B${currentRow},R${currentRow}+R${currentRow}*U4*0.01*B${currentRow})`},
+        { formula: `IF(V4=0,S${currentRow},S${currentRow}+S${currentRow}*V4*0.01)`},
+        { formula: `IF(Y4="Private",D${currentRow}*H${currentRow},G${currentRow}*Z4)`},
+        { formula: `D${currentRow}*I${currentRow}` },
+        { formula: `D${currentRow}*J${currentRow}+(D${currentRow}*J${currentRow}*X4)`},
+        { formula: `L${currentRow}+L${currentRow}*X4`},
         objetoItem.estSubMarkup,
-        { formula: 'A1+A2', result: 7 },
+        { formula: `(K${currentRow}+N${currentRow})+(K${currentRow}+N${currentRow})*(O${currentRow}/100)+M${currentRow}`},
+        objetoItem.laborRateBase ? objetoItem.laborRateBase : 0,
+        objetoItem.materialRateBase ? objetoItem.materialRateBase : 0,
+        objetoItem.equipmentRateBase ? objetoItem.equipmentRateBase : 0,
       ])
       currentRow++;
     });
+
+    currentRow++;
+
     console.log(itemsArray)
 
     const workbook = new ExcelJS.Workbook();
@@ -110,6 +115,9 @@ export class ExcelService {
         {name: 'Est. Mat (Tax Incl.'},
         {name: 'Est. Sub Markup'},
         {name: 'Totals'},
+        {name: 'LaborBase'},
+        {name: 'MaterialBase'},
+        {name: 'EquipmentBase'},
       ],
       rows: itemsArray
     });
@@ -121,6 +129,9 @@ export class ExcelService {
     sheet.getCell('J6').alignment = { wrapText: true};
     sheet.getCell('K6').alignment = { wrapText: true};
     sheet.getCell('L6').alignment = { wrapText: true};
+    sheet.getCell('M6').alignment = { wrapText: true};
+    sheet.getCell('N6').alignment = { wrapText: true};
+    sheet.getCell('O6').alignment = { wrapText: true};
 
     //add data and file name and download
     workbook.xlsx.writeBuffer().then((data) => {
