@@ -90,6 +90,10 @@ export class AuthService {
     console.log('Logged Out')
   }
 
+  async changePassword(email: string) {
+    this.afAuth.sendPasswordResetEmail(email);
+  }
+
   // signin(email: string, password: string) {
   //   return this.http.post<AuthResponseData>(
   //     `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.firebaseConfig.apiKey}`,

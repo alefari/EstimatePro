@@ -25,6 +25,10 @@ export class NavbarComponent implements OnInit {
       // this.isAuthenticated = !user ? false : true;
     });
 
+    // var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
+    //   keyboard: false
+    // })
+
     // this.afAuth.authState.pipe(
     //   switchMap(usuario => {
     //     if(usuario) {
@@ -56,6 +60,10 @@ export class NavbarComponent implements OnInit {
     this.servicioAuth.logout().then(res => {
       console.log(res)
     });
+  }
+
+  onChangePassword() {
+    this.servicioAuth.changePassword(this.user.email);
   }
 
 }
