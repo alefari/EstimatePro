@@ -22,7 +22,6 @@ export class ExcelService {
     let currentRow = 7;
     let categoriasRows = [];
     let subcategoriasRows = [];
-    console.log(items)
     items.forEach((objetoItem) => {
       let arrayFormulas = [
         objetoItem.L,
@@ -151,8 +150,6 @@ export class ExcelService {
       })
     })
 
-    console.log(itemsArray)
-
     const workbook = new ExcelJS.Workbook();
     workbook.creator = 'EstimatePro';
     workbook.lastModifiedBy = 'EstimatePro';
@@ -198,12 +195,12 @@ export class ExcelService {
       name: 'Estimate',
       ref: 'A6',
       headerRow: true,
-      totalsRow: false,
+      totalsRow: true,
       style: {
         theme: 'TableStyleMedium15'
       },
       columns: [
-        {name: 'L'},
+        {name: 'L', totalsRowLabel: ''},
         {name: 'M'},
         {name: 'Scope'},
         {name: 'Qty'},
@@ -215,10 +212,10 @@ export class ExcelService {
         {name: 'Equipment Rate'},
         {name: 'Est. Labor costs'},
         {name: 'Est. Mat. Costs'},
-        {name: 'Est. Equipment (Tax Incl.'},
-        {name: 'Est. Mat (Tax Incl.'},
-        {name: 'Est. Sub Markup'},
-        {name: 'Totals'},
+        {name: 'Est. Equipment (Tax Incl.)'},
+        {name: 'Est. Mat (Tax Incl.)'},
+        {name: 'Est. Sub Markup', totalsRowFunction: 'custom', totalsRowFormula: '="Total:"'},
+        {name: 'Totals', totalsRowFunction: 'sum'},
         {name: 'LaborBase'},
         {name: 'MaterialBase'},
         {name: 'EquipmentBase'},
